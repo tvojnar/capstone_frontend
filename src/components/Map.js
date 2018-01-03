@@ -5,20 +5,23 @@ import {HikeMarker} from './HikeMarker'
 
 const AirbnbMap = withGoogleMap(props => (
   <GoogleMap
-  // pass the onMapMounted function as a ref in order to save a map object somewhere in our class 
+  // pass the onMapMounted function as a ref in order to save a map object somewhere in our class
   ref={props.onMapMounted}
   onZoomChanged={props.handleMapChanged}
   onDragEnd={props.handleMapChanged}
   onBoundsChanged={props.handleMapFullyLoaded}
   defaultCenter={props.center}
   defaultZoom={props.zoom}>{
-    props.hikes.length > 0 && props.hikes.map(hike => (
-      <HikeMarker lat={47.6062}
-      lng={-122.3321}
-      description={'A lovely hike'}
-      name={'Test 2'}/>
-    ))
-  }</GoogleMap>
+      props.hikes.length > 0 && props.hikes.map(hike => (
+        <HikeMarker key={`hike${hike.id}`}
+                     id={hike.id}
+                     lat={hike.latitude}
+                     lng={hike.longitude}
+                     description={hike.description}
+                     name={hike.name}/>
+      ))
+    }
+  </GoogleMap>
 ));
 
 export class Map extends Component {
@@ -79,8 +82,16 @@ export class Map extends Component {
 
   // for right now this only places one point
   fetchPlacesFromApi() {
-    const hike = <HikeMarker lat={46.6062} lng={-122} name={"Test 3"} description={"A very nice hike"} />
-    this.setState({ hikes: [hike] })
+    this.setState({ places: [] })
+
+    fetch(`/api/hikes?min_lng=${this.xMapBounds.min}&max_lng=${this.xMapBounds.max}&min_lat=${this.yMapBounds.max}&max_lat=${this.yMapBounds.min}`,
+      { method: 'GET' })
+      .then((response) => {
+        console.log('in then');
+        console.log(response);
+        response.json()
+      })
+      .then((response) => this.setState({ places: response }))
   }
 
   // this function gets and sets map boundaries
@@ -106,6 +117,7 @@ export class Map extends Component {
     // By defining a GoogleMap component (from the react-google-maps library) outside of the Map component, wrapped in the withGoogleMaps method it makes it so that each time we update a components state we will only re render the components on the map and not the entire map :)
     return(
       <div style={{width: `750px`, height: `750px`}}>
+      // just so I can see that these variables are updating when I change the map boundaries
       <ul>
         <li>lng: {lng}</li>
         <li>lat: {lat}</li>
