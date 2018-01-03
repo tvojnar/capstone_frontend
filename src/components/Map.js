@@ -25,7 +25,7 @@ export class Map extends Component {
   render() {
     // use this to set the center point
     const {lat, lng} = this.state;
-    const places = [<HikeMarker lat={lat} lng={lng}/>]
+    const places = [<HikeMarker lat={lat} lng={lng} name="Test Hike" description="A lovely hike"/>]
 
     // return the map
     // the center point is defined the state
