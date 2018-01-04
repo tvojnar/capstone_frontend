@@ -1,10 +1,10 @@
 import { withGoogleMap, GoogleMap } from 'react-google-maps'
 import React, { Component } from 'react';
-import {HikeMarker} from './HikeMarker'
+import {HikeMarkerContainer} from '../containers/HikeMarkerContainer'
 import $ from 'jquery';
 
 
-const AirbnbMap = withGoogleMap(props => (
+const HikingMap = withGoogleMap(props => (
   <GoogleMap
   // pass the onMapMounted function as a ref in order to save a map object somewhere in our class
   ref={props.onMapMounted}
@@ -14,7 +14,7 @@ const AirbnbMap = withGoogleMap(props => (
   defaultCenter={props.center}
   defaultZoom={props.zoom}>{
       props.hikes.length > 0 && props.hikes.map(hike => (
-        <HikeMarker key={`hike${hike.id}`}
+        <HikeMarkerContainer key={`hike${hike.id}`}
                      id={hike.id}
                      lat={hike.start_lat}
                      lng={hike.start_lng}
@@ -86,8 +86,7 @@ export class Map extends Component {
     // clear the hikes array before making the api call
     this.setState({ hikes: [] })
 
-    // NOTE: Got the api call working with jquery and the format is more familiar so I should go with this
-    // TODO: actually get the hikes to show up!
+    // make the api call
     $.ajax({
       url: `/api/hikes?min_lng=${this.xMapBounds.min}&max_lng=${this.xMapBounds.max}&min_lat=${this.yMapBounds.max}&max_lat=${this.yMapBounds.min}`,
       dataType: 'json',
@@ -96,24 +95,14 @@ export class Map extends Component {
         console.log('successful api call!');
         console.log(data);
         this.setState({ hikes: data })
-      }.bind(this)
-    })
-
-    // fetch(`/api/hikes?min_lng=${this.xMapBounds.min}&max_lng=${this.xMapBounds.max}&min_lat=${this.yMapBounds.max}&max_lat=${this.yMapBounds.min}`,
-    //   { method: 'GET' })
-    //   .then((response) => {
-    //     // why is body a promise?
-    //     let body = response.json()
-    //     console.log('in first then');
-    //     console.log(body);
-    //     this.setState({ hikes: response })
-    //   })
-    //   .then((response) => {
-    //     // Why is response undefined?
-    //     console.log('in second then');
-    //     console.log(response);
-    //     this.setState({ places: response })
-    //   })
+        // QUESTION: Should I have a message to the user appear when there are no hikes in the boundaries of the map?
+      }.bind(this), // success
+      error: function(xhr, status, err) {
+        console.log('in error');
+        console.log(err);
+        // TODO: Display error message that the api call did not work.
+      } // error
+    }); // get request
   } // fetchHikesFromApi
 
   // this function gets and sets map boundaries
@@ -147,7 +136,7 @@ export class Map extends Component {
         <li>yMapBounds.min: {this.yMapBounds.min}</li>
         <li>yMapBounds.max: {this.yMapBounds.max}</li>
       </ul>
-      <AirbnbMap
+      <HikingMap
       onMapMounted={this.handleMapMounted.bind(this)}
       handleMapChanged={this.handleMapChanged.bind(this)}
       handleMapFullyLoaded={this.handleMapFullyLoaded.bind(this)}

@@ -4,27 +4,14 @@ import HikeInfoWindow from './HikeInfoWindow'
 
 // renders a marker based on lat and lng passed via props
 export class HikeMarker extends Component {
-  constructor(props) {
-    super(props)
-
-    // start off with the info window not shown
-    this.state = {
-      showTooltip: false
-    }
-  }
-
-  clickTooltip() {
-    this.setState({ showTooltip: !this.state.showTooltip })
-  }
-
-  closeWindow() {
-    this.setState({ showTooltip: false })
-  }
 
   render() {
-    const {showTooltip} = this.state
-    // props are passed from Map when it renders each HikeMarker
-    const {lat, lng, name, description} = this.props
+    const tripData = {
+      lat: this.props.hikeDetails.lat,
+      lng: this.props.hikeDetails.lng,
+      description: this.props.hikeDetails.description,
+      name: this.props.hikeDetails.name,
+    }
 
 
     // return a Marker, which is imported from the react-google-maps library
@@ -34,15 +21,15 @@ export class HikeMarker extends Component {
       // if the state of showTooltip is true then show the info window for the hike
       <Marker
       position={{
-        lat: parseFloat(lat),
-        lng: parseFloat(lng)
-      }}  
-      onClick={this.clickTooltip.bind(this)}>
-      {showTooltip && (
-        <HikeInfoWindow description={description}
-        name={name}
+        lat: parseFloat(tripData.lat),
+        lng: parseFloat(tripData.lng)
+      }}
+      onClick={this.props.onClick}>
+      {this.props.showTooltip && (
+        <HikeInfoWindow description={tripData.description}
+        name={tripData.name}
         // close the info window when the x is clicked on
-        closeWindow={this.closeWindow.bind(this)}/>
+        closeWindow={this.props.closeWindow}/>
       )}
       </Marker>
     );
