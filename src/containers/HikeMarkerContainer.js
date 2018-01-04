@@ -22,7 +22,7 @@ export class HikeMarkerContainer extends Component {
   }
 
   render() {
-    const {showTooltip} = this.state.showTooltip
+    const showTooltip = this.state.showTooltip
 
     // const {lat, lng, name, description} = this.props
 
