@@ -16,8 +16,8 @@ const AirbnbMap = withGoogleMap(props => (
       props.hikes.length > 0 && props.hikes.map(hike => (
         <HikeMarker key={`hike${hike.id}`}
                      id={hike.id}
-                     lat={hike.latitude}
-                     lng={hike.longitude}
+                     lat={hike.start_lat}
+                     lng={hike.start_lng}
                      description={hike.description}
                      name={hike.name}/>
       ))
@@ -94,7 +94,7 @@ export class Map extends Component {
       cache: false,
       success: function(data){
         console.log('successful api call!');
-        console.log(data[0]);
+        console.log(data);
         this.setState({ hikes: data })
       }.bind(this)
     })
