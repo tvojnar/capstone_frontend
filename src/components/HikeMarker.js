@@ -30,14 +30,14 @@ export class HikeMarker extends Component {
     // return a Marker, which is imported from the react-google-maps library
     return(
       // always make a marker for each hike
+      // on click toggle true/false for the value of showTooltip
+      // if the state of showTooltip is true then show the info window for the hike
       <Marker
       position={{
         lat: parseFloat(lat),
         lng: parseFloat(lng)
-      }}
-      // on click toggle true/false for the value of showTooltip
+      }}  
       onClick={this.clickTooltip.bind(this)}>
-      // if the state of showTooltip is true then show the info window for the hike
       {showTooltip && (
         <HikeInfoWindow description={description}
         name={name}

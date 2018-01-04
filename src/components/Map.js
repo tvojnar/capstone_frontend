@@ -1,6 +1,7 @@
 import { withGoogleMap, GoogleMap } from 'react-google-maps'
 import React, { Component } from 'react';
 import {HikeMarker} from './HikeMarker'
+import $ from 'jquery';
 
 
 const AirbnbMap = withGoogleMap(props => (
@@ -53,7 +54,7 @@ export class Map extends Component {
   handleMapChanged() {
     this.getMapBounds()
     this.setMapCenterPoint()
-    this.fetchPlacesFromApi()
+    this.fetchHikesFromApi()
   }
 
 
@@ -80,19 +81,40 @@ export class Map extends Component {
     })
   }
 
-  // for right now this only places one point
-  fetchPlacesFromApi() {
-    this.setState({ places: [] })
+  // make an API call to get the hikes that are within the boundaries of the map
+  fetchHikesFromApi() {
+    // clear the hikes array before making the api call
+    this.setState({ hikes: [] })
 
-    fetch(`/api/hikes?min_lng=${this.xMapBounds.min}&max_lng=${this.xMapBounds.max}&min_lat=${this.yMapBounds.max}&max_lat=${this.yMapBounds.min}`,
-      { method: 'GET' })
-      .then((response) => {
-        console.log('in then');
-        console.log(response);
-        response.json()
-      })
-      .then((response) => this.setState({ places: response }))
-  }
+    // NOTE: Got the api call working with jquery and the format is more familiar so I should go with this
+    // TODO: actually get the hikes to show up!
+    $.ajax({
+      url: `/api/hikes?min_lng=${this.xMapBounds.min}&max_lng=${this.xMapBounds.max}&min_lat=${this.yMapBounds.max}&max_lat=${this.yMapBounds.min}`,
+      dataType: 'json',
+      cache: false,
+      success: function(data){
+        console.log('successful api call!');
+        console.log(data[0]);
+        this.setState({ hikes: data })
+      }.bind(this)
+    })
+
+    // fetch(`/api/hikes?min_lng=${this.xMapBounds.min}&max_lng=${this.xMapBounds.max}&min_lat=${this.yMapBounds.max}&max_lat=${this.yMapBounds.min}`,
+    //   { method: 'GET' })
+    //   .then((response) => {
+    //     // why is body a promise?
+    //     let body = response.json()
+    //     console.log('in first then');
+    //     console.log(body);
+    //     this.setState({ hikes: response })
+    //   })
+    //   .then((response) => {
+    //     // Why is response undefined?
+    //     console.log('in second then');
+    //     console.log(response);
+    //     this.setState({ places: response })
+    //   })
+  } // fetchHikesFromApi
 
   // this function gets and sets map boundaries
   getMapBounds() {
@@ -117,7 +139,6 @@ export class Map extends Component {
     // By defining a GoogleMap component (from the react-google-maps library) outside of the Map component, wrapped in the withGoogleMaps method it makes it so that each time we update a components state we will only re render the components on the map and not the entire map :)
     return(
       <div style={{width: `750px`, height: `750px`}}>
-      // just so I can see that these variables are updating when I change the map boundaries
       <ul>
         <li>lng: {lng}</li>
         <li>lat: {lat}</li>
