@@ -3,7 +3,9 @@ import { Marker } from 'react-google-maps'
 import HikeInfoWindow from './HikeInfoWindow'
 
 // renders a marker based on lat and lng passed via props
+// HikeMarker is a stateless component
 export const HikeMarker = (props) => {
+  // pull out the trip data from the props passed from HikeMarkerContainer
   const tripData = {
     lat: props.hikeDetails.lat,
     lng: props.hikeDetails.lng,
@@ -14,8 +16,7 @@ export const HikeMarker = (props) => {
 
   // return a Marker, which is imported from the react-google-maps library
   return(
-    // always make a marker for each hike
-    // on click toggle true/false for the value of showTooltip
+    // on click toggle true/false for the value of showTooltip (which is in the state of HikeMarkerContainer)
     // if the state of showTooltip is true then show the info window for the hike
     <Marker
     position={{
