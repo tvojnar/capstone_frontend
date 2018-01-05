@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Marker } from 'react-google-maps'
 import HikeInfoWindow from './HikeInfoWindow'
 
