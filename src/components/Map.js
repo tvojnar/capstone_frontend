@@ -2,29 +2,9 @@ import { withGoogleMap, GoogleMap } from 'react-google-maps'
 import React, { Component } from 'react';
 import {HikeMarkerContainer} from '../containers/HikeMarkerContainer'
 import $ from 'jquery';
+import {HikingMap} from './HikingMap';
 
-
-const HikingMap = withGoogleMap(props => (
-  <GoogleMap
-  // pass the onMapMounted function as a ref in order to save a map object somewhere in our class
-  ref={props.onMapMounted}
-  onZoomChanged={props.handleMapChanged}
-  onDragEnd={props.handleMapChanged}
-  onBoundsChanged={props.handleMapFullyLoaded}
-  defaultCenter={props.center}
-  defaultZoom={props.zoom}>{
-      props.hikes.length > 0 && props.hikes.map(hike => (
-        <HikeMarkerContainer key={`hike${hike.id}`}
-                     id={hike.id}
-                     lat={hike.start_lat}
-                     lng={hike.start_lng}
-                     description={hike.description}
-                     name={hike.name}/>
-      ))
-    }
-  </GoogleMap>
-));
-
+// TODO refactor to separate Map into a container component and a presentational component
 export class Map extends Component {
   constructor(props) {
     super(props)
@@ -119,6 +99,7 @@ export class Map extends Component {
   }
 
   render() {
+
     // use this to set the center point
     const {lat, lng, hikes} = this.state;
 
