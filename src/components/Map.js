@@ -2,28 +2,8 @@ import { withGoogleMap, GoogleMap } from 'react-google-maps'
 import React, { Component } from 'react';
 import {HikeMarkerContainer} from '../containers/HikeMarkerContainer'
 import $ from 'jquery';
+import {HikingMap} from './HikingMap';
 
-
-const HikingMap = withGoogleMap(props => (
-  <GoogleMap
-  // pass the onMapMounted function as a ref in order to save a map object somewhere in our class
-  ref={props.onMapMounted}
-  onZoomChanged={props.handleMapChanged}
-  onDragEnd={props.handleMapChanged}
-  onBoundsChanged={props.handleMapFullyLoaded}
-  defaultCenter={props.center}
-  defaultZoom={props.zoom}>{
-      props.hikes.length > 0 && props.hikes.map(hike => (
-        <HikeMarkerContainer key={`hike${hike.id}`}
-                     id={hike.id}
-                     lat={hike.start_lat}
-                     lng={hike.start_lng}
-                     description={hike.description}
-                     name={hike.name}/>
-      ))
-    }
-  </GoogleMap>
-));
 
 export class Map extends Component {
   constructor(props) {
@@ -88,7 +68,7 @@ export class Map extends Component {
 
     // make the api call
     $.ajax({
-      url: `/api/hikes?min_lng=${this.xMapBounds.min}&max_lng=${this.xMapBounds.max}&min_lat=${this.yMapBounds.max}&max_lat=${this.yMapBounds.min}`,
+      url: `http://localhost:4000/api/hikes?min_lng=${this.xMapBounds.min}&max_lng=${this.xMapBounds.max}&min_lat=${this.yMapBounds.max}&max_lat=${this.yMapBounds.min}`,
       dataType: 'json',
       cache: false,
       success: function(data){

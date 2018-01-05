@@ -14,6 +14,7 @@ export const HikeMarker = (props) => {
   }
 
 
+
   // return a Marker, which is imported from the react-google-maps library
   return(
     // on click toggle true/false for the value of showTooltip (which is in the state of HikeMarkerContainer)
