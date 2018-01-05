@@ -62,7 +62,7 @@ class Form extends Component {
   }// handleChange
 
   handleSubmit(e) {
-    //TODO: this is where I would make the api call
+    // NOTE: rails will automatically convert string numbers into floats or intergers depending on the data type for the column that data is being added to. It will also reformat dates if they are in year-month-date format ("2018-01-09")
     e.preventDefault();
     console.log('in handleSubmit');
     console.log(this.state);
