@@ -63,7 +63,7 @@ class Form extends LinkedComponent {
       success: function(data){
         console.log('successful post');
         console.log(data);
-      }.bind(this),
+      },
       error: function(xhr, status, err) {
         console.log('in error');
         console.log(err);
@@ -73,17 +73,18 @@ class Form extends LinkedComponent {
 
   } // onSubmit
 
-  // const FormInput = ({ label, ...props }) => (
-  //   <label> {label}
+  // const FormInput({ label, ...props }) => (
+  //   <label> { label }
   //     <Input {...props} />
   //     <div className='error-placeholder'>
-  //       {props.valueLink.error || ''}
+  //       { props.valueLink.error || '' }
   //     </div>
   //   </label>
   // );
 
 
   render() {
+
 
 
     let regionOptions = this.props.regions.map(region => {
@@ -93,11 +94,14 @@ class Form extends LinkedComponent {
     const linked = this.linkAll(); // wrap all state members in links
 
 
-
-
-
     const nameLink = Link.state(this, 'name'),
       nameIsValid = nameLink.value
+
+    const latLink = Link.state(this, 'start_lat'),
+      latIsValid = latLink.value
+
+    const lngLink = Link.state(this, 'start_lng'),
+      lngIsValid = lngLink.value
 
     return(
       <form onSubmit={this.onSubmit}>
@@ -111,13 +115,23 @@ class Form extends LinkedComponent {
               </div>
       </label>
 
-        <label>
-          Latitude: <Input type="number" valueLink={ linked.start_lat } />
-        </label>
+      <label>
+        Latitude: <Input type="text"
+                      className={ latIsValid ? '' : 'invalid'}
+                      valueLink={ latLink } />
+              <div className='error-placeholder'>
+                { latIsValid ? '' : 'Starting latitude is required'}
+              </div>
+      </label>
 
-        <label>
-          Longitude: <Input type="number" valueLink={ linked.start_lng } />
-        </label>
+      <label>
+        Longitude: <Input type="text"
+                      className={ lngIsValid ? '' : 'invalid'}
+                      valueLink={ lngLink } />
+              <div className='error-placeholder'>
+                { lngIsValid ? '' : 'Starting longitude is required'}
+              </div>
+      </label>
 
         <label>
           Start date: <Input type="date" valueLink={ linked.start_date } />

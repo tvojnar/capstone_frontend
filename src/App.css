@@ -28,5 +28,9 @@
 }
 
 .invalid {
-  background-color: red;
+  border-color: red;
+}
+
+.error-placeholder {
+  color: red;
 }
