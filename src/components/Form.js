@@ -4,10 +4,17 @@ import { Input } from 'valuelink/tags';
 import $ from 'jquery';
 
 class Form extends LinkedComponent {
+
   constructor(props) {
     super(props);
 
-    this.state = {
+    this.state = this.props.initialState;
+  }
+
+
+  static defaultProps = {
+    regions: ['Central Washington', 'Eastern Washington', 'North Cascades', 'Mount Rainier Area', 'Puget Sound and Islands', 'Olympic Peninsula', 'Snoqualmie Region', 'South Cascades', 'Central Cascades', 'Issaquah Alps', 'Southwest Washington', 'Mount Adams', 'Mount Hood', 'Columbia Gorge', 'Oregon Coast', ],
+    initialState: {
       name: '',
       nameError: false,
       description: '',
@@ -35,11 +42,7 @@ class Form extends LinkedComponent {
       day_hike: false,
       overnight: false,
       old_growth: false,
-    };
-  }
-
-  static defaultProps = {
-    regions: ['Central Washington', 'Eastern Washington', 'North Cascades', 'Mount Rainier Area', 'Puget Sound and Islands', 'Olympic Peninsula', 'Snoqualmie Region', 'South Cascades', 'Central Cascades', 'Issaquah Alps', 'Southwest Washington', 'Mount Adams', 'Mount Hood', 'Columbia Gorge', 'Oregon Coast', ]
+    }
   }
 
   onSubmit = e => {
@@ -84,6 +87,7 @@ class Form extends LinkedComponent {
       hike: this.state
     }
 
+    this.setState(this.props.initialState);
 
     const url = `/api/hikes`
 
@@ -104,20 +108,11 @@ class Form extends LinkedComponent {
   } // if/else
   } // onSubmit
 
-  // const FormInput({ label, ...props }) => (
-  //   <label> { label }
-  //     <Input {...props} />
-  //     <div className='error-placeholder'>
-  //       { props.valueLink.error || '' }
-  //     </div>
-  //   </label>
-  // );
+
 
 
 
   render() {
-
-
 
     let regionOptions = this.props.regions.map(region => {
       return <option key={region} value="region">{region}</option>
