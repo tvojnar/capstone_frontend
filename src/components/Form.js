@@ -61,7 +61,46 @@ class Form extends Component {
     this.setState(stateUpdate)
   }// handleChange
 
+
+
   handleSubmit(e) {
+    const err = this.validate();
+
+      this.setState({
+        name: '',
+        description: '',
+        start_lat: '',
+        start_latError: '',
+        start_lng: '',
+        start_lngError: '',
+        start_date: '',
+        start_dateError: '',
+        end_date: '',
+        endDateError: '',
+        region: 'Central Washington',
+        miles: '',
+        elevation_gain: '',
+        max_elevation: '',
+        notes: '',
+        lakes: false,
+        coast: false,
+        rivers: false,
+        waterfalls: false,
+        fall_foliage: false,
+        wildflowers: false,
+        medows: false,
+        mountain_viwes: false,
+        summits: false,
+        established_campsites: false,
+        day_hike: false,
+        overnight: false,
+        old_growth: false,
+      })
+    
+
+
+
+
     // NOTE: rails will automatically convert string numbers into floats or intergers depending on the data type for the column that data is being added to. It will also reformat dates if they are in year-month-date format ("2018-01-09")
     e.preventDefault();
     console.log('in handleSubmit');
@@ -69,6 +108,7 @@ class Form extends Component {
     // console.log(typeof this.state.start_date);
     // console.log(typeof this.state.miles);
 
+    // TODO: clear form by resetting state to ''
 
     const hikeParams = {
       hike: this.state
@@ -127,7 +167,7 @@ class Form extends Component {
       <label>
       Latitude:
       <input
-      type="number" id='start_lat' value={this.state.start_lat} onChange={this.handleChange}/>
+      type="number" id='start_lat' value={this.state.start_lat} onChange={this.handleChange} />
       </label>
       <br />
 
