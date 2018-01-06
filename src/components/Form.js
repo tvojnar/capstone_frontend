@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Link, { LinkedComponent } from 'valuelink';
 import { Input } from 'valuelink/tags';
+import $ from 'jquery';
 
 class Form extends LinkedComponent {
   constructor(props) {
@@ -39,8 +40,38 @@ class Form extends LinkedComponent {
   }
 
   onSubmit = e => {
+    // NOTE: rails will automatically convert string numbers into floats or intergers depending on the data type for the column that data is being added to. It will also reformat dates if they are in year-month-date format ("2018-01-09")
+    e.preventDefault();
+    console.log('in handleSubmit');
+    console.log(this.state);
+    // console.log(typeof this.state.start_date);
+    // console.log(typeof this.state.miles);
 
-  }
+    // TODO: clear form by resetting state to ''
+
+    const hikeParams = {
+      hike: this.state
+    }
+
+
+    const url = `/api/hikes`
+
+    $.ajax({
+      type: "POST",
+      url: url,
+      data: hikeParams,
+      success: function(data){
+        console.log('successful post');
+        console.log(data);
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.log('in error');
+        console.log(err);
+        // TODO: Display error message that the api call did not work.
+      } // error
+    }) // post
+
+  } // onSubmit
 
 
   render() {
@@ -90,10 +121,6 @@ class Form extends LinkedComponent {
 
         <label>
           Notes: <Input valueLink={ linked.notes } />
-        </label>
-
-        <label>
-          Lakes: <Input type="checkbox" valueLink={ linked.lakes } />
         </label>
 
         <label>
