@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Link, { LinkedComponent } from 'valuelink';
 import { Input } from 'valuelink/tags';
+import { Select } from 'valuelink/tags';
 import $ from 'jquery';
 
 class Form extends LinkedComponent {
@@ -115,7 +116,7 @@ class Form extends LinkedComponent {
   render() {
 
     let regionOptions = this.props.regions.map(region => {
-      return <option key={region} value="region">{region}</option>
+      return <option key={region} value={region}>{region}</option>
     })
 
     const linked = this.linkAll(); // wrap all state members in links
@@ -128,6 +129,8 @@ class Form extends LinkedComponent {
 
     const lngLink = Link.state(this, 'start_lng'),
       lngIsValid = lngLink.value
+
+
 
     let nameBox;
     let latBox;
@@ -186,6 +189,10 @@ class Form extends LinkedComponent {
       { latBox }
 
       { lngBox }
+
+      <label>
+        Region: <Select valueLink={ linked.region }>{regionOptions}</Select>
+      </label>
 
         <label>
           Start date: <Input type="date" valueLink={ linked.start_date } />
