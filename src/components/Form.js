@@ -9,9 +9,12 @@ class Form extends LinkedComponent {
 
     this.state = {
       name: '',
+      nameError: false,
       description: '',
       start_lat: '',
+      latError: false,
       start_lng: '',
+      lngError: false,
       start_date: '',
       end_date: '',
       region: 'Central Washington',
@@ -41,6 +44,7 @@ class Form extends LinkedComponent {
 
   onSubmit = e => {
     // NOTE: rails will automatically convert string numbers into floats or intergers depending on the data type for the column that data is being added to. It will also reformat dates if they are in year-month-date format ("2018-01-09")
+
     e.preventDefault();
     console.log('in handleSubmit');
     console.log(this.state);
@@ -48,7 +52,34 @@ class Form extends LinkedComponent {
     // console.log(typeof this.state.miles);
 
     // TODO: clear form by resetting state to ''
+    let readyToSubmit = true;
 
+    if (this.state.name === '') {
+      this.setState({nameError: true})
+      readyToSubmit = false;
+    } else {
+      this.setState({nameError: false})
+      readyToSubmit = true;
+    }
+
+    if (this.state.start_lat === '') {
+      this.setState({latError: true })
+      readyToSubmit = false;
+    } else {
+      this.setState({latError: false})
+      readyToSubmit = true;
+    }
+
+    if (this.state.start_lng === '') {
+      this.setState({lngError: true })
+      readyToSubmit = false;
+    } else {
+      this.setState({lngError: false})
+      readyToSubmit = true;
+    }
+
+
+    if (readyToSubmit) {
     const hikeParams = {
       hike: this.state
     }
@@ -70,7 +101,7 @@ class Form extends LinkedComponent {
         // TODO: Display error message that the api call did not work.
       } // error
     }) // post
-
+  } // if/else
   } // onSubmit
 
   // const FormInput({ label, ...props }) => (
@@ -83,6 +114,7 @@ class Form extends LinkedComponent {
   // );
 
 
+
   render() {
 
 
@@ -93,7 +125,6 @@ class Form extends LinkedComponent {
 
     const linked = this.linkAll(); // wrap all state members in links
 
-
     const nameLink = Link.state(this, 'name'),
       nameIsValid = nameLink.value
 
@@ -103,10 +134,12 @@ class Form extends LinkedComponent {
     const lngLink = Link.state(this, 'start_lng'),
       lngIsValid = lngLink.value
 
-    return(
-      <form onSubmit={this.onSubmit}>
+    let nameBox;
+    let latBox;
+    let lngBox;
 
-      <label>
+    if (this.state.nameError) {
+      nameBox = <label>
         Name: <Input type="text"
                       className={ nameIsValid ? '' : 'invalid'}
                       valueLink={ nameLink } />
@@ -114,24 +147,50 @@ class Form extends LinkedComponent {
                 { nameIsValid ? '' : 'Name is required'}
               </div>
       </label>
+    } else {
+      nameBox = <label>
+        Name: <Input type="text" valueLink={ nameLink } />
+      </label>
+    }
 
-      <label>
-        Latitude: <Input type="text"
+    if (this.state.latError) {
+      latBox = <label>
+        Starting latitude: <Input type="text"
                       className={ latIsValid ? '' : 'invalid'}
                       valueLink={ latLink } />
               <div className='error-placeholder'>
                 { latIsValid ? '' : 'Starting latitude is required'}
               </div>
       </label>
+    } else {
+      latBox = <label>
+        Starting latitude: <Input type="text" valueLink={ latLink } />
+      </label>
+    }
 
-      <label>
-        Longitude: <Input type="text"
+    if (this.state.lngError) {
+      lngBox = <label>
+        Starting longitude: <Input type="text"
                       className={ lngIsValid ? '' : 'invalid'}
                       valueLink={ lngLink } />
               <div className='error-placeholder'>
                 { lngIsValid ? '' : 'Starting longitude is required'}
               </div>
       </label>
+    } else {
+      lngBox = <label>
+        Starting longitude: <Input type="text" valueLink={ lngLink } />
+      </label>
+    }
+
+    return(
+      <form onSubmit={this.onSubmit}>
+
+      { nameBox }
+
+      { latBox }
+
+      { lngBox }
 
         <label>
           Start date: <Input type="date" valueLink={ linked.start_date } />
@@ -213,7 +272,7 @@ class Form extends LinkedComponent {
           Overnight: <Input type="checkbox" valueLink={ linked.overnight } />
         </label>
 
-        <button disabled={ !nameIsValid} type='submit'>Submit</button>
+        <button type='submit'>Submit</button>
 
       </form>
     ) // return
