@@ -73,19 +73,43 @@ class Form extends LinkedComponent {
 
   } // onSubmit
 
+  // const FormInput = ({ label, ...props }) => (
+  //   <label> {label}
+  //     <Input {...props} />
+  //     <div className='error-placeholder'>
+  //       {props.valueLink.error || ''}
+  //     </div>
+  //   </label>
+  // );
+
 
   render() {
+
+
     let regionOptions = this.props.regions.map(region => {
       return <option key={region} value="region">{region}</option>
     })
 
     const linked = this.linkAll(); // wrap all state members in links
 
+
+
+
+
+    const nameLink = Link.state(this, 'name'),
+      nameIsValid = nameLink.value
+
     return(
       <form onSubmit={this.onSubmit}>
-        <label>
-          Name: <Input valueLink={ linked.name } />
-        </label>
+
+      <label>
+        Name: <Input type="text"
+                      className={ nameIsValid ? '' : 'invalid'}
+                      valueLink={ nameLink } />
+              <div className='error-placeholder'>
+                { nameIsValid ? '' : 'Name is required'}
+              </div>
+      </label>
 
         <label>
           Latitude: <Input type="number" valueLink={ linked.start_lat } />
@@ -175,7 +199,7 @@ class Form extends LinkedComponent {
           Overnight: <Input type="checkbox" valueLink={ linked.overnight } />
         </label>
 
-        <button type='submit'>Submit</button>
+        <button disabled={ !nameIsValid} type='submit'>Submit</button>
 
       </form>
     ) // return
