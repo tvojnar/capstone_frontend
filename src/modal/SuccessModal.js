@@ -1,7 +1,9 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
+import BaseModal from './BaseModal'
 
+// sets the portion of the app that should be hidden
+Modal.setAppElement('#root');
 const customStyles = {
   content : {
     top                   : '50%',
@@ -13,30 +15,12 @@ const customStyles = {
   }
 };
 
-class ErrorModal extends React.Component {
-  constructor() {
-    super();
-
-    this.state = {
-      modalIsOpen: true
-    };
-
-    this.openModal = this.openModal.bind(this);
-    this.afterOpenModal = this.afterOpenModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
-  }
-
-  openModal() {
-    this.setState({modalIsOpen: true});
-  }
+// SuccessModal is a child class of BaseModal
+class SuccessModal extends BaseModal {
 
   afterOpenModal() {
     // references are now sync'd and can be accessed.
     this.subtitle.style.color = 'green';
-  }
-
-  closeModal() {
-    this.setState({modalIsOpen: false});
   }
 
   render() {
@@ -58,4 +42,4 @@ class ErrorModal extends React.Component {
   }
 }
 
-export default ErrorModal
+export default SuccessModal

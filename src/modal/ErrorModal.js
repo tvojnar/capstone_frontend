@@ -1,7 +1,9 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
+import BaseModal from './BaseModal'
 
+// sets the portion of the app that should be hidden
+Modal.setAppElement('#root');
 const customStyles = {
   content : {
     top                   : '50%',
@@ -13,30 +15,13 @@ const customStyles = {
   }
 };
 
-class ErrorModal extends React.Component {
-  constructor() {
-    super();
-
-    this.state = {
-      modalIsOpen: true
-    };
-
-    this.openModal = this.openModal.bind(this);
-    this.afterOpenModal = this.afterOpenModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
-  }
-
-  openModal() {
-    this.setState({modalIsOpen: true});
-  }
+// ErrorModal is a child class of BaseModal
+class ErrorModal extends BaseModal {
 
   afterOpenModal() {
     // references are now sync'd and can be accessed.
-    this.subtitle.style.color = '#f00';
-  }
-
-  closeModal() {
-    this.setState({modalIsOpen: false});
+    // change the h2 color to red
+    this.subtitle.style.color = 'red';
   }
 
   render() {
@@ -50,8 +35,8 @@ class ErrorModal extends React.Component {
           contentLabel="Example Modal"
         >
 
-          <h2 ref={subtitle => this.subtitle = subtitle}>Hike failed to save</h2>
-          <p>Sorry, please try again</p>
+          <h2 ref={subtitle => this.subtitle = subtitle}>Sorry, your hike failed to save</h2>
+          <p>Please try again</p>
           <button onClick={this.closeModal}>close</button>
         </Modal>
       </div>

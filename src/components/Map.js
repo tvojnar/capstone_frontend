@@ -1,6 +1,4 @@
-import { withGoogleMap, GoogleMap } from 'react-google-maps'
 import React, { Component } from 'react';
-import {HikeMarkerContainer} from '../containers/HikeMarkerContainer'
 import $ from 'jquery';
 import {HikingMap} from './HikingMap';
 

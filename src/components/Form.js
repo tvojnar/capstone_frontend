@@ -140,7 +140,7 @@ class Form extends LinkedComponent {
   } // onSubmit
 
 
-// displays the ErrorModal or SuccessModal, depending on if the post to add a new hike was successful or not 
+// displays the ErrorModal or SuccessModal, depending on if the post to add a new hike was successful or not
 showModal(modalType) {
   console.log('in renderModal');
   if (modalType === 'error') {
