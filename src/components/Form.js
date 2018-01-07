@@ -45,8 +45,8 @@ class Form extends LinkedComponent {
       waterfalls: false,
       fall_foliage: false,
       wildflowers: false,
-      medows: false,
-      mountain_viwes: false,
+      meadows: false,
+      mountain_views: false,
       summits: false,
       established_campsites: false,
       day_hike: false,
@@ -304,7 +304,7 @@ showModal(modalType) {
         </label>
 
         <label>
-          Medows: <Input type="checkbox" valueLink={ linked.medows } />
+          Meadows: <Input type="checkbox" valueLink={ linked.meadows} />
         </label>
 
         <label>
@@ -312,7 +312,7 @@ showModal(modalType) {
         </label>
 
         <label>
-          Mountain views: <Input type="checkbox" valueLink={ linked.mountain_viwes } />
+          Mountain views: <Input type="checkbox" valueLink={ linked.mountain_views } />
         </label>
 
         <label>
