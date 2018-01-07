@@ -104,6 +104,7 @@ class Form extends LinkedComponent {
         console.log('in error');
         console.log(err);
         // TODO: Display error message that the api call did not work.
+
       } // error
     }) // post
   } // if/else

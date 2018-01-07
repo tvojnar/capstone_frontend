@@ -37,7 +37,7 @@ export class HikeMarkerContainer extends Component {
     }
 
     // return an a HikeMarker component
-    // HikeMarker will render an info window if showTooltip === true 
+    // HikeMarker will render an info window if showTooltip === true
     return <HikeMarker
       hikeDetails={hikeData} showTooltip={showTooltip} onClick={this.clickTooltip.bind(this)} closeWindow={this.closeWindow.bind(this)}/>
   } // render

@@ -4,12 +4,14 @@
   "private": true,
   "proxy": "http://localhost:4000",
   "dependencies": {
+    "classnames": "^2.2.5",
     "google-maps": "^3.2.1",
     "jquery": "^3.2.1",
     "markerclustererplus": "^2.1.4",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-google-maps": "^9.4.3",
+    "react-modal": "^3.1.10",
     "react-scripts": "1.0.17"
   },
   "scripts": {
