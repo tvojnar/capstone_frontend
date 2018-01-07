@@ -1,6 +1,6 @@
 import { withGoogleMap, GoogleMap } from 'react-google-maps';
 import {HikeMarkerContainer} from '../containers/HikeMarkerContainer';
-import React, { Component } from 'react';
+import React from 'react';
 
 export const HikingMap = withGoogleMap(props => (
   <GoogleMap
