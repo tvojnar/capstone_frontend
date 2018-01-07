@@ -1,18 +1,23 @@
 import * as React from 'react';
+import $ from 'jquery';
+import ErrorModal from '../modal/ErrorModal'
+
+// using valueLink library to connect form fields with the components state. Also used to provide inline error handing for invalid fields in the form
 import Link, { LinkedComponent } from 'valuelink';
 import { Input } from 'valuelink/tags';
 import { Select } from 'valuelink/tags';
-import $ from 'jquery';
+
 
 class Form extends LinkedComponent {
 
   constructor(props) {
     super(props);
 
+    // Set the state using the default props
     this.state = this.props.initialState;
   }
 
-
+// default props are used to generate the options for the select input for regions in the form and to set the state in the constructor, as well as to reset the state to clear the form
   static defaultProps = {
     regions: ['Central Washington', 'Eastern Washington', 'North Cascades', 'Mount Rainier Area', 'Puget Sound and Islands', 'Olympic Peninsula', 'Snoqualmie Region', 'South Cascades', 'Central Cascades', 'Issaquah Alps', 'Southwest Washington', 'Mount Adams', 'Mount Hood', 'Columbia Gorge', 'Oregon Coast', ],
     initialState: {
@@ -43,21 +48,32 @@ class Form extends LinkedComponent {
       day_hike: false,
       overnight: false,
       old_growth: false,
+      showModal: false,
     }
   }
 
+// function runs when the submit button is clicked on the form
   onSubmit = e => {
-    // NOTE: rails will automatically convert string numbers into floats or intergers depending on the data type for the column that data is being added to. It will also reformat dates if they are in year-month-date format ("2018-01-09")
+  // NOTE: rails will automatically convert string numbers into floats or intergers depending on the data type for the column that data is being added to. It will also reformat dates if they are in year-month-date format ("2018-01-09")
 
+
+    // I have to define this function out here because I don't have access to this from within the post request error callback
+    // this function calls the showModal function, which returns the ErrorModal that tells the user that the hike did not save
+    const callShowModal = () => {
+      this.showModal();
+    }
+
+    // prevent the page reloading when the form is submitted
     e.preventDefault();
     console.log('in handleSubmit');
     console.log(this.state);
-    // console.log(typeof this.state.start_date);
-    // console.log(typeof this.state.miles);
 
-    // TODO: clear form by resetting state to ''
+
+    // used to determine if there are missing fields in the form or if the form is ready to be submitted to the API
     let readyToSubmit = true;
 
+    // check that a name, staring lat and starting lng have been entered
+    // if not provided by the user then set the state so that the error message and styleing shows up around the  input field in the form. Also set readyToSubmit to false to that the form wont be submitted to the API
     if (this.state.name === '') {
       this.setState({nameError: true})
       readyToSubmit = false;
@@ -83,15 +99,20 @@ class Form extends LinkedComponent {
     }
 
 
+    // Check that the form has all the required fields and is ready to be submitted
     if (readyToSubmit) {
+    // set the params that will be sent to the API equal to the state of the Form component
     const hikeParams = {
       hike: this.state
     }
 
+    // clear the form by resetting the state to the initialState defined in the default props
     this.setState(this.props.initialState);
 
+    // construct the url to submit the post request to
     const url = `/api/hikes`
 
+    // make the API post request to the API
     $.ajax({
       type: "POST",
       url: url,
@@ -99,29 +120,37 @@ class Form extends LinkedComponent {
       success: function(data){
         console.log('successful post');
         console.log(data);
+        // TODO: success modal?
       },
       error: function(xhr, status, err) {
         console.log('in error');
-        console.log(err);
-        // TODO: Display error message that the api call did not work.
-
+        console.log(this);
+        // if the api post fails then display a modal telling the user that there was an error
+        callShowModal()
       } // error
     }) // post
   } // if/else
   } // onSubmit
 
 
+// displays the ErrorModal, which tells the user that the Hike was not saved
+showModal() {
+  console.log('in renderModal');
+  this.setState({showModal: true})
+}
 
-
-
+  // render the form, and when needed a modal
   render() {
 
+    // generate the HTML option tags for the select field for region
     let regionOptions = this.props.regions.map(region => {
       return <option key={region} value={region}>{region}</option>
     })
 
+    // link all the form fields to the Form components state
     const linked = this.linkAll(); // wrap all state members in links
 
+    // link the name, lat, and lng input feilds in this way so that I can show the user error messages in the form when they try to submit the form without filling out a name, lat, or lng.
     const nameLink = Link.state(this, 'name'),
       nameIsValid = nameLink.value
 
@@ -132,11 +161,13 @@ class Form extends LinkedComponent {
       lngIsValid = lngLink.value
 
 
-
+    // define these so that I can use them in the if/else statements below for the name, lat, and lng input fields
     let nameBox;
     let latBox;
     let lngBox;
+    let modal;
 
+    // only show the form validation message and styling if the user hit submit without entering a name
     if (this.state.nameError) {
       nameBox = <label>
         Name: <Input type="text"
@@ -152,9 +183,10 @@ class Form extends LinkedComponent {
       </label>
     }
 
+    // only show the form validation message and styling if the user hit submit without entering a starting latitude
     if (this.state.latError) {
       latBox = <label>
-        Starting latitude: <Input type="text"
+        Starting latitude: <Input type="number"
                       className={ latIsValid ? '' : 'invalid'}
                       valueLink={ latLink } />
               <div className='error-placeholder'>
@@ -163,13 +195,14 @@ class Form extends LinkedComponent {
       </label>
     } else {
       latBox = <label>
-        Starting latitude: <Input type="text" valueLink={ latLink } />
+        Starting latitude: <Input type="number" valueLink={ latLink } />
       </label>
     }
 
+    // only show the form validation message and styling if the user hit submit without entering a starting longitude
     if (this.state.lngError) {
       lngBox = <label>
-        Starting longitude: <Input type="text"
+        Starting longitude: <Input type="number"
                       className={ lngIsValid ? '' : 'invalid'}
                       valueLink={ lngLink } />
               <div className='error-placeholder'>
@@ -178,11 +211,22 @@ class Form extends LinkedComponent {
       </label>
     } else {
       lngBox = <label>
-        Starting longitude: <Input type="text" valueLink={ lngLink } />
+        Starting longitude: <Input type="number" valueLink={ lngLink } />
       </label>
     }
 
+    // show the error modal if the post request failed
+    if (this.state.showModal) {
+      modal = <ErrorModal />
+    } else {
+      modal = <div></div>
+    }
+
+    // render the form
+    // it used the valueLink library to conect each form input field with the Form components state
     return(
+    <div>
+      {modal}
       <form onSubmit={this.onSubmit}>
 
       { nameBox }
@@ -278,6 +322,7 @@ class Form extends LinkedComponent {
         <button type='submit'>Submit</button>
 
       </form>
+      </div>
     ) // return
 
   } // render

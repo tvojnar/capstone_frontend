@@ -18,7 +18,7 @@ class ErrorModal extends React.Component {
     super();
 
     this.state = {
-      modalIsOpen: false
+      modalIsOpen: true
     };
 
     this.openModal = this.openModal.bind(this);
@@ -42,7 +42,6 @@ class ErrorModal extends React.Component {
   render() {
     return (
       <div>
-        <button onClick={this.openModal}>Open Modal</button>
         <Modal
           isOpen={this.state.modalIsOpen}
           onAfterOpen={this.afterOpenModal}
@@ -51,20 +50,13 @@ class ErrorModal extends React.Component {
           contentLabel="Example Modal"
         >
 
-          <h2 ref={subtitle => this.subtitle = subtitle}>Hello</h2>
+          <h2 ref={subtitle => this.subtitle = subtitle}>Hike failed to save</h2>
+          <p>Sorry, please try again</p>
           <button onClick={this.closeModal}>close</button>
-          <div>I am a modal</div>
-          <form>
-            <input />
-            <button>tab navigation</button>
-            <button>stays</button>
-            <button>inside</button>
-            <button>the modal</button>
-          </form>
         </Modal>
       </div>
     );
   }
 }
 
-export default ErrorModal 
+export default ErrorModal
