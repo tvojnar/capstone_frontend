@@ -24,6 +24,7 @@ class AddHikeModal extends BaseModal {
 
   }
 
+// pass the Form a method to close the AddFormModal via props (hideFormModal)
   render() {
     return (
       <div>

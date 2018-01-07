@@ -26,10 +26,12 @@ export class AddHike extends Component {
   }
 
   render() {
+    // pass AddHikeModal the function to close the modal via props (hideModalFromAddHike)
     let modal;
     if (this.state.showModal) {
       modal = <AddHikeModal hideModalFromAddHike={this.handleHideModal} />
     }
+
 
     return (
       <div>

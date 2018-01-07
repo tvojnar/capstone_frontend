@@ -28,7 +28,9 @@ class SuccessModal extends BaseModal {
 
 
   closeModal() {
+    // make the success modal dissapear
     this.setState({modalIsOpen: false});
+    // make the form modal close 
     this.props.hideFormModal();
   }
 

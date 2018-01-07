@@ -227,6 +227,7 @@ showModal(modalType) {
     }
 
     // show the error modal if the post request failed
+    // pass the successModal the function to close the AddHikeModal via props (hideFormModal)
     if (this.state.showModal) {
       modal = <ErrorModal />
     } else if (this.state.showSuccessModal) {
