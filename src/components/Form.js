@@ -122,6 +122,12 @@ class Form extends LinkedComponent {
       this.showModal(modalType);
     }
 
+    // have to call this.props.fetchHikes(); out here because I don't have access to 'this.props' in the success callback of the post
+    // this.props.fetchHikes() calls the fetchHikes function in the App component, which calls the FetchHikesFromApi function in the Map component, which will cause the map to re-render to show the newly added hike.
+    const callFetchHikes = () => {
+      this.props.fetchHikes();
+    }
+
 
     // set the params that will be sent to the API equal to the state of the Form component
     const hikeParams = {
@@ -144,6 +150,8 @@ class Form extends LinkedComponent {
         console.log(data);
         // when the post is successful show the SuccessModal to the user
         callShowModal('success');
+        // when the post is successful call this method which though a chain of props will call the fetchHikesFromApi method in the Map component
+        callFetchHikes();
       },
       error: function(xhr, status, err) {
         console.log('in error');

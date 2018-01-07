@@ -27,6 +27,17 @@ export class Map extends Component {
     };
   }
 
+
+  componentDidMount() {
+    this.props.onRef(this)
+  }
+  componentWillUnmount() {
+    this.props.onRef(undefined)
+  }
+  method() {
+    window.alert('do stuff')
+  }
+  
   // called when the maps boundaries have changed
   // calls three functions to change the map boundaties and center point and make an api call to get the hikes within those boundaries
   handleMapChanged() {

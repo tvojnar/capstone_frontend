@@ -20,6 +20,7 @@ const customStyles = {
 class AddHikeModal extends BaseModal {
 
 // pass the Form a method to close the AddFormModal via props (hideFormModal)
+// pass Form fetchHikes so that it can call the Map components fetchHikesFromApi function when the form is submitted
   render() {
     return (
       <div>
@@ -30,7 +31,10 @@ class AddHikeModal extends BaseModal {
           style={customStyles}
           contentLabel="Example Modal"
         >
-          <Form hideFormModal={this.props.hideModalFromAddHike}/>
+          <Form
+            hideFormModal={this.props.hideModalFromAddHike}
+            fetchHikes={this.props.fetchHikes}
+          />
           <button onClick={this.props.hideModalFromAddHike}>Cancle</button>
         </Modal>
       </div>
