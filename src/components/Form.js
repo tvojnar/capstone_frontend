@@ -1,5 +1,7 @@
 import * as React from 'react';
 import $ from 'jquery';
+
+// import modals to show sucess or error message after post request to add a new hike
 import ErrorModal from '../modal/ErrorModal'
 import SuccessModal from '../modal/SuccessModal'
 
@@ -62,7 +64,7 @@ class Form extends LinkedComponent {
 
 
     // I have to define this function out here because I don't have access to this from within the post request error callback
-    // this function calls the showModal function, which returns the ErrorModal that tells the user that the hike did not save
+    // this function calls the showModal function, which returns the ErrorModal that tells the user that the hike did not save or the SuccessModal saying that the hike was saved, depending on if modalType is 'error' or 'success'
     const callShowModal = (modalType) => {
       this.showModal(modalType);
     }
@@ -124,6 +126,7 @@ class Form extends LinkedComponent {
       success: function(data){
         console.log('successful post');
         console.log(data);
+        // when the post is successful show the SuccessModal to the user
         callShowModal('success');
       },
       error: function(xhr, status, err) {
@@ -137,7 +140,7 @@ class Form extends LinkedComponent {
   } // onSubmit
 
 
-// displays the ErrorModal, which tells the user that the Hike was not saved
+// displays the ErrorModal or SuccessModal, depending on if the post to add a new hike was successful or not 
 showModal(modalType) {
   console.log('in renderModal');
   if (modalType === 'error') {
