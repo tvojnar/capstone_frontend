@@ -110,7 +110,7 @@ class Form extends LinkedComponent {
     // set the params that will be sent to the API equal to the state of the Form component
     const hikeParams = {
       hike: this.state
-    }
+    };
 
     // clear the form by resetting the state to the initialState defined in the default props
     this.setState(this.props.initialState);
