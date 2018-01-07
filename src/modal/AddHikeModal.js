@@ -1,6 +1,7 @@
 import React from 'react';
 import Modal from 'react-modal';
-import BaseModal from './BaseModal'
+import BaseModal from './BaseModal';
+import Form from '../components/Form';
 
 // sets the portion of the app that should be hidden
 Modal.setAppElement('#root');
@@ -20,7 +21,7 @@ class AddHikeModal extends BaseModal {
 
   afterOpenModal() {
     // references are now sync'd and can be accessed.
-    this.subtitle.style.color = 'green';
+
   }
 
   render() {
@@ -33,9 +34,8 @@ class AddHikeModal extends BaseModal {
           style={customStyles}
           contentLabel="Example Modal"
         >
-
-          <h2 ref={subtitle => this.subtitle = subtitle}>YForm would be here</h2>
-          <button onClick={this.closeModal}>close</button>
+          <Form />
+          <button onClick={this.closeModal}>Cancle</button>
         </Modal>
       </div>
     );
