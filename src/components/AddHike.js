@@ -11,6 +11,7 @@ export class AddHike extends Component {
     };
 
     this.handleClick = this.handleClick.bind(this);
+    this.handleHideModal = this.handleHideModal.bind(this);
   }
 
   handleClick() {
@@ -19,16 +20,21 @@ export class AddHike extends Component {
 
   }
 
+  handleHideModal() {
+    console.log('in handleHideModal');
+    this.setState({showModal: false})
+  }
+
   render() {
     let modal;
     if (this.state.showModal) {
-      modal = <AddHikeModal />
+      modal = <AddHikeModal hideModalFromAddHike={this.handleHideModal} />
     }
 
     return (
       <div>
         { modal }
-        <button onClick={this.handleClick}>AddHike</button>
+        <button className='button' onClick={this.handleClick}>AddHike</button>
       </div>
     )
   }

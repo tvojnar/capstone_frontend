@@ -35,12 +35,11 @@ class AddHikeModal extends BaseModal {
           contentLabel="Example Modal"
         >
           <Form />
-          <button onClick={this.closeModal}>Cancle</button>
+          <button onClick={this.props.hideModalFromAddHike}>Cancle</button>
         </Modal>
       </div>
     );
   }
 }
 
-// TODO: finish up editing this form and then import it into AddHike and get it to render on click
 export default AddHikeModal
