@@ -1,6 +1,8 @@
 import * as React from 'react';
 import $ from 'jquery';
 import ErrorModal from '../modal/ErrorModal'
+import SuccessModal from '../modal/SuccessModal'
+
 
 // using valueLink library to connect form fields with the components state. Also used to provide inline error handing for invalid fields in the form
 import Link, { LinkedComponent } from 'valuelink';
@@ -49,6 +51,8 @@ class Form extends LinkedComponent {
       overnight: false,
       old_growth: false,
       showModal: false,
+      showSuccessModal: false,
+
     }
   }
 
@@ -59,8 +63,8 @@ class Form extends LinkedComponent {
 
     // I have to define this function out here because I don't have access to this from within the post request error callback
     // this function calls the showModal function, which returns the ErrorModal that tells the user that the hike did not save
-    const callShowModal = () => {
-      this.showModal();
+    const callShowModal = (modalType) => {
+      this.showModal(modalType);
     }
 
     // prevent the page reloading when the form is submitted
@@ -120,13 +124,13 @@ class Form extends LinkedComponent {
       success: function(data){
         console.log('successful post');
         console.log(data);
-        // TODO: success modal?
+        callShowModal('success');
       },
       error: function(xhr, status, err) {
         console.log('in error');
         console.log(this);
         // if the api post fails then display a modal telling the user that there was an error
-        callShowModal()
+        callShowModal('error')
       } // error
     }) // post
   } // if/else
@@ -134,9 +138,13 @@ class Form extends LinkedComponent {
 
 
 // displays the ErrorModal, which tells the user that the Hike was not saved
-showModal() {
+showModal(modalType) {
   console.log('in renderModal');
+  if (modalType === 'error') {
   this.setState({showModal: true})
+} else if (modalType === 'success'){
+  this.setState({showSuccessModal: true})
+}
 }
 
   // render the form, and when needed a modal
@@ -218,8 +226,8 @@ showModal() {
     // show the error modal if the post request failed
     if (this.state.showModal) {
       modal = <ErrorModal />
-    } else {
-      modal = <div></div>
+    } else if (this.state.showSuccessModal) {
+      modal = <SuccessModal />
     }
 
     // render the form
