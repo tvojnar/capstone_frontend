@@ -12,6 +12,9 @@ const customStyles = {
     bottom                : 'auto',
     marginRight           : '-50%',
     transform             : 'translate(-50%, -50%)'
+  },
+  overlay : {
+    backgroundColor   : 'transparent'
   }
 };
 
@@ -22,6 +25,14 @@ class SuccessModal extends BaseModal {
     // references are now sync'd and can be accessed.
     this.subtitle.style.color = 'green';
   }
+
+
+  closeModal() {
+    this.setState({modalIsOpen: false});
+    this.props.hideFormModal();
+  }
+
+
 
   render() {
     return (

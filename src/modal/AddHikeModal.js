@@ -34,7 +34,7 @@ class AddHikeModal extends BaseModal {
           style={customStyles}
           contentLabel="Example Modal"
         >
-          <Form />
+          <Form hideFormModal={this.props.hideModalFromAddHike}/>
           <button onClick={this.props.hideModalFromAddHike}>Cancle</button>
         </Modal>
       </div>

@@ -230,7 +230,7 @@ showModal(modalType) {
     if (this.state.showModal) {
       modal = <ErrorModal />
     } else if (this.state.showSuccessModal) {
-      modal = <SuccessModal />
+      modal = <SuccessModal hideFormModal={this.props.hideFormModal}/>
     }
 
     // render the form
