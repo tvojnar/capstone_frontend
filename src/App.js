@@ -6,6 +6,15 @@ import './App.css';
 
 
 class App extends Component {
+  constructor(props) {
+    super(props)
+
+    this.renderMap = this.renderMap.bind(this);
+  }
+
+  renderMap() {
+    
+  }
   render() {
     return (
       <div>

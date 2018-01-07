@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import AddHikeModal from '../modal/AddHikeModal';
 
+// To start off AddHike only renders the 'Add hike' button
+// when the 'add hike button is clicked it changes the showModal state to true, which triggers {modal} to be rendered
+// {modal} is an instance of AddHikeModal
 export class AddHike extends Component {
   constructor(props) {
     super(props);

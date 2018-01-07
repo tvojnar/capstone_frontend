@@ -19,11 +19,6 @@ const customStyles = {
 // SuccessModal is a child class of BaseModal
 class AddHikeModal extends BaseModal {
 
-  afterOpenModal() {
-    // references are now sync'd and can be accessed.
-
-  }
-
 // pass the Form a method to close the AddFormModal via props (hideFormModal)
   render() {
     return (
