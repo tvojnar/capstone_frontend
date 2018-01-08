@@ -61,6 +61,7 @@ class HikeDetailsModal extends BaseModal {
         // 2. The attributes of the hike (which are rendered in the HikeAttributes component )
         // 3. A map with A pin where the hike is
               // NOTE: Have to set onRef={ref => (this.child = ref)} for the map to mount and unmount correctly
+              // pass the start_lng and start_lat to the map so that the map can be centered on the location of the hike 
         // 4. The hikes description and notes via the TextHikeDetailsContainer
     return (
       <div>

@@ -9,7 +9,8 @@ import {SingleHikeMap} from './SingleHikeMap';
   constructor(props) {
     super(props)
 
-    // TODO: set state for lat and lng based on the start_lat and start_lng from props
+    // Set state for lat and lng based on the start_lat and start_lng from props
+    // this lat and lng is used to set the center point of the map
     this.state = {
       lat: this.props.lat,
       lng: this.props.lng,
@@ -54,7 +55,8 @@ import {SingleHikeMap} from './SingleHikeMap';
       mapElement={
         <div style={{ height: `100%` }} />
       }
-
+      lat={lat}
+      lng={lng}
       />
       </div>
     ); // return

@@ -1,5 +1,7 @@
 import { withGoogleMap, GoogleMap } from 'react-google-maps';
 import React from 'react';
+import { SingleHikeMarker } from './SingleHikeMarker'
+
 
 export const SingleHikeMap = withGoogleMap(props => (
   <GoogleMap
@@ -11,11 +13,7 @@ export const SingleHikeMap = withGoogleMap(props => (
   defaultCenter={props.center}
   defaultZoom={props.zoom}>
   {
-    // TODO: render pin for hike here 
-  //     props.hikes.length > 0 && props.hikes.map(hike => (
-  //       <HikeMarkerContainer key={`hike${hike.id}`}
-  //                    hikeData={hike}/>
-  //     ))
+    <SingleHikeMarker lat={props.lat} lng={props.lng}/>
     }
   </GoogleMap>
 ));
