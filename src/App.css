@@ -26,3 +26,11 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.invalid {
+  border-color: blue;
+}
+
+.error-placeholder {
+  color: blue;
+}

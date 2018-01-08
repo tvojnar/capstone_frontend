@@ -1,6 +1,4 @@
-import { withGoogleMap, GoogleMap } from 'react-google-maps'
 import React, { Component } from 'react';
-import {HikeMarkerContainer} from '../containers/HikeMarkerContainer'
 import $ from 'jquery';
 import {HikingMap} from './HikingMap';
 
@@ -27,6 +25,17 @@ export class Map extends Component {
       lng: -122.3321,
       hikes: [],
     };
+  }
+
+
+  componentDidMount() {
+    this.props.onRef(this)
+  }
+  componentWillUnmount() {
+    this.props.onRef(undefined)
+  }
+  method() {
+    window.alert('do stuff')
   }
 
   // called when the maps boundaries have changed
@@ -74,6 +83,7 @@ export class Map extends Component {
       success: function(data){
         console.log('successful api call!');
         console.log(data);
+        // set this.state.hikes to be equal to the data for all of the hikes within the maps bounds 
         this.setState({ hikes: data })
         // QUESTION: Should I have a message to the user appear when there are no hikes in the boundaries of the map?
       }.bind(this), // success
