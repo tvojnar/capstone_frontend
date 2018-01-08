@@ -11,6 +11,7 @@ import {SingleHikeMap} from './SingleHikeMap';
   constructor(props) {
     super(props)
 
+    this.zoom = 13;
     // Set state for lat and lng based on the start_lat and start_lng from props
     // this lat and lng is used to set the center point of the map
     this.state = {
@@ -40,7 +41,7 @@ import {SingleHikeMap} from './SingleHikeMap';
     // By defining a GoogleMap component (from the react-google-maps library) outside of the Map component, wrapped in the withGoogleMaps method it makes it so that each time we update a components state we will only re render the components on the map and not the entire map :)
     return(
 
-      <div style={{width: `750px`, height: `750px`}}>
+      <div style={{width: `750x`, height: `300px`}}>
 
       <SingleHikeMap
       onMapMounted={this.handleMapMounted.bind(this)}
