@@ -74,7 +74,7 @@ class HikeDetailsModal extends BaseModal {
 
           <h2 ref={subtitle => this.subtitle = subtitle}>{hikeData.name}</h2>
           <HikeAttributes hikeData={hikeData}/>
-          <MapHikeDetails onRef={ref => (this.child = ref)} />
+          <MapHikeDetails onRef={ref => (this.child = ref)} lat={hikeData.start_lat} lng={hikeData.start_lng}/>
           <TextHikeDetailsContainer hikeData={hikeData}/>
           <button onClick={this.closeModal}>close</button>
         </Modal>

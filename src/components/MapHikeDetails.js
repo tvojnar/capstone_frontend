@@ -11,8 +11,8 @@ import {SingleHikeMap} from './SingleHikeMap';
 
     // TODO: set state for lat and lng based on the start_lat and start_lng from props
     this.state = {
-      lat: 46.6062,
-      lng: -122.3321,
+      lat: this.props.lat,
+      lng: this.props.lng,
     }; // state
   }  // constructor
 
