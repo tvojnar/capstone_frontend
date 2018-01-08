@@ -1,6 +1,7 @@
 import React from 'react';
 import Modal from 'react-modal';
-import BaseModal from './BaseModal'
+import BaseModal from './BaseModal';
+import TextHikeDetailsContainer from '../containers/TextHikeDetailsContainer';
 
 // sets the portion of the app that should be hidden
 Modal.setAppElement('#root');
@@ -63,7 +64,7 @@ class HikeDetailsModal extends BaseModal {
         >
 
           <h2 ref={subtitle => this.subtitle = subtitle}>{hikeData.name}</h2>
-          
+          <TextHikeDetailsContainer hikeData={hikeData}/>
           <button onClick={this.closeModal}>close</button>
         </Modal>
       </div>
