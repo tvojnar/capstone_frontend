@@ -42,12 +42,16 @@ class HikeDetailsModal extends BaseModal {
   closeModal() {
     // make the success modal dissapear
     this.setState({modalIsOpen: false});
+    // make the HikeInfoWindow close as well
     this.props.closeInfoWindow();
   }
 
 
 
   render() {
+    // hikeData was passed via props from HikeInfoWindow
+    const hikeData = this.props.hikeData;
+
     return (
       <div>
         <Modal
@@ -58,7 +62,8 @@ class HikeDetailsModal extends BaseModal {
           contentLabel="Example Modal"
         >
 
-          <h2 ref={subtitle => this.subtitle = subtitle}>Hike Name</h2>
+          <h2 ref={subtitle => this.subtitle = subtitle}>{hikeData.name}</h2>
+          
           <button onClick={this.closeModal}>close</button>
         </Modal>
       </div>
