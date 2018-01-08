@@ -71,7 +71,7 @@ class HikeDetailsModal extends BaseModal {
         >
 
           <h2 ref={subtitle => this.subtitle = subtitle}>{hikeData.name}</h2>
-          <HikeAttributes />
+          <HikeAttributes hikeData={hikeData}/>
           <TextHikeDetailsContainer hikeData={hikeData}/>
           <button onClick={this.closeModal}>close</button>
         </Modal>

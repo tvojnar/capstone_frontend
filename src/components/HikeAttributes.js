@@ -3,11 +3,15 @@ import { HikeLocation } from './HikeLocation';
 
 // use this component to render the Location, Length, and Elevation components
 export class HikeAttributes extends Component {
+  constructor(props) {
+    super(props)
+
+  }
   render() {
     return (
     <div>
       <p>HikeAttributes</p>
-      <HikeLocation />
+      <HikeLocation region={this.props.hikeData.region}/>
     </div>
     )
   } // render
