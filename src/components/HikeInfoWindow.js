@@ -5,7 +5,8 @@ import { InfoWindow } from 'react-google-maps'
 export class HikeInfoWindow extends Component {
   render() {
     // set the description and name to display from the props passed in by HikeMarker
-    const {description, name} = this.props
+    const description = this.props.hikeData.description
+    const name = this.props.hikeData.name
     return(
       // closeWindow function is defined in HikeMarker component, which toggles showToolip to false
       // I think onCloseClick is a specific InfoWindow function that is for when the x is clicked
