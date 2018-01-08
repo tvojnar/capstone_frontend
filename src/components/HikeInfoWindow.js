@@ -24,7 +24,8 @@ export class HikeInfoWindow extends Component {
 
     let hikeDetailsModal;
     if (this.state.showHikeDetailsModal) {
-      hikeDetailsModal = <HikeDetailsModal hikeData={this.props.hikeData} />
+      hikeDetailsModal = <HikeDetailsModal hikeData={this.props.hikeData}
+      closeInfoWindow={this.props.closeWindow}/>
     }
 
     return(
