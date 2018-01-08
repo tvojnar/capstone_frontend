@@ -4,7 +4,9 @@ import { BaseMap } from './BaseMap';
 import $ from 'jquery';
 import {SingleHikeMap} from './SingleHikeMap';
 
-// Map is a child class of MadeMap. BaseMap has all of the methods for reloading the map on zoom and drag movements
+// Map is a child class of BaseMap. BaseMap has all of the methods for reloading the map on zoom and drag movements
+// MapHikeDetails is rendered on the HikeDetailsModal
+// MapHikeDetails returns a SingleHikeMap which will be a map with a pin for the hike that is being shown in the HikeDetailsModal
  class MapHikeDetails extends BaseMap {
   constructor(props) {
     super(props)
