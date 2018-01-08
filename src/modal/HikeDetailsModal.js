@@ -2,7 +2,8 @@ import React from 'react';
 import Modal from 'react-modal';
 import BaseModal from './BaseModal';
 import { TextHikeDetailsContainer } from '../containers/TextHikeDetailsContainer';
-import { HikeAttributes } from '../components/HikeAttributes'
+import { HikeAttributes } from '../components/HikeAttributes';
+import MapHikeDetails from '../components/MapHikeDetails';
 
 // sets the portion of the app that should be hidden
 Modal.setAppElement('#root');
@@ -58,7 +59,8 @@ class HikeDetailsModal extends BaseModal {
     // in the modal there is:
         // 1. The name of the hike
         // 2. The attributes of the hike (which are rendered in the HikeAttributes component )
-        // 3.
+        // 3. A map with A pin where the hike is
+              // NOTE: Have to set onRef={ref => (this.child = ref)} for the map to mount and unmount correctly
         // 4. The hikes description and notes via the TextHikeDetailsContainer
     return (
       <div>
@@ -72,6 +74,7 @@ class HikeDetailsModal extends BaseModal {
 
           <h2 ref={subtitle => this.subtitle = subtitle}>{hikeData.name}</h2>
           <HikeAttributes hikeData={hikeData}/>
+          <MapHikeDetails onRef={ref => (this.child = ref)} />
           <TextHikeDetailsContainer hikeData={hikeData}/>
           <button onClick={this.closeModal}>close</button>
         </Modal>

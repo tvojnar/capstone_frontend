@@ -8,7 +8,7 @@ import { HikeFeatures } from './HikeFeatures';
 // use this component to render the Location, Length, and Elevation components
 export class HikeAttributes extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
   }
   render() {

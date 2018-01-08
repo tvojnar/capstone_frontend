@@ -3,28 +3,25 @@ import { BaseMap } from './BaseMap';
 import $ from 'jquery';
 import {HikingMap} from './HikingMap';
 
-// TODO refactor to separate Map into a container component and a presentational component
+// Map is a child class of MadeMap. BaseMap has all of the methods for reloading the map on zoom and drag movements
  class Map extends BaseMap {
   constructor(props) {
     super(props)
+
     // TODO: maybe be able to dynamically set the starting center point of the map?
+    // set the state to set the starting center point for the map
     this.state = {
       lat: 46.6062,
       lng: -122.3321,
       hikes: [],
     }; // state
-
-    // this.fetchHikesFromApi = this.fetchHikesFromApi.bind(this);
   }  // constructor
-
-
 
 
   // called when the maps boundaries have changed
   // calls three functions to change the map boundaties and center point and make an api call to get the hikes within those boundaries
   handleMapChanged() {
-    this.getMapBounds();
-    this.setMapCenterPoint();
+    super.handleMapChanged()
     this.fetchHikesFromApi();
   } // handleMapChanged
 

@@ -16,13 +16,11 @@ export class BaseMap extends Component {
     // start off with have mapFullyLoaded as false
     this.mapFullyLoaded = false
 
-    // used to define the center point
-    // hikes will be all the hikes visable in a map area
-    // NOTE:  REMOVED FROM BASE:
+
+    // NOTE: Set state for the center point in the base class!
     // this.state = {
     //   lat: 46.6062,
     //   lng: -122.3321,
-    //   hikes: [],
     // };
   }
 
@@ -66,31 +64,6 @@ export class BaseMap extends Component {
     })
   }
 
-  // NOTE: REMOVED FROM BASE
-  // make an API call to get the hikes that are within the boundaries of the map
-  // fetchHikesFromApi() {
-  //   // clear the hikes array before making the api call
-  //   this.setState({ hikes: [] })
-  //
-  //   // make the api call
-  //   $.ajax({
-  //     url: `/api/hikes?min_lng=${this.xMapBounds.min}&max_lng=${this.xMapBounds.max}&min_lat=${this.yMapBounds.max}&max_lat=${this.yMapBounds.min}`,
-  //     dataType: 'json',
-  //     cache: false,
-  //     success: function(data){
-  //       console.log('successful api call!');
-  //       console.log(data);
-  //       // set this.state.hikes to be equal to the data for all of the hikes within the maps bounds
-  //       this.setState({ hikes: data })
-  //       // QUESTION: Should I have a message to the user appear when there are no hikes in the boundaries of the map?
-  //     }.bind(this), // success
-  //     error: function(xhr, status, err) {
-  //       console.log('in error');
-  //       console.log(err);
-  //       // TODO: Display error message that the api call did not work.
-  //     } // error
-  //   }); // get request
-  // } // fetchHikesFromApi
 
   // this function gets and sets map boundaries
   getMapBounds() {
@@ -106,7 +79,7 @@ export class BaseMap extends Component {
   }
 
   render() {
-    return 
+    return
   }
 }
 
