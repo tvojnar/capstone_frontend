@@ -2,6 +2,7 @@ import React from 'react';
 import Modal from 'react-modal';
 import BaseModal from './BaseModal';
 import { TextHikeDetailsContainer } from '../containers/TextHikeDetailsContainer';
+import { HikeAttributes } from '../components/HikeAttributes'
 
 // sets the portion of the app that should be hidden
 Modal.setAppElement('#root');
@@ -56,7 +57,7 @@ class HikeDetailsModal extends BaseModal {
     // return a modal
     // in the modal there is:
         // 1. The name of the hike
-        // 2.
+        // 2. The attributes of the hike (which are rendered in the HikeAttributes component )
         // 3.
         // 4. The hikes description and notes via the TextHikeDetailsContainer
     return (
@@ -70,6 +71,7 @@ class HikeDetailsModal extends BaseModal {
         >
 
           <h2 ref={subtitle => this.subtitle = subtitle}>{hikeData.name}</h2>
+          <HikeAttributes />
           <TextHikeDetailsContainer hikeData={hikeData}/>
           <button onClick={this.closeModal}>close</button>
         </Modal>
