@@ -11,7 +11,7 @@ import {SingleHikeMap} from './SingleHikeMap';
   constructor(props) {
     super(props)
 
-    this.zoom = 13;
+    this.zoom = 11;
     // Set state for lat and lng based on the start_lat and start_lng from props
     // this lat and lng is used to set the center point of the map
     this.state = {

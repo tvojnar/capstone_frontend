@@ -6,14 +6,10 @@ import { Marker } from 'react-google-maps'
 export const SingleHikeMarker = (props) => {
   // return a Marker, which is imported from the react-google-maps library
   return(
-
     <Marker
     position={{
       lat: parseFloat(props.lat),
       lng: parseFloat(props.lng)
-    }}
-    onClick={props.onClick}>
-    {}
-    </Marker>
+    }}/>
   );
 }
