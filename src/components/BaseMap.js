@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
-import {HikingMap} from './HikingMap';
 
 // TODO refactor to separate Map into a container component and a presentational component
-export class Map extends Component {
+export class BaseMap extends Component {
   constructor(props) {
     super(props)
 
@@ -39,10 +38,8 @@ export class Map extends Component {
   // called when the maps boundaries have changed
   // calls three functions to change the map boundaties and center point and make an api call to get the hikes within those boundaries
   handleMapChanged() {
-    this.getMapBounds()
-    this.setMapCenterPoint()
-    // NOTE: REMOVED FROM BASE
-    // this.fetchHikesFromApi()
+    this.getMapBounds();
+    this.setMapCenterPoint();
   }
 
 
@@ -109,39 +106,8 @@ export class Map extends Component {
   }
 
   render() {
-    // NOTE: REMOVED FROM BASE
-
-  //   // use this to set the center point
-  //   const {lat, lng, hikes} = this.state;
-  //
-  //
-  //   // return the map
-  //   // the center point is defined the state
-  //   // By defining a GoogleMap component (from the react-google-maps library) outside of the Map component, wrapped in the withGoogleMaps method it makes it so that each time we update a components state we will only re render the components on the map and not the entire map :)
-  //   return(
-  //
-  //     <div style={{width: `750px`, height: `750px`}}>
-  //
-  //     <HikingMap
-  //     onMapMounted={this.handleMapMounted.bind(this)}
-  //     handleMapChanged={this.handleMapChanged.bind(this)}
-  //     handleMapFullyLoaded={this.handleMapFullyLoaded.bind(this)}
-  //     center={{
-  //       lat: lat,
-  //       lng: lng
-  //     }}
-  //     zoom={this.zoom}
-  //     containerElement={
-  //       <div style={{ height: `100%` }} />
-  //     }
-  //     mapElement={
-  //       <div style={{ height: `100%` }} />
-  //     }
-  //     hikes={hikes}
-  //     />
-  //     </div>
-  //   );
-  // }
+    return 
+  }
 }
 
 export default Map
