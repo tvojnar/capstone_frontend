@@ -25,7 +25,7 @@ export class HikeInfoWindow extends Component {
     // pass the HikeDetailsModal all of the info for the hike via hikeData and the method to close the info window via closeInfoWindow (this will happen when the 'close' button in the HikeDetailsModal is clicked)
     let hikeDetailsModal;
     if (this.state.showHikeDetailsModal) {
-      hikeDetailsModal = <HikeDetailsModal hikeData={this.props.hikeData} id={this.props.hikeData.id}
+      hikeDetailsModal = <HikeDetailsModal id={this.props.hikeData.id}
       closeInfoWindow={this.props.closeWindow}/>
     }
 
