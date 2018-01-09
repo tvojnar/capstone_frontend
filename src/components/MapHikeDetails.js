@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { withGoogleMap, GoogleMap } from 'react-google-maps';
 import SingleHikeMarker from './SingleHikeMarker';
 import { SingleHikeMap } from './SingleHikeMap';
 

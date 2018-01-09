@@ -12,7 +12,7 @@ export const HikeMarker = (props) => {
   return(
     // on click toggle true/false for the value of showTooltip (which is in the state of HikeMarkerContainer)
     // if the state of showTooltip is true then show the info window for the hike
-    // Pass the info window all of the hikeData from the API so that I'll have access to it in the hike deails modal 
+    // Pass the info window all of the hikeData from the API so that I'll have access to it in the hike deails modal
     <Marker
     position={{
       lat: parseFloat(hikeData.start_lat),

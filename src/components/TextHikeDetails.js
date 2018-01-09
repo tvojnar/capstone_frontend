@@ -1,5 +1,4 @@
 import React from 'react'
-import HikeInfoWindow from './HikeInfoWindow'
 
 export const TextHikeDetails = (props) => {
   // pull out the hike data from the props passed from TextHikeDetailsContainer

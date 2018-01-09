@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 
 export class HikeLocation extends Component {
-  constructor(props) {
-    super(props)
-  }
 
   render() {
     console.log('in HikeLocation render');

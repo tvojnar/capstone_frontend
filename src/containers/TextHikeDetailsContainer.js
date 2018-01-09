@@ -3,9 +3,7 @@ import { TextHikeDetails } from '../components/TextHikeDetails';
 
 // used to return the components for the hikes description and notes
 export class TextHikeDetailsContainer extends Component {
-  constructor(props) {
-    super(props)
-  }
+
 
 
   render() {
@@ -25,7 +23,7 @@ export class TextHikeDetailsContainer extends Component {
 
    // return 2 TextHikeDetails
       // one for the hike description
-      // one for the hike notes 
+      // one for the hike notes
     return(
       <div>
         <TextHikeDetails data={descriptionData}/>
