@@ -1,30 +1,74 @@
-import React from 'react';
-import { BaseMap } from './BaseMap';
+import React, { Component } from 'react';
 import $ from 'jquery';
 import {HikingMap} from './HikingMap';
 
-// Map is a child class of MadeMap. BaseMap has all of the methods for reloading the map on zoom and drag movements
- class Map extends BaseMap {
+// TODO refactor to separate Map into a container component and a presentational component
+export class Map extends Component {
   constructor(props) {
     super(props)
 
+    // how zoomed in the map starts off as
+    this.zoom = 7
+
+    // store the map boundary coordinates
+    this.xMapBounds = { min: null, max: null }
+    this.yMapBounds = { min: null, max: null }
+
+    // start off with have mapFullyLoaded as false
+    this.mapFullyLoaded = false
+
+    // used to define the center point
+    // hikes will be all the hikes visable in a map area
     // TODO: maybe be able to dynamically set the starting center point of the map?
-    // set the state to set the starting center point for the map
     this.state = {
       lat: 46.6062,
       lng: -122.3321,
       hikes: [],
-    }; // state
-  }  // constructor
+    };
+  }
 
+
+  componentDidMount() {
+    this.props.onRef(this)
+  }
+  componentWillUnmount() {
+    this.props.onRef(undefined)
+  }
+  method() {
+    window.alert('do stuff')
+  }
 
   // called when the maps boundaries have changed
   // calls three functions to change the map boundaties and center point and make an api call to get the hikes within those boundaries
   handleMapChanged() {
-    super.handleMapChanged()
-    this.fetchHikesFromApi();
-  } // handleMapChanged
+    this.getMapBounds()
+    this.setMapCenterPoint()
+    this.fetchHikesFromApi()
+  }
 
+
+  handleMapMounted(map) {
+    // assigns to the this.map value a map object during the map initialization
+    this.map = map
+  }
+
+
+  handleMapFullyLoaded() {
+    // marks that the map has fully loaded and calls the handleMapChanged function to get the lastest data
+    if (this.mapFullyLoaded)
+    return
+
+    this.mapFullyLoaded = true
+    this.handleMapChanged()
+  }
+
+  // this function gets and sets the center point
+  setMapCenterPoint() {
+    this.setState({
+      lat: this.map.getCenter().lat(),
+      lng: this.map.getCenter().lng()
+    })
+  }
 
   // make an API call to get the hikes that are within the boundaries of the map
   fetchHikesFromApi() {
@@ -51,7 +95,18 @@ import {HikingMap} from './HikingMap';
     }); // get request
   } // fetchHikesFromApi
 
+  // this function gets and sets map boundaries
+  getMapBounds() {
+    var mapBounds = this.map.getBounds()
+    var xMapBounds = mapBounds.b
+    var yMapBounds = mapBounds.f
 
+    this.xMapBounds.min = xMapBounds.b
+    this.xMapBounds.max = xMapBounds.f
+
+    this.yMapBounds.min = yMapBounds.f
+    this.yMapBounds.max = yMapBounds.b
+  }
 
   render() {
 
@@ -63,7 +118,6 @@ import {HikingMap} from './HikingMap';
     // the center point is defined the state
     // By defining a GoogleMap component (from the react-google-maps library) outside of the Map component, wrapped in the withGoogleMaps method it makes it so that each time we update a components state we will only re render the components on the map and not the entire map :)
     return(
-
       <div style={{width: `750px`, height: `750px`}}>
 
       <HikingMap
@@ -84,8 +138,8 @@ import {HikingMap} from './HikingMap';
       hikes={hikes}
       />
       </div>
-    ); // return
-  } // render
-} // Map
+    );
+  }
+}
 
 export default Map
