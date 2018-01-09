@@ -83,7 +83,7 @@ export class Map extends Component {
       success: function(data){
         console.log('successful api call!');
         console.log(data);
-        // set this.state.hikes to be equal to the data for all of the hikes within the maps bounds 
+        // set this.state.hikes to be equal to the data for all of the hikes within the maps bounds
         this.setState({ hikes: data })
         // QUESTION: Should I have a message to the user appear when there are no hikes in the boundaries of the map?
       }.bind(this), // success
@@ -118,14 +118,6 @@ export class Map extends Component {
     // the center point is defined the state
     // By defining a GoogleMap component (from the react-google-maps library) outside of the Map component, wrapped in the withGoogleMaps method it makes it so that each time we update a components state we will only re render the components on the map and not the entire map :)
     return(
-      // <ul>
-      //   <li>lng: {lng}</li>
-      //   <li>lat: {lat}</li>
-      //   <li>xMapBounds.min: {this.xMapBounds.min}</li>
-      //   <li>xMapBounds.max: {this.xMapBounds.max}</li>
-      //   <li>yMapBounds.min: {this.yMapBounds.min}</li>
-      //   <li>yMapBounds.max: {this.yMapBounds.max}</li>
-      // </ul>
       <div style={{width: `750px`, height: `750px`}}>
 
       <HikingMap
