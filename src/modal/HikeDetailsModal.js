@@ -60,7 +60,8 @@ class HikeDetailsModal extends BaseModal {
     this.props.closeInfoWindow();
   }
 
-  componentDidMount() {
+  // wait to make the fetch to the API until the component will mount (could also do this in componentDidMount)
+  componentWillMount() {
     // Call the function that makes the api call
     this.fetchHikeDetailsFromApi();
   }
@@ -69,7 +70,7 @@ class HikeDetailsModal extends BaseModal {
     // make the api call to get hike details
     const hikeId = this.props.id
     $.ajax({
-      url: `/api/hikes/` + `${hikeId}`,
+      url: `/api/hikes/${hikeId}`,
       dataType: 'json',
       cache: false,
       success: function(data){
@@ -89,26 +90,20 @@ class HikeDetailsModal extends BaseModal {
 
   render() {
 
-    // hikeData was passed via props from HikeInfoWindow
-    // const hikeData = this.props.hikeData;
-
-    const hikeDetails = this.state.hike;
-    // console.log('in HikeDetailsModal render');
-    // console.log(typeof hikeDetails.start_lat);
-    // console.log(hikeDetails.start_lng);
-
-    // return a modal
-    // in the modal there is:
-        // 1. The name of the hike
-        // 2. The attributes of the hike (which are rendered in the HikeAttributes component )
-        // 3. A map with A pin where the hike is
-              // NOTE: Have to set onRef={ref => (this.child = ref)} for the map to mount and unmount correctly
-              // pass the start_lng and start_lat to the map so that the map can be centered on the location of the hike
-        // 4. The hikes description and notes via the TextHikeDetailsContainer
-
-
-
+      // IF THE API HAS RETURNED THE DATA FOR THE HIKES DETAILS
       if (Object.keys(this.state.hike).length !== 0) {
+        // set hikeDetails to the data object with the hike details that was returned from the API
+        const hikeDetails = this.state.hike;
+
+
+        // return a modal
+        // in the modal there is:
+            // 1. The name of the hike
+            // 2. The attributes of the hike (which are rendered in the HikeAttributes component )
+            // 3. A map with A pin where the hike is
+                  // NOTE: Have to set onRef={ref => (this.child = ref)} for the map to mount and unmount correctly
+                  // pass the start_lng and start_lat to the map so that the map can be centered on the location of the hike
+            // 4. The hikes description and notes via the TextHikeDetailsContainer
         return (
       <div>
         <Modal
@@ -129,7 +124,9 @@ class HikeDetailsModal extends BaseModal {
       </div>
     ); // return
   }
+  // IF THE API HAS NOT RETUNED THE DATA FOR THE HIKES DETAILS YET
   else {
+    // just return a modal with an <h2> that says 'loading ...'
     return (
   <div>
     <Modal
