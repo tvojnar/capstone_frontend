@@ -42,7 +42,8 @@ class HikeDetailsModal extends BaseModal {
     // set the initial state
     this.state = {
       modalIsOpen: true,
-      hike: '',
+      hike: {},
+      load: 'loading...'
     }
   }
 
@@ -59,10 +60,9 @@ class HikeDetailsModal extends BaseModal {
     this.props.closeInfoWindow();
   }
 
-  componentWillMount() {
-    // super.componentWillMount();
+  componentDidMount() {
     // Call the function that makes the api call
-    this.fetchHikeDetailsFromApi()
+    this.fetchHikeDetailsFromApi();
   }
 
   fetchHikeDetailsFromApi() {
@@ -88,11 +88,14 @@ class HikeDetailsModal extends BaseModal {
   }
 
   render() {
-    console.log('in HikeDetailsModal render');
+
     // hikeData was passed via props from HikeInfoWindow
     // const hikeData = this.props.hikeData;
 
     const hikeDetails = this.state.hike;
+    // console.log('in HikeDetailsModal render');
+    // console.log(typeof hikeDetails.start_lat);
+    // console.log(hikeDetails.start_lng);
 
     // return a modal
     // in the modal there is:
@@ -102,7 +105,11 @@ class HikeDetailsModal extends BaseModal {
               // NOTE: Have to set onRef={ref => (this.child = ref)} for the map to mount and unmount correctly
               // pass the start_lng and start_lat to the map so that the map can be centered on the location of the hike
         // 4. The hikes description and notes via the TextHikeDetailsContainer
-    return (
+
+
+
+      if (Object.keys(this.state.hike).length !== 0) {
+        return (
       <div>
         <Modal
           isOpen={this.state.modalIsOpen}
@@ -114,13 +121,20 @@ class HikeDetailsModal extends BaseModal {
 
           <h2 ref={subtitle => this.subtitle = subtitle}>{hikeDetails.name}</h2>
           <HikeAttributes hikeData={hikeDetails}/>
-          <MapHikeDetails onRef={ref => (this.child = ref)} lat={hikeDetails.start_lat} lng={hikeDetails.start_lng}/>
+          <MapHikeDetails
+            onRef={ref => (this.child = ref)}         lat={hikeDetails.start_lat} lng={hikeDetails.start_lng}/>
           <TextHikeDetailsContainer hikeData={hikeDetails}/>
           <button onClick={this.closeModal}>close</button>
         </Modal>
       </div>
-    );
+    ); // return
   }
-}
+  else {
+    return (
+      <p>{this.state.load}</p>
+    )
+  }
+  } // render
+} // HikeDetailsModal
 
 export default HikeDetailsModal

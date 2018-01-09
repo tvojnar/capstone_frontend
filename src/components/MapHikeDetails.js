@@ -9,19 +9,29 @@ export class MapHikeDetails extends Component {
   constructor(props) {
     super(props)
 
+
+
     // set the zoom a little closer so we can see more details around the hike
     this.zoom = 11
 
     // set the lat and lng based on props passed in from HikeDetailsModal
-    this.state = {
-      lat: this.props.lat,
-      lng: this.props.lng
-    };
+    // this.state = {
+    //   lat: this.props.lat,
+    //   lng: this.props.lng
+    // };
   }
 
+
   render() {
+    console.log('in MapHikeDetails render');
+    console.log(typeof this.props.lat);
+    console.log(typeof this.props.lng);
+
     // use the lat and lng to set the center point of the SingleHikeMap
-    const {lat, lng} = this.state;
+    // const {lat, lng} = this.state;
+
+    const lat = this.props.lat;
+    const lng = this.props.lng;
     // pass the SingleHikeMap an instance of SingleHikeMap to render on the map
     const hike = <SingleHikeMarker lat={lat} lng={lng}/>
 
