@@ -1,4 +1,54 @@
+import React, { Component } from 'react'
+import { withGoogleMap, GoogleMap } from 'react-google-maps';
+import SingleHikeMarker from './SingleHikeMarker'
 
+const DetailsMap = withGoogleMap(props => (
+  <GoogleMap
+    defaultCenter={props.center}
+    defaultZoom={props.zoom}>
+      {props.places}
+    </GoogleMap>
+));
+
+export class MapHikeDetails extends Component {
+  constructor(props) {
+    super(props)
+
+    this.zoom = 7
+
+    this.state = {
+      lat: this.props.lat,
+      lng: this.props.lng
+    };
+  }
+
+  render() {
+    const {lat, lng} = this.state;
+    const places = [<SingleHikeMarker lat={lat} lng={lng}/>]
+
+
+    return(
+      <div style={{width: `750px`, height: `750px`}}>
+        <DetailsMap
+          center={{
+            lat: lat,
+            lng: lng
+          }}
+          zoom={this.zoom}
+          containerElement={
+            <div style={{ height: `100%` }} />
+          }
+          mapElement={
+            <div style={{ height: `100%` }} />
+          }
+          places={places}
+        />
+      </div>
+    );
+  }
+}
+
+export default MapHikeDetails
 // import React from 'react';
 // import { BaseMap } from './BaseMap';
 // import $ from 'jquery';
