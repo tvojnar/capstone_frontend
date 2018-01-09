@@ -131,8 +131,19 @@ class HikeDetailsModal extends BaseModal {
   }
   else {
     return (
-      <p>{this.state.load}</p>
-    )
+  <div>
+    <Modal
+      isOpen={this.state.modalIsOpen}
+      onAfterOpen={this.afterOpenModal}
+      onRequestClose={this.closeModal}
+      style={customStyles}
+      contentLabel="Example Modal"
+    >
+      <h2 ref={subtitle => this.subtitle = subtitle}>{this.state.load}</h2>
+      <button onClick={this.closeModal}>close</button>
+    </Modal>
+  </div>
+); // return
   }
   } // render
 } // HikeDetailsModal
