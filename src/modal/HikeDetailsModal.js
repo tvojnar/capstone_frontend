@@ -47,7 +47,7 @@ class HikeDetailsModal extends BaseModal {
       load: 'loading...'
     }
 
-    this.editHikeDetails = this.editHikeDetails.bind(this);
+    this.toggleEditForm = this.toggleEditForm.bind(this);
     this.fetchHikeDetailsFromApi = this.fetchHikeDetailsFromApi.bind(this);
   }
 
@@ -58,7 +58,7 @@ class HikeDetailsModal extends BaseModal {
 
 
   closeModal() {
-    // make the success modal dissapear
+    // make the modal dissapear
     this.setState({modalIsOpen: false});
     // make the HikeInfoWindow close as well
     this.props.closeInfoWindow();
@@ -94,7 +94,10 @@ class HikeDetailsModal extends BaseModal {
     }); // get request
   }
 
-  editHikeDetails() {
+  // toggles if the editForm is show
+  // clicking the 'Edit hike details' button toggles to true
+  // clicking the 'cancle' button toggles to false again
+  toggleEditForm() {
     this.setState({showEditForm: !this.state.showEditForm})
   }
 
@@ -105,24 +108,37 @@ class HikeDetailsModal extends BaseModal {
         // set hikeDetails to the data object with the hike details that was returned from the API
         const hikeDetails = this.state.hike;
 
-        let editForm;
-        let editButton;
-        // pass hikeState to EditForm, which will be added to EditForms state via the ComponentWillMount function in BaseForm
+
+        let whatToRender;
         if (this.state.showEditForm) {
-          editForm =
+          // the editForm will replace all of the hike details when the 'Edit hike details' buttomn is clicked
+            // only the edit form will be rendered in the modal!
+
+          // pass hikeState to EditForm, which will be added to EditForms state via the ComponentWillMount function in BaseForm
+          whatToRender =
             <div>
-              <h4>Edid hike details: </h4>
+              <h2 ref={subtitle => this.subtitle = subtitle}>{hikeDetails.name}</h2>
+              <h4>Edit hike details: </h4>
               <EditForm
               hikeState={hikeDetails}
               fetchHikes={this.props.fetchHikes}
               fetchHikeDetails={this.fetchHikeDetailsFromApi}
-              hideEditForm={this.editHikeDetails}/>
-              <button onClick={this.editHikeDetails}>Cancle</button>
+              hideEditForm={this.toggleEditForm}/>
+              <button onClick={this.toggleEditForm}>Cancle</button>
           </div>
-          editButton = <p></p>
         }
         else {
-          editButton = <button onClick={this.editHikeDetails}>Edit hike details</button>
+          // else the modal will show all of the hike's details
+            whatToRender =
+            <div>
+              <h2 ref={subtitle => this.subtitle = subtitle}>{hikeDetails.name}</h2>
+              <button onClick={this.toggleEditForm}>Edit hike details</button>
+              <HikeAttributes hikeData={hikeDetails}/>
+              <MapHikeDetails
+                onRef={ref => (this.child = ref)}         lat={hikeDetails.start_lat} lng={hikeDetails.start_lng}/>
+              <TextHikeDetailsContainer hikeData={hikeDetails}/>
+              <button onClick={this.closeModal}>close</button>
+          </div>
         }
 
 
@@ -143,15 +159,7 @@ class HikeDetailsModal extends BaseModal {
           style={customStyles}
           contentLabel="Example Modal"
         >
-
-          <h2 ref={subtitle => this.subtitle = subtitle}>{hikeDetails.name}</h2>
-          { editForm }
-          { editButton }
-          <HikeAttributes hikeData={hikeDetails}/>
-          <MapHikeDetails
-            onRef={ref => (this.child = ref)}         lat={hikeDetails.start_lat} lng={hikeDetails.start_lng}/>
-          <TextHikeDetailsContainer hikeData={hikeDetails}/>
-          <button onClick={this.closeModal}>close</button>
+          {whatToRender}
         </Modal>
       </div>
     ); // return
