@@ -10,7 +10,7 @@ export class MapAddHike extends Component {
     super(props)
 
     // set the zoom a little closer so we can see more details around the hike
-    this.zoom = 11
+    this.zoom = 7
   }
 
 
@@ -24,7 +24,7 @@ export class MapAddHike extends Component {
 
     // return an instance of SingleHikeMap, which is the map that will be rendered on the HikeDetailsModal
     return(
-      <div style={{width: `750px`, height: `400px`}}>
+      <div style={{width: `400px`, height: `400px`}}>
         <SetPinMap
           center={{
             lat: lat,
