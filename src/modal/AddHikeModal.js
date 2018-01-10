@@ -4,6 +4,7 @@ import BaseModal from './BaseModal';
 import Form from '../components/Form';
 import {MapAddHike} from '../components/MapAddHike';
 import SetPinForm from '../components/SetPinForm';
+import FormContainer from '../containers/FormContainer'
 
 // sets the portion of the app that should be hidden
 Modal.setAppElement('#root');
@@ -25,27 +26,16 @@ class AddHikeModal extends BaseModal {
     super(props)
 
     this.state = {
-      lat: 46.6062,
-      lng: -122.3321,
       modalIsOpen: true,
-      enteredName: false,
-      hikeName: '',
     };
 
-    this.setName = this.setName.bind(this);
   }
 
-  setName(name) {
-    console.log('in setName and name is:');
-    console.log(name);
-    this.setState({hikeName: name})
-  }
 
-// pass the Form a method to close the AddFormModal via props (hideFormModal)
-// pass Form fetchHikes so that it can call the Map components fetchHikesFromApi function when the form is submitted
+
+// pass FormContainer fetchHikes so that it can pass it to Form to call the Map components fetchHikesFromApi function when the form is submitted
   render() {
-    console.log('in render for MapAddModal and name is:');
-    console.log(this.state.hikeName);
+
     return (
       <div>
         <Modal
@@ -55,16 +45,7 @@ class AddHikeModal extends BaseModal {
           style={customStyles}
           contentLabel="Example Modal"
         >
-          <SetPinForm setName={this.setName}/>
-          <MapAddHike
-              lat={this.state.lat}
-              lng={this.state.lng}
-              enteredName={this.state.enteredName}/>
-          <Form
-            hideFormModal={this.props.hideModalFromAddHike}
-            fetchHikes={this.props.fetchHikes}
-            hikeName={this.state.hikeName}
-          />
+          <FormContainer fetchHikes={this.props.handleFetchHikes} />
           <button onClick={this.props.hideModalFromAddHike}>Cancle</button>
         </Modal>
       </div>
