@@ -42,9 +42,9 @@ class FormContainer extends Component {
     const url = baseUrl + hikeName + '&key' + apiKey
     const encodedUrl = encodeURI(url);
 
-
-    console.log('encoded url: ');
-    console.log(encodedUrl);
+    //
+    // console.log('encoded url: ');
+    // console.log(encodedUrl);
 
 
     $.ajax({
@@ -66,10 +66,10 @@ class FormContainer extends Component {
               lng: geoLng,
               enteredName: true,
             })
-          console.log('state: ');
-          console.log(this.state.lat);
-          console.log(this.state.lng);
-          console.log(this.state.enteredName);
+          // console.log('state: ');
+          // console.log(this.state.lat);
+          // console.log(this.state.lng);
+          // console.log(this.state.enteredName);
 
         }
   }.bind(this), // success
@@ -85,16 +85,15 @@ class FormContainer extends Component {
 // pass the Form a method to close the AddFormModal via props (hideFormModal)
 // pass Form fetchHikes so that it can call the Map components fetchHikesFromApi function when the form is submitted
 render() {
-  console.log('in render for MapAddModal and name is:');
-  console.log(this.state.hikeName);
+  // console.log('in render for MapAddModal and name is:');
+  // console.log(this.state.hikeName);
   return (
     <div>
     <SetPinForm setName={this.setName}/>
     <MapAddHike
-    lat={this.state.lat}
-    lng={this.state.lng}
-    enteredName={this.state.enteredName}
-    zoom={12}/>
+      lat={this.state.lat}
+      lng={this.state.lng}
+      enteredName={this.state.enteredName}/>
     <Form
     hideFormModal={this.props.hideModalFromAddHike}
     fetchHikes={this.props.fetchHikes}
