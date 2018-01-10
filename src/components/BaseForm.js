@@ -64,10 +64,19 @@ class BaseForm extends LinkedComponent {
 
   // use this function to prepopulate form input fields with the hike's data in EditForm
   componentWillMount(nextProps) {
-    console.log('in componentWillReceiveProps');
     if (this.props.hikeState) {
-    this.setState(this.props.hikeState)
+      this.setState(this.props.hikeState)
+    }
   }
+
+
+
+  componentWillReceiveProps(nextProps) {
+    console.log('in componentWillReceiveProps and name is:');
+    console.log(nextProps.hikeName);
+    if (nextProps.hikeName) {
+      this.setState({name: nextProps.hikeName})
+    }
   }
 
 
@@ -95,252 +104,252 @@ class BaseForm extends LinkedComponent {
         console.log('NO NAME');
         this.setState({nameError: true})
       } else {
-          console.log('YES NAME');
+        console.log('YES NAME');
         this.setState({nameError: false})
       }
 
       if (this.state.start_lat === '') {
-          console.log('NO LAT');
+        console.log('NO LAT');
         this.setState({latError: true })
       } else {
-          console.log('YES LAT');
+        console.log('YES LAT');
         this.setState({latError: false })
       }
 
       if (this.state.start_lng === '') {
-          console.log('NO LNG');
+        console.log('NO LNG');
         this.setState({lngError: true })
       } else {
-          console.log('YES LNG');
+        console.log('YES LNG');
         this.setState({lngError: false })
       }
     } else {
-        console.log('ELSE');
+      console.log('ELSE');
       readyToSubmit =  true;
     }
 
-console.log(`after all the if statements readyToSubmit: ${readyToSubmit}`);
+    console.log(`after all the if statements readyToSubmit: ${readyToSubmit}`);
     // Check that the form has all the required fields and is ready to be submitted
     // if it is then trim the leading and trailing spaces and then submit the form and call submitForm as a callback function so that I know that trimState completed before I submit the form
     // TODO: figure out why the trim function isn't trimming the strings for name, description, and notes
     if (readyToSubmit) {
       this.trimState( this.submitForm()
-      )
-    }
-  } // onSubmit
+    )
+  }
+} // onSubmit
 
-  submitForm() {
-    // Define what happens in this function in each child class
-  } // submitForm
-
-
-  trimState() {
-    // NOTE: tried this as well: mystring = mystring.replace(/^\s+|\s+$/g, "");
-    // remove leading and trailing white spaces from text fields in state so that they won't interfere with searching later
-    // trim white spaces
-    console.log('in trimState');
-    console.log(this.state.name.length);
-    const nameNoSpaces = this.state.name.replace(/^\s+|\s+$/g, "");
-    console.log(this.state.name.length);
-
-    this.setState({name: nameNoSpaces});
-    const descriptionNoSpaces = this.state.description.trim();
-    this.setState({description: descriptionNoSpaces });
-    const notesNoSpaces = this.state.notes.trim();
-    this.setState({notes: notesNoSpaces });
-  } // trimState
-
-  // render the form, and when needed a modal
-  render() {
-
-    // generate the HTML option tags for the select field for region
-    let regionOptions = this.props.regions.map(region => {
-      return <option key={region} value={region}>{region}</option>
-    })
-
-    // link all the form fields to the Form components state
-    const linked = this.linkAll(); // wrap all state members in links
-
-    // link the name, lat, and lng input feilds in this way so that I can show the user error messages in the form when they try to submit the form without filling out a name, lat, or lng.
-    const nameLink = Link.state(this, 'name'),
-    nameIsValid = nameLink.value
-
-    const latLink = Link.state(this, 'start_lat'),
-    latIsValid = latLink.value
-
-    const lngLink = Link.state(this, 'start_lng'),
-    lngIsValid = lngLink.value
+submitForm() {
+  // Define what happens in this function in each child class
+} // submitForm
 
 
-    // define these so that I can use them in the if/else statements below for the name, lat, and lng input fields
-    let nameBox;
-    let latBox;
-    let lngBox;
-    let modal;
+trimState() {
+  // NOTE: tried this as well: mystring = mystring.replace(/^\s+|\s+$/g, "");
+  // remove leading and trailing white spaces from text fields in state so that they won't interfere with searching later
+  // trim white spaces
+  console.log('in trimState');
+  console.log(this.state.name.length);
+  const nameNoSpaces = this.state.name.replace(/^\s+|\s+$/g, "");
+  console.log(this.state.name.length);
 
-    // only show the form validation message and styling if the user hit submit without entering a name
-    if (this.state.nameError) {
-      nameBox = <label>
-      Name: <Input type="text"
-      className={ nameIsValid ? '' : 'invalid'}
-      valueLink={ nameLink }
-      />
-      <div className='error-placeholder'>
-      { nameIsValid ? '' : 'Name is required'}
-      </div>
-      </label>
-    } else {
-      nameBox = <label>
-      Name: <Input type="text" valueLink={ nameLink }
-            />
-      </label>
-    }
+  this.setState({name: nameNoSpaces});
+  const descriptionNoSpaces = this.state.description.trim();
+  this.setState({description: descriptionNoSpaces });
+  const notesNoSpaces = this.state.notes.trim();
+  this.setState({notes: notesNoSpaces });
+} // trimState
 
-    // only show the form validation message and styling if the user hit submit without entering a starting latitude
-    if (this.state.latError) {
-      latBox = <label>
-      Starting latitude: <Input type="number"
-      className={ latIsValid ? '' : 'invalid'}
-      valueLink={ latLink } />
-      <div className='error-placeholder'>
-      { latIsValid ? '' : 'Starting latitude is required'}
-      </div>
-      </label>
-    } else {
-      latBox = <label>
-      Starting latitude: <Input type="number" valueLink={ latLink } />
-      </label>
-    }
+// render the form, and when needed a modal
+render() {
 
-    // only show the form validation message and styling if the user hit submit without entering a starting longitude
-    if (this.state.lngError) {
-      lngBox = <label>
-      Starting longitude: <Input type="number"
-      className={ lngIsValid ? '' : 'invalid'}
-      valueLink={ lngLink } />
-      <div className='error-placeholder'>
-      { lngIsValid ? '' : 'Starting longitude is required'}
-      </div>
-      </label>
-    } else {
-      lngBox = <label>
-      Starting longitude: <Input type="number" valueLink={ lngLink } />
-      </label>
-    }
+  // generate the HTML option tags for the select field for region
+  let regionOptions = this.props.regions.map(region => {
+    return <option key={region} value={region}>{region}</option>
+  })
 
-    // show the error modal if the post request failed
-    // pass the successModal the function to close the AddHikeModal via props (hideFormModal)
-    // TODO: figure out how to refactor this to move this logic into Form.js instead
-    if (this.state.showErrorModal) {
-      modal = <ErrorModal />
-    } else if (this.state.showSuccessModal) {
-      modal = <SuccessModal hideFormModal={this.props.hideFormModal}/>
-    }
+  // link all the form fields to the Form components state
+  const linked = this.linkAll(); // wrap all state members in links
 
-    // render the form
-    // it used the valueLink library to conect each form input field with the Form components state
-    return(
-      <div>
-      {modal}
-      <form onSubmit={this.onSubmit}>
+  // link the name, lat, and lng input feilds in this way so that I can show the user error messages in the form when they try to submit the form without filling out a name, lat, or lng.
+  const nameLink = Link.state(this, 'name'),
+  nameIsValid = nameLink.value
 
-      { nameBox }
+  const latLink = Link.state(this, 'start_lat'),
+  latIsValid = latLink.value
 
-      { latBox }
+  const lngLink = Link.state(this, 'start_lng'),
+  lngIsValid = lngLink.value
 
-      { lngBox }
 
-      <label>
-      Region: <Select valueLink={ linked.region }>{regionOptions}</Select>
-      </label>
+  // define these so that I can use them in the if/else statements below for the name, lat, and lng input fields
+  let nameBox;
+  let latBox;
+  let lngBox;
+  let modal;
 
-      <label>
-      Start date: <Input type="date" valueLink={ linked.start_date } />
-      </label>
+  // only show the form validation message and styling if the user hit submit without entering a name
+  if (this.state.nameError) {
+    nameBox = <label>
+    Name: <Input type="text"
+    className={ nameIsValid ? '' : 'invalid'}
+    valueLink={ nameLink }
+    />
+    <div className='error-placeholder'>
+    { nameIsValid ? '' : 'Name is required'}
+    </div>
+    </label>
+  } else {
+    nameBox = <label>
+    Name: <Input type="text" valueLink={ nameLink }
+    />
+    </label>
+  }
 
-      <label>
-      End date: <Input type="date" valueLink={ linked.end_date } />
-      </label>
+  // only show the form validation message and styling if the user hit submit without entering a starting latitude
+  if (this.state.latError) {
+    latBox = <label>
+    Starting latitude: <Input type="number"
+    className={ latIsValid ? '' : 'invalid'}
+    valueLink={ latLink } />
+    <div className='error-placeholder'>
+    { latIsValid ? '' : 'Starting latitude is required'}
+    </div>
+    </label>
+  } else {
+    latBox = <label>
+    Starting latitude: <Input type="number" valueLink={ latLink } />
+    </label>
+  }
 
-      <label>
-      Miles: <Input type="number" valueLink={ linked.miles } />
-      </label>
+  // only show the form validation message and styling if the user hit submit without entering a starting longitude
+  if (this.state.lngError) {
+    lngBox = <label>
+    Starting longitude: <Input type="number"
+    className={ lngIsValid ? '' : 'invalid'}
+    valueLink={ lngLink } />
+    <div className='error-placeholder'>
+    { lngIsValid ? '' : 'Starting longitude is required'}
+    </div>
+    </label>
+  } else {
+    lngBox = <label>
+    Starting longitude: <Input type="number" valueLink={ lngLink } />
+    </label>
+  }
 
-      <label>
-      Elevation gain: <Input type="number" valueLink={ linked.elevation_gain } />
-      </label>
+  // show the error modal if the post request failed
+  // pass the successModal the function to close the AddHikeModal via props (hideFormModal)
+  // TODO: figure out how to refactor this to move this logic into Form.js instead
+  if (this.state.showErrorModal) {
+    modal = <ErrorModal />
+  } else if (this.state.showSuccessModal) {
+    modal = <SuccessModal hideFormModal={this.props.hideFormModal}/>
+  }
 
-      <label>
-      Max elevation: <Input type="number" valueLink={ linked.max_elevation } />
-      </label>
+  // render the form
+  // it used the valueLink library to conect each form input field with the Form components state
+  return(
+    <div>
+    {modal}
+    <form onSubmit={this.onSubmit}>
 
-      <label>
-      Description: <Input valueLink={ linked.description } />
-      </label>
+    { nameBox }
 
-      <label>
-      Notes: <Input valueLink={ linked.notes } />
-      </label>
+    { latBox }
 
-      <label>
-      Lakes: <Input type="checkbox" valueLink={ linked.lakes } />
-      </label>
+    { lngBox }
 
-      <label>
-      Coast: <Input type="checkbox" valueLink={ linked.coast } />
-      </label>
+    <label>
+    Region: <Select valueLink={ linked.region }>{regionOptions}</Select>
+    </label>
 
-      <label>
-      Rivers: <Input type="checkbox" valueLink={ linked.rivers } />
-      </label>
+    <label>
+    Start date: <Input type="date" valueLink={ linked.start_date } />
+    </label>
 
-      <label>
-      Waterfalls: <Input type="checkbox" valueLink={ linked.waterfalls } />
-      </label>
+    <label>
+    End date: <Input type="date" valueLink={ linked.end_date } />
+    </label>
 
-      <label>
-      Fall foliage: <Input type="checkbox" valueLink={ linked.fall_foliage } />
-      </label>
+    <label>
+    Miles: <Input type="number" valueLink={ linked.miles } />
+    </label>
 
-      <label>
-      Wildflowers: <Input type="checkbox" valueLink={ linked.wildflowers } />
-      </label>
+    <label>
+    Elevation gain: <Input type="number" valueLink={ linked.elevation_gain } />
+    </label>
 
-      <label>
-      Meadows: <Input type="checkbox" valueLink={ linked.meadows} />
-      </label>
+    <label>
+    Max elevation: <Input type="number" valueLink={ linked.max_elevation } />
+    </label>
 
-      <label>
-      Old-growth: <Input type="checkbox" valueLink={ linked.old_growth } />
-      </label>
+    <label>
+    Description: <Input valueLink={ linked.description } />
+    </label>
 
-      <label>
-      Mountain views: <Input type="checkbox" valueLink={ linked.mountain_views } />
-      </label>
+    <label>
+    Notes: <Input valueLink={ linked.notes } />
+    </label>
 
-      <label>
-      Summits: <Input type="checkbox" valueLink={ linked.summits } />
-      </label>
+    <label>
+    Lakes: <Input type="checkbox" valueLink={ linked.lakes } />
+    </label>
 
-      <label>
-      Established campsites: <Input type="checkbox" valueLink={ linked.established_campsites } />
-      </label>
+    <label>
+    Coast: <Input type="checkbox" valueLink={ linked.coast } />
+    </label>
 
-      <label>
-      Day hike: <Input type="checkbox" valueLink={ linked.day_hike } />
-      </label>
+    <label>
+    Rivers: <Input type="checkbox" valueLink={ linked.rivers } />
+    </label>
 
-      <label>
-      Overnight: <Input type="checkbox" valueLink={ linked.overnight } />
-      </label>
+    <label>
+    Waterfalls: <Input type="checkbox" valueLink={ linked.waterfalls } />
+    </label>
 
-      <button type='submit'>Submit</button>
+    <label>
+    Fall foliage: <Input type="checkbox" valueLink={ linked.fall_foliage } />
+    </label>
 
-      </form>
-      </div>
-    ) // return
+    <label>
+    Wildflowers: <Input type="checkbox" valueLink={ linked.wildflowers } />
+    </label>
 
-  } // render
+    <label>
+    Meadows: <Input type="checkbox" valueLink={ linked.meadows} />
+    </label>
+
+    <label>
+    Old-growth: <Input type="checkbox" valueLink={ linked.old_growth } />
+    </label>
+
+    <label>
+    Mountain views: <Input type="checkbox" valueLink={ linked.mountain_views } />
+    </label>
+
+    <label>
+    Summits: <Input type="checkbox" valueLink={ linked.summits } />
+    </label>
+
+    <label>
+    Established campsites: <Input type="checkbox" valueLink={ linked.established_campsites } />
+    </label>
+
+    <label>
+    Day hike: <Input type="checkbox" valueLink={ linked.day_hike } />
+    </label>
+
+    <label>
+    Overnight: <Input type="checkbox" valueLink={ linked.overnight } />
+    </label>
+
+    <button type='submit'>Submit</button>
+
+    </form>
+    </div>
+  ) // return
+
+} // render
 } // form
 
 export default BaseForm

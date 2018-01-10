@@ -26,7 +26,6 @@ class SetPinForm extends LinkedComponent {
 
   // use this function to prepopulate form input fields with the hike's name in EditForm
   componentWillMount(nextProps) {
-    console.log('in componentWillReceiveProps');
     if (this.props.hikeName) {
       this.setState({name: this.props.hikeName})
     }
@@ -68,7 +67,9 @@ class SetPinForm extends LinkedComponent {
 
 
 submitForm() {
-  // Define what happens in this function in each child class
+  console.log('in submit form and name is: ');
+  console.log(this.state.name);
+  this.props.setName(this.state.name);
 } // submitForm
 
 
