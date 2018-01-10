@@ -37,9 +37,11 @@ class FormContainer extends Component {
 
   getCoordinates(hikeName) {
     const baseUrl = 'https://maps.googleapis.com/maps/api/geocode/json?address='
-    const apiKey = process.env.REACT_APP_GOOGLE_MAPS_KEY
-    const url = baseUrl + hikeName + apiKey
+    const apiKey = 'AIzaSyDCte77X-YyyMzwq0o2xqO0BD77hqy7ekM'
+    console.log(apiKey);
+    const url = baseUrl + hikeName + '&key' + apiKey
     const encodedUrl = encodeURI(url);
+
 
     console.log('encoded url: ');
     console.log(encodedUrl);
