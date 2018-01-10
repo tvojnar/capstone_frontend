@@ -72,7 +72,8 @@ class BaseForm extends LinkedComponent {
 
 
   componentWillReceiveProps(nextProps) {
-    console.log('in componentWillReceiveProps and name is:');
+    // if the form is passed a hikeName it will update this.state.name
+    // hikeName is passed as props from AddHikeModal (and later on HikeDetailsModal)
     console.log(nextProps.hikeName);
     if (nextProps.hikeName) {
       this.setState({name: nextProps.hikeName})

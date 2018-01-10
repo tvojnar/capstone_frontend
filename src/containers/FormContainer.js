@@ -52,7 +52,20 @@ class FormContainer extends Component {
       success: function(data){
         console.log('successful api call to geocode!');
         console.log(data);
-      }.bind(this), // success
+        if (data) {
+          console.log('in if in geocode ajax call');
+          console.log(data.results[0].geometry.location.lat);
+          console.log(data.results[0].geometry.location.lng);
+
+          let geoLat = data.results[0].geometry.location.lat
+          let geoLng = data.results[0].geometry.location.lng
+          this.setState({
+              lat: geoLat,
+              lng: geoLng,
+              enteredName: true,
+            })
+        }
+  }.bind(this), // success
       error: function(xhr, status, err) {
         console.log('in error');
         console.log(err);
