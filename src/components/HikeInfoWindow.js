@@ -26,7 +26,8 @@ export class HikeInfoWindow extends Component {
     let hikeDetailsModal;
     if (this.state.showHikeDetailsModal) {
       hikeDetailsModal = <HikeDetailsModal id={this.props.hikeData.id}
-      closeInfoWindow={this.props.closeWindow}/>
+      closeInfoWindow={this.props.closeWindow}
+      fetchHikes={this.props.fetchHikes}/>
     }
 
     return(
@@ -35,7 +36,7 @@ export class HikeInfoWindow extends Component {
       <div>
         { hikeDetailsModal }
 
-        <InfoWindow onCloseClick={this.props.closeWindow}>
+        <InfoWindow onCloseClick={this.props.closeWindow} >
           <div>
             <h1>{name}</h1>
             <p>{description}</p>

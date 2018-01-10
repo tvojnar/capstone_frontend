@@ -14,7 +14,8 @@ export const HikingMap = withGoogleMap(props => (
   defaultZoom={props.zoom}>{
       props.hikes.length > 0 && props.hikes.map(hike => (
         <HikeMarkerContainer key={`hike${hike.id}`}
-                     hikeData={hike}/>
+                     hikeData={hike}
+                     fetchHikes={props.fetchHikes}/>
       ))
     }
   </GoogleMap>

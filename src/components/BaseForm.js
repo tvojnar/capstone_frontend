@@ -1,5 +1,5 @@
 import * as React from 'react';
-import $ from 'jquery';
+// import $ from 'jquery';
 
 // import modals to show sucess or error message after post request to add a new hike
 
@@ -62,12 +62,14 @@ class BaseForm extends LinkedComponent {
     }
   }
 
+  // use this function to prepopulate form input fields with the hike's data in EditForm
   componentWillMount(nextProps) {
     console.log('in componentWillReceiveProps');
     if (this.props.hikeState) {
     this.setState(this.props.hikeState)
   }
   }
+
 
   // TODO
   // function runs when the submit button is clicked on the form
@@ -78,36 +80,74 @@ class BaseForm extends LinkedComponent {
     // prevent the page reloading when the form is submitted
     e.preventDefault();
 
-    // used to determine if there are missing fields in the form or if the form is ready to be submitted to the API
-    let readyToSubmit = true;
+
+    // this.state.readyToSubmit is used to determine if there are missing fields in the form or if the form is ready to be submitted to the API
+    let readyToSubmit = true
+    console.log(`before all the if statements readyToSubmit: ${readyToSubmit}`);
+
 
     // check that a name, staring lat and starting lng have been entered
     // if not provided by the user then set the state so that the error message and styleing shows up around the  input field in the form. Also set readyToSubmit to false to that the form wont be submitted to the API
-    if (this.state.name === '') {
-      this.setState({nameError: true})
-      readyToSubmit = false;
+    if (this.state.name === '' || this.state.start_lat === '' || this.state.start_lng === '') {
+      console.log('in if cause something was missing');
+      readyToSubmit = false
+      if (this.state.name === '') {
+        console.log('NO NAME');
+        this.setState({nameError: true})
+      } else {
+          console.log('YES NAME');
+        this.setState({nameError: false})
+      }
+
+      if (this.state.start_lat === '') {
+          console.log('NO LAT');
+        this.setState({latError: true })
+      } else {
+          console.log('YES LAT');
+        this.setState({latError: false })
+      }
+
+      if (this.state.start_lng === '') {
+          console.log('NO LNG');
+        this.setState({lngError: true })
+      } else {
+          console.log('YES LNG');
+        this.setState({lngError: false })
+      }
     } else {
-      this.setState({nameError: false})
-      readyToSubmit = true;
+        console.log('ELSE');
+      readyToSubmit =  true;
     }
-
-    if (this.state.start_lat === '') {
-      this.setState({latError: true })
-      readyToSubmit = false;
-    } else {
-      this.setState({latError: false})
-      readyToSubmit = true;
-    }
-
-    if (this.state.start_lng === '') {
-      this.setState({lngError: true })
-      readyToSubmit = false;
-    } else {
-      this.setState({lngError: false})
-      readyToSubmit = true;
-    }
-
-
+    // if (this.state.name === '' || this.state.name.length < 1) {
+    //   console.log('in if cause there was no name');
+    //   this.setState({nameError: true})
+    //   this.setState({readyToSubmit: false})
+    // } else {
+    //     console.log('ELSE NAME');
+    //   this.setState({nameError: false})
+    //   this.setState({readyToSubmit: true});
+    // }
+    //
+    // if (this.state.start_lat === '') {
+    //   console.log('in if cause there was no lat');
+    //   this.setState({latError: true })
+    //   this.setState({readyToSubmit: false})
+    // } else {
+    //   console.log('ELSE LAT');
+    //   this.setState({latError: false})
+    //   this.setState({readyToSubmit: true})
+    // }
+    //
+    // if (this.state.start_lng === '') {
+    //   console.log('in if cause there was no lng');
+    //   this.setState({lngError: true })
+    //   this.setState({readyToSubmit: false})
+    // } else {
+    //   console.log('ELSE LNG');
+    //   this.setState({lngError: false})
+    //   this.setState({readyToSubmit: true})
+    // }
+console.log(`after all the if statements readyToSubmit: ${readyToSubmit}`);
     // Check that the form has all the required fields and is ready to be submitted
     // if it is then trim the leading and trailing spaces and then submit the form and call submitForm as a callback function so that I know that trimState completed before I submit the form
     // TODO: figure out why the trim function isn't trimming the strings for name, description, and notes

@@ -1,9 +1,9 @@
 import $ from 'jquery';
-import React from 'react';
+// import React from 'react';
 
 // import modals to show sucess or error message after post request to add a new hike
-import ErrorModal from '../modal/ErrorModal'
-import SuccessModal from '../modal/SuccessModal'
+// import ErrorModal from '../modal/ErrorModal'
+// import SuccessModal from '../modal/SuccessModal'
 
 
 // using valueLink library to connect form fields with the components state. Also used to provide inline error handing for invalid fields in the form
@@ -51,7 +51,7 @@ class Form extends BaseForm {
       type: "POST",
       url: url,
       data: hikeParams,
-      success: function(data){
+      success: (data) => {
         console.log('successful post');
         console.log(data);
         // when the post is successful show the SuccessModal to the user

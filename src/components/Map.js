@@ -25,6 +25,8 @@ export class Map extends Component {
       lng: -122.3321,
       hikes: [],
     };
+
+    this.fetchHikesFromApi = this.fetchHikesFromApi.bind(this);
   }
 
 
@@ -134,6 +136,7 @@ export class Map extends Component {
         <div style={{ height: `100%` }} />
       }
       hikes={hikes}
+      fetchHikes={this.fetchHikesFromApi}
       />
       </div>
     );

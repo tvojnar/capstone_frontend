@@ -61,6 +61,8 @@ class HikeDetailsModal extends BaseModal {
     this.setState({modalIsOpen: false});
     // make the HikeInfoWindow close as well
     this.props.closeInfoWindow();
+    // rerender the map when the modal closes to update the map incase a patch request was made in the EditForm in the modal
+    this.props.fetchHikes();
   }
 
   // wait to make the fetch to the API until the component will mount (could also do this in componentDidMount)
@@ -104,8 +106,11 @@ class HikeDetailsModal extends BaseModal {
 
         let editForm;
         let editButton;
+        // pass hikeState to EditForm, which will be added to EditForms state via the ComponentWillMount function in BaseForm
         if (this.state.showEditForm) {
-          editForm = <EditForm hikeState={hikeDetails}/>
+          editForm = <EditForm
+            hikeState={hikeDetails}
+            fetchHikes={this.props.fetchHikes}/>
           editButton = <p></p>
         }
         else {
