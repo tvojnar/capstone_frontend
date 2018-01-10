@@ -10,10 +10,19 @@ export class MapAddHike extends Component {
     super(props)
 
     // set the zoom a little closer so we can see more details around the hike
-    this.zoom = 7
-
+    this.state = {
+      zoom: 7,
+      center: {
+        lat: this.props.lat,
+        lng: this.props.lng
+      }
+    }
   }
 
+  // static defaultProps = {
+  //     lat: 47.608013,
+  //     lng: -122.335167,
+  // }
 
   render() {
     // use the lat and lng  passed as props from MapHikeDetails to set the center point of the SingleHikeMap
@@ -30,11 +39,8 @@ export class MapAddHike extends Component {
     return(
       <div style={{width: `400px`, height: `400px`}}>
         <SetPinMap
-          center={{
-            lat: lat,
-            lng: lng
-          }}
-          zoom={this.zoom}
+          center={this.state.center}
+          zoom={this.state.zoom}
           containerElement={
             <div style={{ height: `100%` }} />
           }

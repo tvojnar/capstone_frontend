@@ -15,8 +15,8 @@ class FormContainer extends Component {
     super(props)
 
     this.state = {
-      lat: 46.6062,
-      lng: -122.3321,
+      lat: 47.6062,
+      lng: -122,
       enteredName: false,
       hikeName: '',
     };
@@ -66,6 +66,11 @@ class FormContainer extends Component {
               lng: geoLng,
               enteredName: true,
             })
+          console.log('state: ');
+          console.log(this.state.lat);
+          console.log(this.state.lng);
+          console.log(this.state.enteredName);
+
         }
   }.bind(this), // success
       error: function(xhr, status, err) {
@@ -88,7 +93,8 @@ render() {
     <MapAddHike
     lat={this.state.lat}
     lng={this.state.lng}
-    enteredName={this.state.enteredName}/>
+    enteredName={this.state.enteredName}
+    zoom={12}/>
     <Form
     hideFormModal={this.props.hideModalFromAddHike}
     fetchHikes={this.props.fetchHikes}
