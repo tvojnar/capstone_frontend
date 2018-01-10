@@ -26,7 +26,8 @@ class AddHikeModal extends BaseModal {
     this.state = {
       lat: 46.6062,
       lng: -122.3321,
-      modalIsOpen: true
+      modalIsOpen: true,
+      enteredName: false
     };
   }
 
@@ -42,7 +43,10 @@ class AddHikeModal extends BaseModal {
           style={customStyles}
           contentLabel="Example Modal"
         >
-          <MapAddHike lat={this.state.lat} lng={this.state.lng} />
+          <MapAddHike
+              lat={this.state.lat}
+              lng={this.state.lng}
+              enteredName={this.state.enteredName}/>
           <Form
             hideFormModal={this.props.hideModalFromAddHike}
             fetchHikes={this.props.fetchHikes}

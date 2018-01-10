@@ -13,7 +13,7 @@ export class MapAddHike extends Component {
     this.zoom = 7
 
     this.state = {
-      enderedName: false,
+      enderedName: this.props.enteredName,
     }
   }
 
