@@ -109,11 +109,16 @@ class HikeDetailsModal extends BaseModal {
         let editButton;
         // pass hikeState to EditForm, which will be added to EditForms state via the ComponentWillMount function in BaseForm
         if (this.state.showEditForm) {
-          editForm = <EditForm
-            hikeState={hikeDetails}
-            fetchHikes={this.props.fetchHikes}
-            fetchHikeDetails={this.fetchHikeDetailsFromApi}
-            hideEditForm={this.editHikeDetails}/>
+          editForm =
+            <div>
+              <h4>Edid hike details: </h4>
+              <EditForm
+              hikeState={hikeDetails}
+              fetchHikes={this.props.fetchHikes}
+              fetchHikeDetails={this.fetchHikeDetailsFromApi}
+              hideEditForm={this.editHikeDetails}/>
+              <button onClick={this.editHikeDetails}>Cancle</button>
+          </div>
           editButton = <p></p>
         }
         else {
