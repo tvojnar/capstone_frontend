@@ -45,6 +45,8 @@ class HikeDetailsModal extends BaseModal {
       hike: {},
       load: 'loading...'
     }
+
+    this.editHikeDetails = this.editHikeDetails.bind(this);
   }
 
   afterOpenModal() {
@@ -88,6 +90,10 @@ class HikeDetailsModal extends BaseModal {
     }); // get request
   }
 
+  editHikeDetails() {
+
+  }
+
   render() {
 
       // IF THE API HAS RETURNED THE DATA FOR THE HIKES DETAILS
@@ -115,6 +121,7 @@ class HikeDetailsModal extends BaseModal {
         >
 
           <h2 ref={subtitle => this.subtitle = subtitle}>{hikeDetails.name}</h2>
+          <button onClick={this.editHikeDetails}>Edit hike details</button>
           <HikeAttributes hikeData={hikeDetails}/>
           <MapHikeDetails
             onRef={ref => (this.child = ref)}         lat={hikeDetails.start_lat} lng={hikeDetails.start_lng}/>
