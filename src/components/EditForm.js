@@ -26,6 +26,11 @@ class EditForm extends BaseForm {
       hike: this.state
     };
 
+    const callMethodsInHikeDetails = () => {
+      this.props.fetchHikeDetails();
+      this.props.hideEditForm();
+    }
+
 
     // make the API patch request to the API
     $.ajax({
@@ -35,6 +40,9 @@ class EditForm extends BaseForm {
       success: function(data){
         console.log('successful patch');
         console.log(data);
+        // TODO: call the GET in the HikeDetailsModal to reload the hikes data
+        // TODO: remove the editForm and show the button again
+        callMethodsInHikeDetails();
 
       },
       error: function(xhr, status, err) {

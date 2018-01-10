@@ -48,6 +48,7 @@ class HikeDetailsModal extends BaseModal {
     }
 
     this.editHikeDetails = this.editHikeDetails.bind(this);
+    this.fetchHikeDetailsFromApi = this.fetchHikeDetailsFromApi.bind(this);
   }
 
   afterOpenModal() {
@@ -94,7 +95,7 @@ class HikeDetailsModal extends BaseModal {
   }
 
   editHikeDetails() {
-    this.setState({showEditForm: true})
+    this.setState({showEditForm: !this.state.showEditForm})
   }
 
   render() {
@@ -110,7 +111,9 @@ class HikeDetailsModal extends BaseModal {
         if (this.state.showEditForm) {
           editForm = <EditForm
             hikeState={hikeDetails}
-            fetchHikes={this.props.fetchHikes}/>
+            fetchHikes={this.props.fetchHikes}
+            fetchHikeDetails={this.fetchHikeDetailsFromApi}
+            hideEditForm={this.editHikeDetails}/>
           editButton = <p></p>
         }
         else {

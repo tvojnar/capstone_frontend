@@ -118,35 +118,7 @@ class BaseForm extends LinkedComponent {
         console.log('ELSE');
       readyToSubmit =  true;
     }
-    // if (this.state.name === '' || this.state.name.length < 1) {
-    //   console.log('in if cause there was no name');
-    //   this.setState({nameError: true})
-    //   this.setState({readyToSubmit: false})
-    // } else {
-    //     console.log('ELSE NAME');
-    //   this.setState({nameError: false})
-    //   this.setState({readyToSubmit: true});
-    // }
-    //
-    // if (this.state.start_lat === '') {
-    //   console.log('in if cause there was no lat');
-    //   this.setState({latError: true })
-    //   this.setState({readyToSubmit: false})
-    // } else {
-    //   console.log('ELSE LAT');
-    //   this.setState({latError: false})
-    //   this.setState({readyToSubmit: true})
-    // }
-    //
-    // if (this.state.start_lng === '') {
-    //   console.log('in if cause there was no lng');
-    //   this.setState({lngError: true })
-    //   this.setState({readyToSubmit: false})
-    // } else {
-    //   console.log('ELSE LNG');
-    //   this.setState({lngError: false})
-    //   this.setState({readyToSubmit: true})
-    // }
+
 console.log(`after all the if statements readyToSubmit: ${readyToSubmit}`);
     // Check that the form has all the required fields and is ready to be submitted
     // if it is then trim the leading and trailing spaces and then submit the form and call submitForm as a callback function so that I know that trimState completed before I submit the form
