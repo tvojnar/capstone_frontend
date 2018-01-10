@@ -1,17 +1,12 @@
 import $ from 'jquery';
 import React from 'react';
-
-// import modals to show sucess or error message after post request to add a new hike
-import ErrorModal from '../modal/ErrorModal'
-import SuccessModal from '../modal/SuccessModal'
-
+import BaseForm from './BaseForm';
 
 // using valueLink library to connect form fields with the components state. Also used to provide inline error handing for invalid fields in the form
 
-import BaseForm from './BaseForm';
-
-
-class Form extends BaseForm {
+// EditForm is a child class of BaseForm
+// Form is also a child class of BaseForm
+class EditForm extends BaseForm {
 
   constructor(props) {
     super(props);
@@ -21,7 +16,6 @@ class Form extends BaseForm {
 }
 
   submitForm() {
-
     // I have to define this function out here because I don't have access to this from within the post request error callback
     // this function calls the showModal function, which returns the ErrorModal that tells the user that the hike did not save or the SuccessModal saying that the hike was saved, depending on if modalType is 'error' or 'success'
     const callShowModal = (modalType) => {
@@ -85,4 +79,4 @@ class Form extends BaseForm {
 
   } // form
 
-export default Form
+export default EditForm

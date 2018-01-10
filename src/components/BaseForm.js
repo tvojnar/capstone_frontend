@@ -4,8 +4,8 @@ import $ from 'jquery';
 // import modals to show sucess or error message after post request to add a new hike
 
 // TODO
-// import ErrorModal from '../modal/ErrorModal'
-// import SuccessModal from '../modal/SuccessModal'
+import ErrorModal from '../modal/ErrorModal'
+import SuccessModal from '../modal/SuccessModal'
 
 
 // using valueLink library to connect form fields with the components state. Also used to provide inline error handing for invalid fields in the form
@@ -14,7 +14,7 @@ import { Input } from 'valuelink/tags';
 import { Select } from 'valuelink/tags';
 
 
-class Form extends LinkedComponent {
+class BaseForm extends LinkedComponent {
 
   constructor(props) {
     super(props);
@@ -23,11 +23,10 @@ class Form extends LinkedComponent {
     this.state = this.props.initialState;
 
     this.trimState = this.trimState.bind(this);
-    // TODO
-    // this.submitForm = this.submitForm.bind(this);
   }
 
   // default props are used to generate the options for the select input for regions in the form and to set the state in the constructor, as well as to reset the state to clear the form
+  // TODO: figure out how to set the state for the modals in form.js
   static defaultProps = {
     regions: ['Central Washington', 'Eastern Washington', 'North Cascades', 'Mount Rainier Area', 'Puget Sound and Islands', 'Olympic Peninsula', 'Snoqualmie Region', 'South Cascades', 'Central Cascades', 'Issaquah Alps', 'Southwest Washington', 'Mount Adams', 'Mount Hood', 'Columbia Gorge', 'Oregon Coast', ],
     initialState: {
@@ -58,10 +57,16 @@ class Form extends LinkedComponent {
       day_hike: false,
       overnight: false,
       old_growth: false,
-      showModal: false,
+      showErrorModal: false,
       showSuccessModal: false,
-
     }
+  }
+
+  componentWillMount(nextProps) {
+    console.log('in componentWillReceiveProps');
+    if (this.props.hikeState) {
+    this.setState(this.props.hikeState)
+  }
   }
 
   // TODO
@@ -72,12 +77,6 @@ class Form extends LinkedComponent {
 
     // prevent the page reloading when the form is submitted
     e.preventDefault();
-
-
-
-    console.log('in handleSubmit');
-    console.log(this.state);
-
 
     // used to determine if there are missing fields in the form or if the form is ready to be submitted to the API
     let readyToSubmit = true;
@@ -119,64 +118,9 @@ class Form extends LinkedComponent {
   } // onSubmit
 
   submitForm() {
-
-    // I have to define this function out here because I don't have access to this from within the post request error callback
-    // this function calls the showModal function, which returns the ErrorModal that tells the user that the hike did not save or the SuccessModal saying that the hike was saved, depending on if modalType is 'error' or 'success'
-    const callShowModal = (modalType) => {
-      this.showModal(modalType);
-    }
-
-    // have to call this.props.fetchHikes(); out here because I don't have access to 'this.props' in the success callback of the post
-    // this.props.fetchHikes() calls the fetchHikes function in the App component, which calls the FetchHikesFromApi function in the Map component, which will cause the map to re-render to show the newly added hike.
-    const callFetchHikes = () => {
-      this.props.fetchHikes();
-    }
-
-
-    // set the params that will be sent to the API equal to the state of the Form component
-    const hikeParams = {
-      hike: this.state
-    };
-
-    // clear the form by resetting the state to the initialState defined in the default props
-    this.setState(this.props.initialState);
-
-    // construct the url to submit the post request to
-    const url = `/api/hikes`
-
-    // make the API post request to the API
-    $.ajax({
-      type: "POST",
-      url: url,
-      data: hikeParams,
-      success: function(data){
-        console.log('successful post');
-        console.log(data);
-        // when the post is successful show the SuccessModal to the user
-        callShowModal('success');
-        // when the post is successful call this method which though a chain of props will call the fetchHikesFromApi method in the Map component
-        callFetchHikes();
-      },
-      error: function(xhr, status, err) {
-        console.log('in error');
-        console.log(this);
-        // if the api post fails then display a modal telling the user that there was an error
-        callShowModal('error')
-      } // error
-    }) // post
-
+    // Define what happens in this function in each child class
   } // submitForm
 
-
-  // displays the ErrorModal or SuccessModal, depending on if the post to add a new hike was successful or not
-  showModal(modalType) {
-    console.log('in renderModal');
-    if (modalType === 'error') {
-      this.setState({showModal: true})
-    } else if (modalType === 'success'){
-      this.setState({showSuccessModal: true})
-    }
-  } // showModal
 
   trimState() {
     // NOTE: tried this as well: mystring = mystring.replace(/^\s+|\s+$/g, "");
@@ -274,7 +218,8 @@ class Form extends LinkedComponent {
 
     // show the error modal if the post request failed
     // pass the successModal the function to close the AddHikeModal via props (hideFormModal)
-    if (this.state.showModal) {
+    // TODO: figure out how to refactor this to move this logic into Form.js instead
+    if (this.state.showErrorModal) {
       modal = <ErrorModal />
     } else if (this.state.showSuccessModal) {
       modal = <SuccessModal hideFormModal={this.props.hideFormModal}/>
@@ -386,4 +331,4 @@ class Form extends LinkedComponent {
   } // render
 } // form
 
-export default Form
+export default BaseForm

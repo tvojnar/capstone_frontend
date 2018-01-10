@@ -5,6 +5,7 @@ import BaseModal from './BaseModal';
 import { TextHikeDetailsContainer } from '../containers/TextHikeDetailsContainer';
 import { HikeAttributes } from '../components/HikeAttributes';
 import MapHikeDetails from '../components/MapHikeDetails';
+import EditForm from '../components/EditForm'
 
 // sets the portion of the app that should be hidden
 Modal.setAppElement('#root');
@@ -91,7 +92,7 @@ class HikeDetailsModal extends BaseModal {
   }
 
   editHikeDetails() {
-
+    this.setState({showEditForm: true})
   }
 
   render() {
@@ -100,6 +101,16 @@ class HikeDetailsModal extends BaseModal {
       if (Object.keys(this.state.hike).length !== 0) {
         // set hikeDetails to the data object with the hike details that was returned from the API
         const hikeDetails = this.state.hike;
+
+        let editForm;
+        let editButton;
+        if (this.state.showEditForm) {
+          editForm = <EditForm hikeState={hikeDetails}/>
+          editButton = <p></p>
+        }
+        else {
+          editButton = <button onClick={this.editHikeDetails}>Edit hike details</button>
+        }
 
 
         // return a modal
@@ -121,7 +132,8 @@ class HikeDetailsModal extends BaseModal {
         >
 
           <h2 ref={subtitle => this.subtitle = subtitle}>{hikeDetails.name}</h2>
-          <button onClick={this.editHikeDetails}>Edit hike details</button>
+          { editForm }
+          { editButton }
           <HikeAttributes hikeData={hikeDetails}/>
           <MapHikeDetails
             onRef={ref => (this.child = ref)}         lat={hikeDetails.start_lat} lng={hikeDetails.start_lng}/>
