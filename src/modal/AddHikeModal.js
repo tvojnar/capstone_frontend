@@ -3,6 +3,7 @@ import Modal from 'react-modal';
 import BaseModal from './BaseModal';
 import Form from '../components/Form';
 import {MapAddHike} from '../components/MapAddHike';
+import SetPinForm from '../components/SetPinForm';
 
 // sets the portion of the app that should be hidden
 Modal.setAppElement('#root');
@@ -43,6 +44,7 @@ class AddHikeModal extends BaseModal {
           style={customStyles}
           contentLabel="Example Modal"
         >
+          <SetPinForm />
           <MapAddHike
               lat={this.state.lat}
               lng={this.state.lng}

@@ -12,9 +12,6 @@ export class MapAddHike extends Component {
     // set the zoom a little closer so we can see more details around the hike
     this.zoom = 7
 
-    this.state = {
-      enderedName: this.props.enteredName,
-    }
   }
 
 
@@ -25,7 +22,7 @@ export class MapAddHike extends Component {
 
     // pass the SetPinMap an instance of SetPinMarker to render on the map if the user has entered a name
     let hike;
-     if (this.state.enteredName) {
+     if (this.props.enteredName) {
           hike = <SetPinMarker lat={lat} lng={lng}/>
         }
 
