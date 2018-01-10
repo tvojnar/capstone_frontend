@@ -33,7 +33,11 @@ export class HikeMarkerContainer extends Component {
     // HikeMarker will render an info window if showTooltip === true
     // pass all of the hikeData from the API to the HikeMarker because I will need all that info in the hike details modal that will be rendered by the info window of each hike
     return <HikeMarker
-      hikeData={this.props.hikeData} showTooltip={showTooltip} onClick={this.clickTooltip.bind(this)} closeWindow={this.closeWindow.bind(this)}/>
+      hikeData={this.props.hikeData}
+      showTooltip={showTooltip}
+      onClick={this.clickTooltip.bind(this)}
+      closeWindow={this.closeWindow.bind(this)}
+      fetchHikes={this.props.fetchHikes}/>
   } // render
 } // class
 

@@ -25,6 +25,8 @@ export class Map extends Component {
       lng: -122.3321,
       hikes: [],
     };
+
+    this.fetchHikesFromApi = this.fetchHikesFromApi.bind(this);
   }
 
 
@@ -34,9 +36,7 @@ export class Map extends Component {
   componentWillUnmount() {
     this.props.onRef(undefined)
   }
-  method() {
-    window.alert('do stuff')
-  }
+
 
   // called when the maps boundaries have changed
   // calls three functions to change the map boundaties and center point and make an api call to get the hikes within those boundaries
@@ -136,6 +136,7 @@ export class Map extends Component {
         <div style={{ height: `100%` }} />
       }
       hikes={hikes}
+      fetchHikes={this.fetchHikesFromApi}
       />
       </div>
     );

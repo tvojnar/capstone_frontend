@@ -22,7 +22,8 @@ export const HikeMarker = (props) => {
     {props.showTooltip && (
       <HikeInfoWindow hikeData={hikeData}
       // close the info window when the x is clicked on
-      closeWindow={props.closeWindow}/>
+      closeWindow={props.closeWindow}
+      fetchHikes={props.fetchHikes}/>
     )}
     </Marker>
   );

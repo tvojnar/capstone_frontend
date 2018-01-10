@@ -2,6 +2,7 @@ import React from 'react';
 import Modal from 'react-modal';
 import BaseModal from './BaseModal';
 import Form from '../components/Form';
+import {MapAddHike} from '../components/MapAddHike';
 
 // sets the portion of the app that should be hidden
 Modal.setAppElement('#root');
@@ -19,6 +20,16 @@ const customStyles = {
 // SuccessModal is a child class of BaseModal
 class AddHikeModal extends BaseModal {
 
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      lat: 46.6062,
+      lng: -122.3321,
+      modalIsOpen: true
+    };
+  }
+
 // pass the Form a method to close the AddFormModal via props (hideFormModal)
 // pass Form fetchHikes so that it can call the Map components fetchHikesFromApi function when the form is submitted
   render() {
@@ -31,6 +42,7 @@ class AddHikeModal extends BaseModal {
           style={customStyles}
           contentLabel="Example Modal"
         >
+          <MapAddHike lat={this.state.lat} lng={this.state.lng} />
           <Form
             hideFormModal={this.props.hideModalFromAddHike}
             fetchHikes={this.props.fetchHikes}
