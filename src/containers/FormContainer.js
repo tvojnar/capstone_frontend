@@ -36,10 +36,14 @@ class FormContainer extends Component {
   }
 
   setLatLng(name, lat, lng) {
+    console.log('in setLatLng');
+    console.log(name);
+    console.log(typeof lat);
+    console.log(typeof lng);
     this.setState({
-      name: name,
-      lat: lat,
-      lng: lng,
+      hikeName: name,
+      lat: parseFloat(lat),
+      lng: parseFloat(lng),
       nameEntered: true,
     })
   }

@@ -15,6 +15,7 @@ class LatLngSetPinForm extends LinkedComponent {
     this.state = this.props.initialState;
 
     this.trimState = this.trimState.bind(this);
+    this.submitForm = this.submitForm.bind(this);
   }
 
   // default props are used to reset the state to clear the form as well as to set the initialState
@@ -87,6 +88,10 @@ class LatLngSetPinForm extends LinkedComponent {
 // this will call a function in FormContainer to set the name in state
 // in will also result in getCoordinates being called, which will set the state of lat and lng in FormContainer
 submitForm() {
+  console.log('in LatLngSetPinForm submitform and name, lat and lng are: ');
+  console.log(this.state.name);
+  console.log(this.state.lat);
+  console.log(this.state.lng);
   this.props.setLatLng(this.state.name, this.state.lat, this.state.lng);
 } // submitForm
 
@@ -103,10 +108,10 @@ render() {
   const nameLink = Link.state(this, 'name'),
   nameIsValid = nameLink.value
 
-  const latLink = Link.state(this, 'start_lat'),
+  const latLink = Link.state(this, 'lat'),
   latIsValid = latLink.value
 
-  const lngLink = Link.state(this, 'start_lng'),
+  const lngLink = Link.state(this, 'lng'),
   lngIsValid = lngLink.value
 
 

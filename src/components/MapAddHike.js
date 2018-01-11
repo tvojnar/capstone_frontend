@@ -17,13 +17,17 @@ export class MapAddHike extends Component {
 
 
   render() {
-    console.log('in MapAddHike render');
+
     // use the lat and lng  passed as props from FormContainer to set the center point of the SetPinMap
     const {lat, lng} = this.props;
+    console.log('in MapAddHike render');
+    console.log(lat);
+    console.log(lng);
 
-    // pass the SetPinMap an instance of SetPinMarker to render on the map if the user has entered a name
+
+    // pass the SetPinMap an instance of SetPinMarker to render on the map if the user has entered a name (i.e. the successfully submited either SetPinForm or latLngSetPinForm)
     let hike;
-     if (this.props.enteredName) {
+     if (this.props.nameEntered) {
           hike = <SetPinMarker lat={lat} lng={lng}/>
         }
 
