@@ -50,12 +50,18 @@ class LatLngSetPinForm extends LinkedComponent {
 
     // check that a name has been entered
     // if not provided by the user then set the state so that the error message and styleing shows up around the  input field in the form. Also set readyToSubmit to false to that the form wont be submitted to the API
-    if (this.state.start_lat === '' || this.state.start_lng === '') {
+    if (this.state.name === '' || this.state.lat === '' || this.state.lng === '') {
       console.log('in if cause something was missing');
       readyToSubmit = false
+      if (this.state.name === '') {
+        console.log('NO NAME');
+        this.setState({nameError: true})
+      } else {
+        console.log('YES NAME');
+        this.setState({nameError: false})
+      }
 
-
-      if (this.state.start_lat === '') {
+      if (this.state.lat === '') {
         console.log('NO LAT');
         this.setState({latError: true })
       } else {
@@ -63,7 +69,7 @@ class LatLngSetPinForm extends LinkedComponent {
         this.setState({latError: false })
       }
 
-      if (this.state.start_lng === '') {
+      if (this.state.lng === '') {
         console.log('NO LNG');
         this.setState({lngError: true })
       } else {
