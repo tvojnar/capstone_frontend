@@ -45,7 +45,9 @@ class AddHikeModal extends BaseModal {
           style={customStyles}
           contentLabel="Example Modal"
         >
-          <FormContainer fetchHikes={this.props.handleFetchHikes} />
+          <FormContainer
+            fetchHikes={this.props.fetchHikes}
+            hideModalFromAddHike={this.props.hideModalFromAddHike}/>
           <button onClick={this.props.hideModalFromAddHike}>Cancle</button>
         </Modal>
       </div>

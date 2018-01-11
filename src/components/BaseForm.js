@@ -105,31 +105,7 @@ class BaseForm extends LinkedComponent {
     // if not provided by the user then set the state so that the error message and styleing shows up around the  input field in the form. Also set readyToSubmit to false to that the form wont be submitted to the API
     // TODO: NOW THAT I AM SETTING NAME AND START LAT AND LNG IN THE SetPinForms I DON'T NEED ALL OF THE VISUAL VALIDATIONS HERE, I JUST NEED TO VALIDATE THAT THERE IS A NAME, LAT AND LNG STORED IN THE FORM
     if (this.state.name === '' || this.state.start_lat === '' || this.state.start_lng === '') {
-      console.log('in if cause something was missing');
       readyToSubmit = false
-      if (this.state.name === '') {
-        console.log('NO NAME');
-        this.setState({nameError: true})
-      } else {
-        console.log('YES NAME');
-        this.setState({nameError: false})
-      }
-
-      if (this.state.start_lat === '') {
-        console.log('NO LAT');
-        this.setState({latError: true })
-      } else {
-        console.log('YES LAT');
-        this.setState({latError: false })
-      }
-
-      if (this.state.start_lng === '') {
-        console.log('NO LNG');
-        this.setState({lngError: true })
-      } else {
-        console.log('YES LNG');
-        this.setState({lngError: false })
-      }
     } else {
       console.log('ELSE');
       readyToSubmit =  true;
@@ -189,66 +165,14 @@ render() {
 
 
   // define these so that I can use them in the if/else statements below for the name, lat, and lng input fields
-  let nameBox;
-  let latBox;
-  let lngBox;
   let modal;
 
-  // only show the form validation message and styling if the user hit submit without entering a name
-  if (this.state.nameError) {
-    nameBox = <label>
-    Name: <Input type="text"
-    className={ nameIsValid ? '' : 'invalid'}
-    valueLink={ nameLink }
-    />
-    <div className='error-placeholder'>
-    { nameIsValid ? '' : 'Name is required'}
-    </div>
-    </label>
-  } else {
-    nameBox = <label>
-    Name: <Input type="text" valueLink={ nameLink }
-    />
-    </label>
-  }
-
-  // only show the form validation message and styling if the user hit submit without entering a starting latitude
-  if (this.state.latError) {
-    latBox = <label>
-    Starting latitude: <Input type="number"
-    className={ latIsValid ? '' : 'invalid'}
-    valueLink={ latLink } />
-    <div className='error-placeholder'>
-    { latIsValid ? '' : 'Starting latitude is required'}
-    </div>
-    </label>
-  } else {
-    latBox = <label>
-    Starting latitude: <Input type="number" valueLink={ latLink } />
-    </label>
-  }
-
-  // only show the form validation message and styling if the user hit submit without entering a starting longitude
-  if (this.state.lngError) {
-    lngBox = <label>
-    Starting longitude: <Input type="number"
-    className={ lngIsValid ? '' : 'invalid'}
-    valueLink={ lngLink } />
-    <div className='error-placeholder'>
-    { lngIsValid ? '' : 'Starting longitude is required'}
-    </div>
-    </label>
-  } else {
-    lngBox = <label>
-    Starting longitude: <Input type="number" valueLink={ lngLink } />
-    </label>
-  }
 
   // show the error modal if the post request failed
   // pass the successModal the function to close the AddHikeModal via props (hideFormModal)
   // TODO: figure out how to refactor this to move this logic into Form.js instead
   if (this.state.showErrorModal) {
-    modal = <ErrorModal />
+    modal = <ErrorModal hideFormModal={this.props.hideFormModal}/>
   } else if (this.state.showSuccessModal) {
     modal = <SuccessModal hideFormModal={this.props.hideFormModal}/>
   }
@@ -259,12 +183,6 @@ render() {
     <div>
     {modal}
     <form onSubmit={this.onSubmit}>
-
-    { nameBox }
-
-    { latBox }
-
-    { lngBox }
 
     <label>
     Region: <Select valueLink={ linked.region }>{regionOptions}</Select>

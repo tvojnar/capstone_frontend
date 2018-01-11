@@ -33,7 +33,8 @@ export class AddHike extends Component {
     // pass AddHikeModal fetchHikes prop so that it can pass it to the Form component so that when the form is submitted it calls the fetchHikesFromApi function in the Map component so that the newly added hike will imidiatly show up on the map
     let modal;
     if (this.state.showModal) {
-      modal = <AddHikeModal hideModalFromAddHike={this.handleHideModal}
+      modal = <AddHikeModal
+      hideModalFromAddHike={this.handleHideModal}
       fetchHikes={this.props.fetchHikes}/>
     }
 
