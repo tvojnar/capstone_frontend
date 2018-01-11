@@ -65,7 +65,8 @@ class SetPinForm extends LinkedComponent {
   }
 } // onSubmit
 
-
+// this will call a function in FormContainer to set the name in state
+// in will also result in getCoordinates being called, which will set the state of lat and lng in FormContainer
 submitForm() {
   console.log('in submit form and name is: ');
   console.log(this.state.name);

@@ -85,8 +85,9 @@ class FormContainer extends Component {
 // pass the Form a method to close the AddFormModal via props (hideFormModal)
 // pass Form fetchHikes so that it can call the Map components fetchHikesFromApi function when the form is submitted
 render() {
-  // console.log('in render for MapAddModal and name is:');
-  // console.log(this.state.hikeName);
+
+
+
   return (
     <div>
     <SetPinForm setName={this.setName}/>

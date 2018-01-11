@@ -11,20 +11,14 @@ export class MapAddHike extends Component {
 
     // set the zoom a little closer so we can see more details around the hike
     this.state = {
-      zoom: 7,
+      zoom: 8,
     }
   }
 
-// componentWillReceiveProps(nextProps){
-//   this.setState({
-//     lat: nextProps.lat,
-//     lng: nextProps.lng
-//   })
-// }
 
   render() {
     console.log('in MapAddHike render');
-    // use the lat and lng  passed as props from MapHikeDetails to set the center point of the SingleHikeMap
+    // use the lat and lng  passed as props from FormContainer to set the center point of the SetPinMap
     const {lat, lng} = this.props;
 
     // pass the SetPinMap an instance of SetPinMarker to render on the map if the user has entered a name
