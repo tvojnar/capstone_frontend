@@ -59,6 +59,8 @@ class BaseForm extends LinkedComponent {
       old_growth: false,
       showErrorModal: false,
       showSuccessModal: false,
+      submitError: false,
+      submitErrorMessage: 'Submit failed: Please set a pin for the hike',
     }
   }
 
@@ -109,6 +111,7 @@ class BaseForm extends LinkedComponent {
     // TODO: Figure out a new way to display error messages to the user when these forms aren't populated. They are populated via user input in SetPinForm and LatLngSetPinForm, which have validations. So I should not let this form be submitted until nameEntered === true or something like that. I need to think about the best way to do this.
     if (this.state.name === '' || this.state.start_lat === '' || this.state.start_lng === '') {
       readyToSubmit = false
+
     } else {
       console.log('ELSE');
       readyToSubmit =  true;
@@ -119,9 +122,17 @@ class BaseForm extends LinkedComponent {
     // if it is then trim the leading and trailing spaces and then submit the form and call submitForm as a callback function so that I know that trimState completed before I submit the form
     // TODO: figure out why the trim function isn't trimming the strings for name, description, and notes
     if (readyToSubmit) {
-      this.trimState( this.submitForm()
-    )
-  }
+      // set submitError to false so that NO error message is displayed to the user 
+      this.setState({
+        submitError: false,
+      })
+      this.trimState( this.submitForm() )
+  } else {
+      // set submitError to true so that the user is informed that they need to set a pin for the hike before submitting the form
+      this.setState({
+        submitError: true,
+      })
+    } // if/else
 } // onSubmit
 
 submitForm() {
@@ -180,6 +191,11 @@ render() {
     modal = <SuccessModal hideFormModal={this.props.hideFormModal}/>
   }
 
+  let errorOnSubmitMessage;
+  if (this.state.submitError) {
+    errorOnSubmitMessage = <p>{this.state.submitErrorMessage}</p>
+
+  }
   // render the form
   // it used the valueLink library to conect each form input field with the Form components state
   return(
@@ -271,6 +287,7 @@ render() {
     Overnight: <Input type="checkbox" valueLink={ linked.overnight } />
     </label>
 
+    {errorOnSubmitMessage}
     <button type='submit'>Submit</button>
 
     </form>
