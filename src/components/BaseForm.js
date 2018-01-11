@@ -13,7 +13,7 @@ import Link, { LinkedComponent } from 'valuelink';
 import { Input } from 'valuelink/tags';
 import { Select } from 'valuelink/tags';
 
-
+// this is the base class for Form and EditForm
 class BaseForm extends LinkedComponent {
 
   constructor(props) {
@@ -62,7 +62,7 @@ class BaseForm extends LinkedComponent {
     }
   }
 
-  // use this function to prepopulate form input fields with the hike's data in EditForm
+  // use this function to prepopulate form input fields with the hike's data in EditForm via props passed in from the parent component of EditForm
   componentWillMount(nextProps) {
     if (this.props.hikeState) {
       this.setState(this.props.hikeState)
@@ -72,8 +72,7 @@ class BaseForm extends LinkedComponent {
 
 
   componentWillReceiveProps(nextProps) {
-    // once the user has entereda name is SetPinForm and enteredName === true then the name, start_latm and start_lng will be set in Form via props passed from FormContainer
-    // hikeName is passed as props from FormConteiner
+    // once the user has entered name in SetPinForm or name/lat/lng in LatLngSetPinForm and enteredName === true then the name, start_latm and start_lng will be set in Form via props passed from FormContainer
     console.log('in Form CWRP');
     console.log(nextProps.hikeName);
     console.log(nextProps.hikeLat);
@@ -86,7 +85,7 @@ class BaseForm extends LinkedComponent {
   }
 
 
-  // TODO
+
   // function runs when the submit button is clicked on the form
   onSubmit = e => {
     // NOTE: rails will automatically convert string numbers into floats or intergers depending on the data type for the column that data is being added to. It will also reformat dates if they are in year-month-date format ("2018-01-09")
@@ -102,8 +101,7 @@ class BaseForm extends LinkedComponent {
 
 
     // check that a name, staring lat and starting lng have been entered
-    // if not provided by the user then set the state so that the error message and styleing shows up around the  input field in the form. Also set readyToSubmit to false to that the form wont be submitted to the API
-    // TODO: NOW THAT I AM SETTING NAME AND START LAT AND LNG IN THE SetPinForms I DON'T NEED ALL OF THE VISUAL VALIDATIONS HERE, I JUST NEED TO VALIDATE THAT THERE IS A NAME, LAT AND LNG STORED IN THE FORM
+    // TODO: Figure out a new way to display error messages to the user when these forms aren't populated. They are populated via user input in SetPinForm and LatLngSetPinForm, which have validations. So I should not let this form be submitted until nameEntered === true or something like that. I need to think about the best way to do this. 
     if (this.state.name === '' || this.state.start_lat === '' || this.state.start_lng === '') {
       readyToSubmit = false
     } else {
