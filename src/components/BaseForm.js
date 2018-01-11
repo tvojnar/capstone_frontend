@@ -103,6 +103,7 @@ class BaseForm extends LinkedComponent {
 
     // check that a name, staring lat and starting lng have been entered
     // if not provided by the user then set the state so that the error message and styleing shows up around the  input field in the form. Also set readyToSubmit to false to that the form wont be submitted to the API
+    // TODO: NOW THAT I AM SETTING NAME AND START LAT AND LNG IN THE SetPinForms I DON'T NEED ALL OF THE VISUAL VALIDATIONS HERE, I JUST NEED TO VALIDATE THAT THERE IS A NAME, LAT AND LNG STORED IN THE FORM
     if (this.state.name === '' || this.state.start_lat === '' || this.state.start_lng === '') {
       console.log('in if cause something was missing');
       readyToSubmit = false

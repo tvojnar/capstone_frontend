@@ -50,7 +50,7 @@ class FormContainer extends Component {
 
   setManualEnter() {
     this.setState({
-      manualEnter: true,
+      manualEnter: !this.state.manualEnter,
     })
   } // setManualEnter
 
@@ -99,12 +99,13 @@ class FormContainer extends Component {
 // pass the Form a method to close the AddFormModal via props (hideFormModal)
 // pass Form fetchHikes so that it can call the Map components fetchHikesFromApi function when the form is submitted
 render() {
-  let manualButton;
+  let button;
   let pinForm;
   if (this.state.manualEnter) {
+    button= <button onClick={this.setManualEnter}>Use name to set pin</button>
     pinForm = <LatLngSetPinForm setLatLng={this.setLatLng}/>
   } else {
-    manualButton= <button onClick={this.setManualEnter}>Set lat and lng manually</button>
+    button= <button onClick={this.setManualEnter}>Set lat and lng manually</button>
     pinForm= <SetPinForm setName={this.setName}/>
   }
 
@@ -112,7 +113,7 @@ render() {
   return (
     <div>
     {pinForm}
-    {manualButton}
+    {button}
     <MapAddHike
       lat={this.state.lat}
       lng={this.state.lng}
