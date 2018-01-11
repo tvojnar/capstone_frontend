@@ -73,6 +73,7 @@ class BaseForm extends LinkedComponent {
 
   componentWillReceiveProps(nextProps) {
     // once the user has entered name in SetPinForm or name/lat/lng in LatLngSetPinForm and enteredName === true then the name, start_latm and start_lng will be set in Form via props passed from FormContainer
+    // if the user enters a name that does not get any results from the geocoding api then the state for name, start_lat and start_lng will be set back to ''
     console.log('in Form CWRP');
     console.log(nextProps.hikeName);
     console.log(nextProps.hikeLat);
@@ -81,6 +82,10 @@ class BaseForm extends LinkedComponent {
       this.setState({name: nextProps.hikeName})
       this.setState({start_lat: nextProps.hikeLat})
       this.setState({start_lng: nextProps.hikeLng})
+    } else {
+      this.setState({name: ''})
+      this.setState({start_lat: ''})
+      this.setState({start_lng: ''})
     }
   }
 
@@ -101,7 +106,7 @@ class BaseForm extends LinkedComponent {
 
 
     // check that a name, staring lat and starting lng have been entered
-    // TODO: Figure out a new way to display error messages to the user when these forms aren't populated. They are populated via user input in SetPinForm and LatLngSetPinForm, which have validations. So I should not let this form be submitted until nameEntered === true or something like that. I need to think about the best way to do this. 
+    // TODO: Figure out a new way to display error messages to the user when these forms aren't populated. They are populated via user input in SetPinForm and LatLngSetPinForm, which have validations. So I should not let this form be submitted until nameEntered === true or something like that. I need to think about the best way to do this.
     if (this.state.name === '' || this.state.start_lat === '' || this.state.start_lng === '') {
       readyToSubmit = false
     } else {

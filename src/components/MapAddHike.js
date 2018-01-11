@@ -23,6 +23,7 @@ export class MapAddHike extends Component {
     console.log('in MapAddHike render');
     console.log(lat);
     console.log(lng);
+    console.log(this.props.nameEntered);
 
 
     // pass the SetPinMap an instance of SetPinMarker to render on the map if the user has entered a name (i.e. the successfully submited either SetPinForm or latLngSetPinForm)

@@ -85,9 +85,12 @@ class FormContainer extends Component {
     // console.log(encodedUrl);
 
     const setErrorState = () => {
+      // set error to true so that errorMessage will be displayed to the user
+      // setting nameEntered to false will clear any previous state of name, start_lat and start_lng in Form.js to '' so that the form cannot be submitted
       this.setState({
         error: true,
-        errorMessage: 'Unable to access Google at this time to find the location of your hike. Please click the button below to manually enter the lat and lng of your hike'
+        errorMessage: 'Unable to access Google at this time to find the location of your hike. Please click the button below to manually enter the lat and lng of your hike',
+        nameEntered: false,
       })
     } // setErrorState
 
@@ -100,8 +103,9 @@ class FormContainer extends Component {
         // when the call the the api is successful set this.lat and this.lng and toggle nameEntered to true so that the map will render a pin and state for the name, start_lat and start_lng will be updated in Form.js
         console.log('successful api call to geocode!');
         console.log(data);
-        if (data[0]) {
-          // console.log('in if in geocode ajax call');
+        if (data.status === "OK") {
+          // Object.keys(data.results).length !== 0
+          console.log('in if in geocode ajax call');
           // console.log(data.results[0].geometry.location.lat);
           // console.log(data.results[0].geometry.location.lng);
           let geoLat = data.results[0].geometry.location.lat
@@ -115,16 +119,18 @@ class FormContainer extends Component {
           })
           // TODO: handle when there are no results
         } else {
+          // set error to true so that errorMessage will be displayed to the user
+          // setting nameEntered to false will clear any previous state of name, start_lat and start_lng in Form.js to '' so that the form cannot be submitted
           this.setState({
             error: true,
-            errorMessage: 'No hike was found for that name. Try adding more details, like a state or county, or click the button below to manually enter the starting lat and lng for your hike.'
+            errorMessage: 'No hike was found for that name. Try adding more details, like a state or county, or click the button below to manually enter the starting lat and lng for your hike.',
+            nameEntered: false,
           })
         } // if/else
       }.bind(this), // success
       error: function(xhr, status, err) {
         console.log('in error');
         console.log(err);
-        // TODO: handle when the API call did not work
         setErrorState();
       } // error
     }); // get request
