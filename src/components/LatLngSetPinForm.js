@@ -6,7 +6,7 @@ import Link, { LinkedComponent } from 'valuelink';
 import { Input } from 'valuelink/tags';
 
 
-class SetPinForm extends LinkedComponent {
+class LatLngSetPinForm extends LinkedComponent {
 
   constructor(props) {
     super(props);
@@ -20,6 +20,8 @@ class SetPinForm extends LinkedComponent {
   // default props are used to reset the state to clear the form as well as to set the initialState
   static defaultProps = {
     initialState: {
+      lat: '',
+      lng: '',
       name: '',
     }
   }
@@ -27,12 +29,14 @@ class SetPinForm extends LinkedComponent {
   // use this function to prepopulate form input fields with the hike's name in EditForm
   componentWillMount(nextProps) {
     if (this.props.hikeName) {
-      this.setState({name: this.props.hikeName})
+      this.setState({
+        lat: this.props.hikeLat,
+        lng: this.state.hikeLng})
     }
   }
 
 
-  // TODO
+
   // function runs when the submit button is clicked on the form
   onSubmit = e => {
     // prevent the page reloading when the form is submitted
@@ -45,15 +49,30 @@ class SetPinForm extends LinkedComponent {
 
     // check that a name has been entered
     // if not provided by the user then set the state so that the error message and styleing shows up around the  input field in the form. Also set readyToSubmit to false to that the form wont be submitted to the API
-    if (this.state.name === '') {
-      console.log('in if cause name was missing');
+    if (this.state.start_lat === '' || this.state.start_lng === '') {
+      console.log('in if cause something was missing');
       readyToSubmit = false
-      this.setState({nameError: true})
-    }  else {
+
+
+      if (this.state.start_lat === '') {
+        console.log('NO LAT');
+        this.setState({latError: true })
+      } else {
+        console.log('YES LAT');
+        this.setState({latError: false })
+      }
+
+      if (this.state.start_lng === '') {
+        console.log('NO LNG');
+        this.setState({lngError: true })
+      } else {
+        console.log('YES LNG');
+        this.setState({lngError: false })
+      }
+    } else {
       console.log('ELSE');
-      this.setState({nameError: false})
       readyToSubmit =  true;
-    } // if/else
+    }
 
     console.log(`after all the if statements readyToSubmit: ${readyToSubmit}`);
     // Check that the form a name before you submite (readyToSubmit = true)
@@ -68,9 +87,7 @@ class SetPinForm extends LinkedComponent {
 // this will call a function in FormContainer to set the name in state
 // in will also result in getCoordinates being called, which will set the state of lat and lng in FormContainer
 submitForm() {
-  console.log('in submit form and name is: ');
-  console.log(this.state.name);
-  this.props.setName(this.state.name);
+  this.props.setLatLng(this.state.name, this.state.lat, this.state.lng);
 } // submitForm
 
 
@@ -86,10 +103,17 @@ render() {
   const nameLink = Link.state(this, 'name'),
   nameIsValid = nameLink.value
 
+  const latLink = Link.state(this, 'start_lat'),
+  latIsValid = latLink.value
 
-  // define these so that I can use them in the if/else statements below for the name input field
+  const lngLink = Link.state(this, 'start_lng'),
+  lngIsValid = lngLink.value
+
+
+  // define these so that I can use them in the if/else statements below for the lat, and lng input fields
+  let latBox;
+  let lngBox;
   let nameBox;
-
 
   // only show the form validation message and styling if the user hit submit without entering a name
   if (this.state.nameError) {
@@ -109,12 +133,47 @@ render() {
     </label>
   }
 
+
+  // only show the form validation message and styling if the user hit submit without entering a starting latitude
+  if (this.state.latError) {
+    latBox = <label>
+    Starting latitude: <Input type="number"
+    className={ latIsValid ? '' : 'invalid'}
+    valueLink={ latLink } />
+    <div className='error-placeholder'>
+    { latIsValid ? '' : 'Starting latitude is required'}
+    </div>
+    </label>
+  } else {
+    latBox = <label>
+    Starting latitude: <Input type="number" valueLink={ latLink } />
+    </label>
+  }
+
+  // only show the form validation message and styling if the user hit submit without entering a starting longitude
+  if (this.state.lngError) {
+    lngBox = <label>
+    Starting longitude: <Input type="number"
+    className={ lngIsValid ? '' : 'invalid'}
+    valueLink={ lngLink } />
+    <div className='error-placeholder'>
+    { lngIsValid ? '' : 'Starting longitude is required'}
+    </div>
+    </label>
+  } else {
+    lngBox = <label>
+    Starting longitude: <Input type="number" valueLink={ lngLink } />
+    </label>
+  }
+
+
   // render the form
   // it used the valueLink library to conect each form input field with the Form components state
   return(
     <form onSubmit={this.onSubmit}>
-
       { nameBox }
+      { latBox }
+      { lngBox }
 
       <button type='submit'>Set pin</button>
 
@@ -124,4 +183,4 @@ render() {
 } // render
 } // form
 
-export default SetPinForm
+export default LatLngSetPinForm

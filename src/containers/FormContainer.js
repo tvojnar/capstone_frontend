@@ -3,8 +3,7 @@ import $ from 'jquery';
 import Form from '../components/Form';
 import { MapAddHike } from '../components/MapAddHike';
 import SetPinForm from '../components/SetPinForm';
-
-
+import LatLngSetPinForm from '../components/LatLngSetPinForm';
 
 
 // FormContainer is rendered by AddHikeModal and HikeDetailsModal
@@ -23,6 +22,8 @@ class FormContainer extends Component {
 
 
     this.setName = this.setName.bind(this);
+    this.setLatLng = this.setLatLng.bind(this);
+    this.setManualEnter = this.setManualEnter.bind(this);
   }
 
   // this function is called by SetPinForm when it is submitted
@@ -33,6 +34,21 @@ class FormContainer extends Component {
     this.setState({hikeName: name})
     this.getCoordinates(name);
   }
+
+  setLatLng(name, lat, lng) {
+    this.setState({
+      name: name,
+      lat: lat,
+      lng: lng,
+      nameEntered: true,
+    })
+  }
+
+  setManualEnter() {
+    this.setState({
+      manualEnter: true,
+    })
+  } // setManualEnter
 
 
   getCoordinates(hikeName) {
@@ -75,17 +91,24 @@ class FormContainer extends Component {
         // TODO: handle when the API call did not work
       } // error
     }); // get request
-
-
   } // getCoordinates
 // pass the Form a method to close the AddFormModal via props (hideFormModal)
 // pass Form fetchHikes so that it can call the Map components fetchHikesFromApi function when the form is submitted
 render() {
+  let manualButton;
+  let pinForm;
+  if (this.state.manualEnter) {
+    pinForm = <LatLngSetPinForm setLatLng={this.setLatLng}/>
+  } else {
+    manualButton= <button onClick={this.setManualEnter}>Set lat and lng manually</button>
+    pinForm= <SetPinForm setName={this.setName}/>
+  }
 
 
   return (
     <div>
-    <SetPinForm setName={this.setName}/>
+    {pinForm}
+    {manualButton}
     <MapAddHike
       lat={this.state.lat}
       lng={this.state.lng}
