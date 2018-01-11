@@ -17,7 +17,7 @@ class FormContainer extends Component {
     this.state = {
       lat: 47.6062,
       lng: -122,
-      enteredName: false,
+      nameEntered: false,
       hikeName: '',
     };
 
@@ -36,10 +36,10 @@ class FormContainer extends Component {
 
 
   getCoordinates(hikeName) {
-    const baseUrl = 'https://maps.googleapis.com/maps/api/geocode/json?address='
-    const apiKey = 'AIzaSyDCte77X-YyyMzwq0o2xqO0BD77hqy7ekM'
+    const baseUrl = 'https://maps.googleapis.com/maps/api/geocode/json?address=';
+    const apiKey = 'AIzaSyD6xT_duuOpLAzZEE-yHY1l7do810TIL_8';
     console.log(apiKey);
-    const url = baseUrl + hikeName + '&key' + apiKey
+    const url = baseUrl + hikeName + '&key' + apiKey;
     const encodedUrl = encodeURI(url);
 
     //
@@ -64,19 +64,15 @@ class FormContainer extends Component {
           this.setState({
               lat: geoLat,
               lng: geoLng,
-              enteredName: true,
+              nameEntered: true,
             })
-          // console.log('state: ');
-          // console.log(this.state.lat);
-          // console.log(this.state.lng);
-          // console.log(this.state.enteredName);
-
+        // TODO: handle when there are no results
         }
   }.bind(this), // success
       error: function(xhr, status, err) {
         console.log('in error');
         console.log(err);
-        // TODO: Display error message that the api call did not work.
+        // TODO: handle when the API call did not work
       } // error
     }); // get request
 
@@ -87,18 +83,20 @@ class FormContainer extends Component {
 render() {
 
 
-
   return (
     <div>
     <SetPinForm setName={this.setName}/>
     <MapAddHike
       lat={this.state.lat}
       lng={this.state.lng}
-      enteredName={this.state.enteredName}/>
+      nameEntered={this.state.nameEntered}/>
     <Form
     hideFormModal={this.props.hideModalFromAddHike}
     fetchHikes={this.props.fetchHikes}
     hikeName={this.state.hikeName}
+    hikeLat={this.state.lat}
+    hikeLng={this.state.lng}
+    nameEntered={this.state.nameEntered}
     />
     </div>
   );

@@ -72,11 +72,16 @@ class BaseForm extends LinkedComponent {
 
 
   componentWillReceiveProps(nextProps) {
-    // if the form is passed a hikeName it will update this.state.name
-    // hikeName is passed as props from AddHikeModal (and later on HikeDetailsModal)
+    // once the user has entereda name is SetPinForm and enteredName === true then the name, start_latm and start_lng will be set in Form via props passed from FormContainer
+    // hikeName is passed as props from FormConteiner
+    console.log('in Form CWRP');
     console.log(nextProps.hikeName);
-    if (nextProps.hikeName) {
+    console.log(nextProps.hikeLat);
+    console.log(nextProps.hikeLng);
+    if (nextProps.nameEntered) {
       this.setState({name: nextProps.hikeName})
+      this.setState({start_lat: nextProps.hikeLat})
+      this.setState({start_lng: nextProps.hikeLng})
     }
   }
 
