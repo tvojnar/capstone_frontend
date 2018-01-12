@@ -5,7 +5,6 @@ import BaseModal from './BaseModal';
 import { TextHikeDetailsContainer } from '../containers/TextHikeDetailsContainer';
 import { HikeAttributes } from '../components/HikeAttributes';
 import MapHikeDetails from '../components/MapHikeDetails';
-import EditForm from '../components/EditForm';
 import FormContainer from '../containers/FormContainer';
 
 // sets the portion of the app that should be hidden
