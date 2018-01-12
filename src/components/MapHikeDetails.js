@@ -33,12 +33,6 @@ export class MapHikeDetails extends Component {
             lng: lng
           }}
           zoom={this.zoom}
-          containerElement={
-            <div style={{ height: `100%` }} />
-          }
-          mapElement={
-            <div style={{ height: `100%` }} />
-          }
           hike={hike}
         />
       </div>

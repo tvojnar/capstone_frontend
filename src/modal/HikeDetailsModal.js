@@ -140,7 +140,9 @@ class HikeDetailsModal extends BaseModal {
               <button onClick={this.toggleEditForm}>Edit hike details</button>
               <HikeAttributes hikeData={hikeDetails}/>
               <MapHikeDetails
-                onRef={ref => (this.child = ref)}         lat={hikeDetails.start_lat} lng={hikeDetails.start_lng}/>
+                onRef={ref => (this.child = ref)}
+                lat={hikeDetails.start_lat}
+                lng={hikeDetails.start_lng}/>
               <TextHikeDetailsContainer hikeData={hikeDetails}/>
               <button onClick={this.closeModal}>close</button>
           </div>
