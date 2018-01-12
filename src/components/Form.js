@@ -1,16 +1,8 @@
 import $ from 'jquery';
-// import React from 'react';
-
-// import modals to show sucess or error message after post request to add a new hike
-// import ErrorModal from '../modal/ErrorModal'
-// import SuccessModal from '../modal/SuccessModal'
-
-
-// using valueLink library to connect form fields with the components state. Also used to provide inline error handing for invalid fields in the form
-
 import BaseForm from './BaseForm';
 
-
+// this is the form that the the user enters all the hikes details in
+// the state of Form is what is submitted to the API to create a new hike
 class Form extends BaseForm {
 
   constructor(props) {
