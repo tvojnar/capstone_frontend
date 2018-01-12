@@ -32,7 +32,7 @@ class SetPinForm extends LinkedComponent {
   //   }
   // }
 
-  componentWillMount(nextProps) {
+  componentWillMount() {
     console.log('in CWRP in SetPinForm and detailsToSetPin is:');
     console.log(this.props.detailsToSetPin);
     if (Object.keys(this.props.detailsToSetPin).length !== 0) {

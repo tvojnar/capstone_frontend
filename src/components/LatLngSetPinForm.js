@@ -30,13 +30,22 @@ class LatLngSetPinForm extends LinkedComponent {
 
   // use this function to prepopulate form input fields with the hike's name in EditForm
   componentWillMount(nextProps) {
-    if (this.props.hikeName) {
-      this.setState({
-        lat: this.props.hikeLat,
-        lng: this.state.hikeLng})
-    }
-  }
+    // if (this.props.hikeName) {
+    //   this.setState({
+    //     lat: this.props.hikeLat,
+    //     lng: this.state.hikeLng})
+    // }
+      console.log('in CWM in LatLngSetPinForm');
 
+    if (Object.keys(this.props.detailsToSetPin).length !== 0) {
+      this.setState({
+        name: this.props.detailsToSetPin.name,
+        lat: this.props.detailsToSetPin.lat,
+        lng: this.props.detailsToSetPin.lng
+      })
+    }
+
+  }
 
 
   // function runs when the submit button is clicked on the form
@@ -108,7 +117,7 @@ trimState() {
 
 // render the form
 render() {
-
+  console.log('in render in LatLngSetPinForm');
 
   // link the name field in this way so that I can show the user error messages in the form when they try to submit the form without filling out a name
   // linking in this way links the input field with state so that when the user types the state for name is updated

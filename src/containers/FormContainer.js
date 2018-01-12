@@ -171,6 +171,8 @@ class FormContainer extends Component {
     let button;
     let pinForm;
     if (this.state.manualEnter) {
+      console.log('in IF for setting detailsToSetPin and is it: ');
+      console.log(detailsToSetPin);
       button= <button onClick={this.setManualEnter}>Use name to set pin</button>
       pinForm = <LatLngSetPinForm
                       setLatLng={this.setLatLng}
