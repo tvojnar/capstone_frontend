@@ -5,7 +5,6 @@ import BaseModal from './BaseModal';
 import { TextHikeDetailsContainer } from '../containers/TextHikeDetailsContainer';
 import { HikeAttributes } from '../components/HikeAttributes';
 import MapHikeDetails from '../components/MapHikeDetails';
-import EditForm from '../components/EditForm';
 import FormContainer from '../containers/FormContainer';
 
 // sets the portion of the app that should be hidden
@@ -141,7 +140,9 @@ class HikeDetailsModal extends BaseModal {
               <button onClick={this.toggleEditForm}>Edit hike details</button>
               <HikeAttributes hikeData={hikeDetails}/>
               <MapHikeDetails
-                onRef={ref => (this.child = ref)}         lat={hikeDetails.start_lat} lng={hikeDetails.start_lng}/>
+                onRef={ref => (this.child = ref)}
+                lat={hikeDetails.start_lat}
+                lng={hikeDetails.start_lng}/>
               <TextHikeDetailsContainer hikeData={hikeDetails}/>
               <button onClick={this.closeModal}>close</button>
           </div>

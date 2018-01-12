@@ -1,9 +1,6 @@
 import React from 'react';
 import Modal from 'react-modal';
 import BaseModal from './BaseModal';
-import Form from '../components/Form';
-import {MapAddHike} from '../components/MapAddHike';
-import SetPinForm from '../components/SetPinForm';
 import FormContainer from '../containers/FormContainer'
 
 // sets the portion of the app that should be hidden
@@ -35,7 +32,7 @@ class AddHikeModal extends BaseModal {
 
 // pass FormContainer fetchHikes so that it can pass it to Form to call the Map components fetchHikesFromApi function when the form is submitted
 // pass FormContainer hideModalFromAddHike so that it can close the AddHikeModal
-// pass FormContainer whichForm = 'add' so that it will render Form.js not EditForm.js 
+// pass FormContainer whichForm = 'add' so that it will render Form.js not EditForm.js
   render() {
 
     return (

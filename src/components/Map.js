@@ -129,12 +129,6 @@ export class Map extends Component {
         lng: lng
       }}
       zoom={this.zoom}
-      containerElement={
-        <div style={{ height: `100%` }} />
-      }
-      mapElement={
-        <div style={{ height: `100%` }} />
-      }
       hikes={hikes}
       fetchHikes={this.fetchHikesFromApi}
       />
