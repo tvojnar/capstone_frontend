@@ -122,7 +122,7 @@ class BaseForm extends LinkedComponent {
     // if it is then trim the leading and trailing spaces and then submit the form and call submitForm as a callback function so that I know that trimState completed before I submit the form
     // TODO: figure out why the trim function isn't trimming the strings for name, description, and notes
     if (readyToSubmit) {
-      // set submitError to false so that NO error message is displayed to the user 
+      // set submitError to false so that NO error message is displayed to the user
       this.setState({
         submitError: false,
       })
@@ -158,6 +158,8 @@ trimState() {
 
 // render the form, and when needed a modal
 render() {
+  console.log('in BaseForm render and name is');
+  console.log(this.state.name);
 
   // generate the HTML option tags for the select field for region
   let regionOptions = this.props.regions.map(region => {

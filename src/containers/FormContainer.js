@@ -34,13 +34,22 @@ class FormContainer extends Component {
   }
 
   // if we are editing the hike then we want to change nameEntered to true so that the pin for the hike will be shown in the edit form
-  componentWillMount(nextProps) {
+  componentWillMount() {
     if (this.props.whichForm === 'edit') {
-      this.setState({
-        nameEntered: true,
-      })
+          console.log('in IF of CWM in FormContainer:');
+          console.log(this.props.hikeState.start_lat);
+          console.log(this.props.hikeState.start_lng);
+
+          this.setState({
+            nameEntered: true,
+            hikeName: this.props.hikeState.name,
+            lat: this.props.hikeState.start_lat,
+            lng: this.props.hikeState.start_lng,
+          })
     }
-  }
+  } // conponentWillMount
+
+
 
   // this function is passed as props to SetPinForm so it can call it when the form is submitted
   // it sets this.name as the name passed from SetPinForm
@@ -209,6 +218,7 @@ class FormContainer extends Component {
       fetchHikes={this.props.fetchHikes}
       fetchHikeDetails={this.props.fetchHikeDetails}
       hideEditForm={this.props.hideEditForm}
+      nameEntered={this.state.nameEntered}
       />
     }
 
@@ -216,15 +226,21 @@ class FormContainer extends Component {
     // 1. A form for the user to set the pin for the hike
     // 2. a map so show the pin on
     // 3. A form with all the details for the hike. This form is what is submitted to the backend API to add a hike to the DB.
+    console.log('in render of FormContainer and nameEntered is:');
+    console.log(this.state.nameEntered);
+    console.log(this.state.lat);
+    console.log(this.state.lng);
+    console.log(this.state.hikeName);
+
     return (
       <div>
       {displayErrorMessage}
       {pinForm}
       {button}
       <MapAddHike
-      lat={this.state.lat}
-      lng={this.state.lng}
-      nameEntered={this.state.nameEntered}/>
+        lat={this.state.lat}
+        lng={this.state.lng}
+        nameEntered={this.state.nameEntered}/>
       { formToShow }
       </div>
     );
