@@ -115,10 +115,11 @@ class HikeDetailsModal extends BaseModal {
           // the editForm will replace all of the hike details when the 'Edit hike details' buttomn is clicked
             // only the edit form will be rendered in the modal!
 
-          // pass hikeState to EditForm, which will be added to EditForms state via the ComponentWillMount function in BaseForm
+          // pass hikeState to FormContainer so that it can be passed to EditForm, hikeState will be added to EditForms state via the ComponentWillMount function in BaseForm so that the current details of the hike can be shown in the EditForm
+          // passing hikeState to FormContainer will trigger FormContainer to pass detailsToSetPin to SetPinForm and LatLngSetPinForm so that the name and pin for the hike will be shown in them and on the SetPinMap
           console.log('in HikeDetailsModal render and hikeDetials is: ');
           console.log(hikeDetails);
-        
+
           whatToRender =
             <div>
               <h2 ref={subtitle => this.subtitle = subtitle}>{hikeDetails.name}</h2>

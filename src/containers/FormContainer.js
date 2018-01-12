@@ -33,6 +33,7 @@ class FormContainer extends Component {
     this.setManualEnter = this.setManualEnter.bind(this);
   }
 
+  // if we are editing the hike then we want to change nameEntered to true so that the pin for the hike will be shown in the edit form
   componentWillMount(nextProps) {
     if (this.props.whichForm === 'edit') {
       this.setState({
@@ -150,6 +151,8 @@ class FormContainer extends Component {
   // pass Form fetchHikes so that it can call the Map components fetchHikesFromApi function when the form is submitted
   render() {
 
+    // if we are editing the hike details then HikeDetailsModal will pass info for the name, lat, and lng of the hike via props (in hikeState)
+    // if the hikeState prop is received then we want to pass the data for the name, lat, and lng to SetPinForm and LatLngSetPinForm so that they can display the current details of the hike
     let detailsToSetPin;
     if (this.props.hikeState) {
       console.log('in render in FormContainer and hikeState is:');
