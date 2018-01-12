@@ -173,7 +173,7 @@ class FormContainer extends Component {
       />
     } else if (this.props.whichForm === 'edit'){
       formToShow = <EditForm
-      hikeState={this.props.hikeDetails}
+      hikeState={this.props.hikeState}
       fetchHikes={this.props.fetchHikes}
       fetchHikeDetails={this.props.fetchHikeDetails}
       hideEditForm={this.props.hideEditForm} />

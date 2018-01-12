@@ -116,6 +116,8 @@ class HikeDetailsModal extends BaseModal {
             // only the edit form will be rendered in the modal!
 
           // pass hikeState to EditForm, which will be added to EditForms state via the ComponentWillMount function in BaseForm
+          console.log('in HikeDetailsModal render and hikeDetials is: ');
+          console.log(hikeDetails);
           whatToRender =
             <div>
               <h2 ref={subtitle => this.subtitle = subtitle}>{hikeDetails.name}</h2>
