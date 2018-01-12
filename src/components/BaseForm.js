@@ -65,7 +65,8 @@ class BaseForm extends LinkedComponent {
   }
 
   // use this function to prepopulate form input fields with the hike's data in EditForm via props passed in from the parent component of EditForm
-  componentWillMount(nextProps) {
+  componentDidMount() {
+    console.log('in CDM of BaseForm');
     if (this.props.hikeState) {
       this.setState(this.props.hikeState)
     }

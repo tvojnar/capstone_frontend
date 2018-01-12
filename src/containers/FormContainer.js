@@ -140,6 +140,7 @@ class FormContainer extends Component {
         } else {
           // set error to true so that errorMessage will be displayed to the user
           // setting nameEntered to false will clear any previous state of name, start_lat and start_lng in Form.js to '' so that the form cannot be submitted
+          console.log('in error of geocode');
           this.setState({
             error: true,
             errorMessage: 'No hike was found for that name. Try adding more details, like a state or county, or click the button below to manually enter the starting lat and lng for your hike.',
@@ -215,6 +216,9 @@ class FormContainer extends Component {
     } else if (this.props.whichForm === 'edit'){
       formToShow = <EditForm
       hikeState={this.props.hikeState}
+      hikeName={this.state.hikeName}
+      hikeLat={this.state.lat}
+      hikeLng={this.state.lng}
       fetchHikes={this.props.fetchHikes}
       fetchHikeDetails={this.props.fetchHikeDetails}
       hideEditForm={this.props.hideEditForm}
