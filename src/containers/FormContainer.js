@@ -5,6 +5,9 @@ import EditForm from '../components/EditForm';
 import { MapAddHike } from '../components/MapAddHike';
 import SetPinForm from '../components/SetPinForm';
 import LatLngSetPinForm from '../components/LatLngSetPinForm';
+import '../foundation.css';
+import {Button, Colors} from 'react-foundation';
+import '../App.css';
 
 
 // FormContainer is rendered by AddHikeModal and HikeDetailsModal
@@ -183,13 +186,13 @@ class FormContainer extends Component {
     if (this.state.manualEnter) {
       console.log('in IF for setting detailsToSetPin and is it: ');
       console.log(detailsToSetPin);
-      button= <button onClick={this.setManualEnter}>Use name to set pin</button>
+      button= <Button className='toggleManual' onClick={this.setManualEnter}>Use name to set pin</Button>
       pinForm = <LatLngSetPinForm
                       setLatLng={this.setLatLng}
                       detailsToSetPin={detailsToSetPin}
                       />
     } else {
-      button= <button onClick={this.setManualEnter}>Set lat and lng manually</button>
+      button= <Button className='toggleManual' onClick={this.setManualEnter}>Set lat and lng manually</Button>
       pinForm= <SetPinForm
                       setName={this.setName}
                       detailsToSetPin={detailsToSetPin}

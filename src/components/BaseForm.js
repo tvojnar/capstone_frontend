@@ -1,4 +1,7 @@
 import * as React from 'react';
+import '../foundation.css';
+import {Button, Colors} from 'react-foundation';
+import '../App.css';
 // import $ from 'jquery';
 
 // import modals to show sucess or error message after post request to add a new hike
@@ -291,7 +294,7 @@ render() {
     </label>
 
     {errorOnSubmitMessage}
-    <button type='submit'>Submit</button>
+    <Button className='greenButton' type='submit'>Submit</Button>
 
     </form>
     </div>

@@ -2,6 +2,8 @@ import React from 'react';
 import Modal from 'react-modal';
 import BaseModal from './BaseModal';
 import FormContainer from '../containers/FormContainer'
+import '../foundation.css';
+import {Button, Colors} from 'react-foundation';
 
 // sets the portion of the app that should be hidden
 Modal.setAppElement('#root');
@@ -63,7 +65,7 @@ class AddHikeModal extends BaseModal {
             fetchHikes={this.props.fetchHikes}
             hideModalFromAddHike={this.props.hideModalFromAddHike}
             whichForm={'add'}/>
-          <button onClick={this.props.hideModalFromAddHike}>Cancle</button>
+          <Button color={Colors.ALERT} onClick={this.props.hideModalFromAddHike}>Cancle</Button>
         </Modal>
       </div>
     );
