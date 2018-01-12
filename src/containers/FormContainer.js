@@ -33,6 +33,14 @@ class FormContainer extends Component {
     this.setManualEnter = this.setManualEnter.bind(this);
   }
 
+  componentWillMount(nextProps) {
+    if (this.props.whichForm === 'edit') {
+      this.setState({
+        nameEntered: true,
+      })
+    }
+  }
+
   // this function is passed as props to SetPinForm so it can call it when the form is submitted
   // it sets this.name as the name passed from SetPinForm
   // getCoordinates will set this.lat and this.lng and toggle this.nameEntered to true so that a pin will show up on the map and state will be modified in Form
@@ -142,16 +150,35 @@ class FormContainer extends Component {
   // pass Form fetchHikes so that it can call the Map components fetchHikesFromApi function when the form is submitted
   render() {
 
+    let detailsToSetPin;
+    if (this.props.hikeState) {
+      console.log('in render in FormContainer and hikeState is:');
+      console.log(this.props.hikeState);
+      detailsToSetPin = {
+        name: this.props.hikeState.name,
+        lat: this.props.hikeState.start_lat,
+        lng: this.props.hikeState.start_lng
+      }
+    } else {
+      detailsToSetPin={}
+    }
+
     // if this.manualEnter is true either render the SetPinForm so that the user can enter a name and use geocoding to set the pin for the hike
     // if this.manualEnter is false render the LatLngSetPinForm so that the user can manually enter a lat and lng to set the pin for the hike
     let button;
     let pinForm;
     if (this.state.manualEnter) {
       button= <button onClick={this.setManualEnter}>Use name to set pin</button>
-      pinForm = <LatLngSetPinForm setLatLng={this.setLatLng}/>
+      pinForm = <LatLngSetPinForm
+                      setLatLng={this.setLatLng}
+                      detailsToSetPin={detailsToSetPin}
+                      />
     } else {
       button= <button onClick={this.setManualEnter}>Set lat and lng manually</button>
-      pinForm= <SetPinForm setName={this.setName}/>
+      pinForm= <SetPinForm
+                      setName={this.setName}
+                      detailsToSetPin={detailsToSetPin}
+                      />
     }
 
     // if there was an error in the api call to geocode (either the api call failed or no results were returned) then render a <p> with an error message for the user
@@ -176,7 +203,8 @@ class FormContainer extends Component {
       hikeState={this.props.hikeState}
       fetchHikes={this.props.fetchHikes}
       fetchHikeDetails={this.props.fetchHikeDetails}
-      hideEditForm={this.props.hideEditForm} />
+      hideEditForm={this.props.hideEditForm}
+      />
     }
 
     // return

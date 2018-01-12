@@ -26,12 +26,23 @@ class SetPinForm extends LinkedComponent {
   }
 
   // use this function to prepopulate form input fields with the hike's name in EditForm
+  // componentWillMount(nextProps) {
+  //   if (this.props.hikeName) {
+  //     this.setState({name: this.nextProps.hikeName})
+  //   }
+  // }
+
   componentWillMount(nextProps) {
-    if (this.props.hikeName) {
-      this.setState({name: this.props.hikeName})
+    console.log('in CWRP in SetPinForm and detailsToSetPin is:');
+    console.log(this.props.detailsToSetPin);
+    if (Object.keys(this.props.detailsToSetPin).length !== 0) {
+      this.setState({
+        name: this.props.detailsToSetPin.name,
+        lat: this.props.detailsToSetPin.lat,
+        lng: this.props.detailsToSetPin
+      })
     }
   }
-
 
 
   // function runs when the submit button is clicked on the form
@@ -93,7 +104,7 @@ render() {
 
 
   // only show the form validation message and styling if the user hits submit without entering a name
-  // nameIsValid will be false if the user hit submit before entering a name and will become true once the user starts typing in the input field for name 
+  // nameIsValid will be false if the user hit submit before entering a name and will become true once the user starts typing in the input field for name
   if (this.state.nameError) {
     nameBox = <label>
     Name: <Input type="text"
