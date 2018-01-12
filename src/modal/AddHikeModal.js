@@ -34,6 +34,8 @@ class AddHikeModal extends BaseModal {
 
 
 // pass FormContainer fetchHikes so that it can pass it to Form to call the Map components fetchHikesFromApi function when the form is submitted
+// pass FormContainer hideModalFromAddHike so that it can close the AddHikeModal
+// pass FormContainer whichForm = 'add' so that it will render Form.js not EditForm.js 
   render() {
 
     return (
@@ -47,7 +49,8 @@ class AddHikeModal extends BaseModal {
         >
           <FormContainer
             fetchHikes={this.props.fetchHikes}
-            hideModalFromAddHike={this.props.hideModalFromAddHike}/>
+            hideModalFromAddHike={this.props.hideModalFromAddHike}
+            whichForm={'add'}/>
           <button onClick={this.props.hideModalFromAddHike}>Cancle</button>
         </Modal>
       </div>

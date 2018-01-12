@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import $ from 'jquery';
 import Form from '../components/Form';
+import EditForm from '../components/EditForm';
 import { MapAddHike } from '../components/MapAddHike';
 import SetPinForm from '../components/SetPinForm';
 import LatLngSetPinForm from '../components/LatLngSetPinForm';
@@ -159,6 +160,25 @@ class FormContainer extends Component {
       displayErrorMessage = <h5>{this.state.errorMessage}</h5>
     }
 
+    // use this.props.whichForm to decide if Form or EditForm should be rendered
+    let formToShow;
+    if (this.props.whichForm === 'add') {
+      formToShow = <Form
+      hideFormModal={this.props.hideModalFromAddHike}
+      fetchHikes={this.props.fetchHikes}
+      hikeName={this.state.hikeName}
+      hikeLat={this.state.lat}
+      hikeLng={this.state.lng}
+      nameEntered={this.state.nameEntered}
+      />
+    } else if (this.props.whichForm === 'edit'){
+      formToShow = <EditForm
+      hikeState={this.props.hikeDetails}
+      fetchHikes={this.props.fetchHikes}
+      fetchHikeDetails={this.props.fetchHikeDetails}
+      hideEditForm={this.props.hideEditForm} />
+    }
+
     // return
     // 1. A form for the user to set the pin for the hike
     // 2. a map so show the pin on
@@ -172,14 +192,7 @@ class FormContainer extends Component {
       lat={this.state.lat}
       lng={this.state.lng}
       nameEntered={this.state.nameEntered}/>
-      <Form
-      hideFormModal={this.props.hideModalFromAddHike}
-      fetchHikes={this.props.fetchHikes}
-      hikeName={this.state.hikeName}
-      hikeLat={this.state.lat}
-      hikeLng={this.state.lng}
-      nameEntered={this.state.nameEntered}
-      />
+      { formToShow }
       </div>
     );
   }
