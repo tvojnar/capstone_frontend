@@ -43,7 +43,7 @@ export class HikeInfoWindow extends Component {
           <div>
             <h4 className='greenUnderline'>{name}</h4>
             <p>{description}</p>
-            <Button className='blueButton' onClick={this.handleClick}>Trip details</Button>
+            <Button className='blueButton hoverGrey' onClick={this.handleClick}>Trip details</Button>
           </div>
         </InfoWindow>
       </div>

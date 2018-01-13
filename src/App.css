@@ -27,7 +27,7 @@ medium blue: #9bbff4
   color: #bbdaa4;
 }
 
-button:hover {
+#b:hover {
   background-color: red;
 }
 .redButton {
@@ -37,6 +37,10 @@ button:hover {
 .blueButton {
   background-color: #a7cdf2;
   color: black;
+}
+
+.hoverGrey:hover {
+  background-color: gray;
 }
 .greenButton {
   background-color: #bbdaa4;
