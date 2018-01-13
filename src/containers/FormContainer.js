@@ -6,7 +6,7 @@ import { MapAddHike } from '../components/MapAddHike';
 import SetPinForm from '../components/SetPinForm';
 import LatLngSetPinForm from '../components/LatLngSetPinForm';
 import '../foundation.css';
-import {Button, Colors} from 'react-foundation';
+import {Button, Colors, Row, Column} from 'react-foundation';
 import '../App.css';
 
 
@@ -39,16 +39,16 @@ class FormContainer extends Component {
   // if we are editing the hike then we want to change nameEntered to true so that the pin for the hike will be shown in the edit form
   componentWillMount() {
     if (this.props.whichForm === 'edit') {
-          console.log('in IF of CWM in FormContainer:');
-          console.log(this.props.hikeState.start_lat);
-          console.log(this.props.hikeState.start_lng);
+      console.log('in IF of CWM in FormContainer:');
+      console.log(this.props.hikeState.start_lat);
+      console.log(this.props.hikeState.start_lng);
 
-          this.setState({
-            nameEntered: true,
-            hikeName: this.props.hikeState.name,
-            lat: this.props.hikeState.start_lat,
-            lng: this.props.hikeState.start_lng,
-          })
+      this.setState({
+        nameEntered: true,
+        hikeName: this.props.hikeState.name,
+        lat: this.props.hikeState.start_lat,
+        lng: this.props.hikeState.start_lng,
+      })
     }
   } // conponentWillMount
 
@@ -188,15 +188,15 @@ class FormContainer extends Component {
       console.log(detailsToSetPin);
       button= <Button className='toggleManual' onClick={this.setManualEnter}>Use name to set pin</Button>
       pinForm = <LatLngSetPinForm
-                      setLatLng={this.setLatLng}
-                      detailsToSetPin={detailsToSetPin}
-                      />
+      setLatLng={this.setLatLng}
+      detailsToSetPin={detailsToSetPin}
+      />
     } else {
       button= <Button className='toggleManual' onClick={this.setManualEnter}>Set lat and lng manually</Button>
       pinForm= <SetPinForm
-                      setName={this.setName}
-                      detailsToSetPin={detailsToSetPin}
-                      />
+      setName={this.setName}
+      detailsToSetPin={detailsToSetPin}
+      />
     }
 
     // if there was an error in the api call to geocode (either the api call failed or no results were returned) then render a <p> with an error message for the user
@@ -241,14 +241,24 @@ class FormContainer extends Component {
 
     return (
       <div>
+      <Row className='setPinDiv row'>
+      <Column small={12} medium={4} large={6}  >
       {displayErrorMessage}
       {pinForm}
       {button}
-      <MapAddHike
+      </Column>
+      <Column small={12} medium={8} large={6}>
+        <MapAddHike
         lat={this.state.lat}
         lng={this.state.lng}
         nameEntered={this.state.nameEntered}/>
-      { formToShow }
+      </Column>
+      </Row>
+      <Row>
+        <Column small={12}>
+          { formToShow }
+        </Column>
+      </Row>
       </div>
     );
   }

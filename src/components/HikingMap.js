@@ -7,7 +7,7 @@ import { withScriptjs, withGoogleMap, GoogleMap} from "react-google-maps"
 export const HikingMap = compose(
   withProps({
     googleMapURL: "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places",
-    loadingElement: <div style={{ height: `100%` }} />,
+    loadingElement: <div className='loadingDiv' style={{ height: `100%`, width: '66.7%' }} />,
     containerElement: <div style={{ height: `600px` }} />,
     mapElement: <div style={{ height: `100%` }} />,
   }),

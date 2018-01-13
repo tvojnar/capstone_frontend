@@ -82,7 +82,7 @@ header {
 }
 
 body {
-  background-color: #FEFAF1;
+  /* background-color: #FEFAF1; */
 }
 
 /******************************/
@@ -93,6 +93,24 @@ body {
   background-color: #F9E581;
   color: black;
 }
+
+
+/******************************/
+/****** BaseForm *********/
+/******************************/
+.hikeAttributes {
+  margin-top: 5%;
+}
+/* 
+.attributeLabel input {
+  float: left;
+}
+
+.attributeLabel {
+  margin-left: 30px;
+  display: block;
+} */
+
 /******************************/
 /**** Set pin forms   *********/
 /******************************/
