@@ -15,6 +15,17 @@ medium blue: #9bbff4
 /******************************/
 /****** General *********/
 /******************************/
+.greenUnderline {
+  border-bottom: solid #bbdaa4;
+}
+
+.blueText {
+  color: #a7cdf2;
+}
+
+.greenText {
+  color: #bbdaa4;
+}
 
 button:hover {
   background-color: red;
@@ -25,6 +36,7 @@ button:hover {
 
 .blueButton {
   background-color: #a7cdf2;
+  color: black;
 }
 .greenButton {
   background-color: #bbdaa4;
@@ -101,7 +113,7 @@ body {
 .hikeAttributes {
   margin-top: 5%;
 }
-/* 
+/*
 .attributeLabel input {
   float: left;
 }
