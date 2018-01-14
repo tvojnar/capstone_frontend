@@ -1,6 +1,6 @@
 import * as React from 'react';
 import '../foundation.css';
-import {Button, Colors, Row, Column} from 'react-foundation';
+import {Button, Colors, Row, Column, Callout} from 'react-foundation';
 import '../App.css';
 // import $ from 'jquery';
 
@@ -200,7 +200,9 @@ render() {
 
   let errorOnSubmitMessage;
   if (this.state.submitError) {
-    errorOnSubmitMessage = <p>{this.state.submitErrorMessage}</p>
+    errorOnSubmitMessage = <Callout color={Colors.ALERT}>
+    <p>{this.state.submitErrorMessage}</p>
+    </Callout>
 
   }
   // render the form
