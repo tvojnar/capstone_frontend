@@ -6,6 +6,9 @@ import { TextHikeDetailsContainer } from '../containers/TextHikeDetailsContainer
 import { HikeAttributes } from '../components/HikeAttributes';
 import MapHikeDetails from '../components/MapHikeDetails';
 import FormContainer from '../containers/FormContainer';
+import '../foundation.css';
+import {Button, Colors, Row, Column} from 'react-foundation';
+import '../App.css';
 
 // sets the portion of the app that should be hidden
 Modal.setAppElement('#root');
@@ -144,7 +147,7 @@ class HikeDetailsModal extends BaseModal {
                 lat={hikeDetails.start_lat}
                 lng={hikeDetails.start_lng}/>
               <TextHikeDetailsContainer hikeData={hikeDetails}/>
-              <button onClick={this.closeModal}>close</button>
+              <Button onClick={this.closeModal}>close</Button>
           </div>
         }
 
@@ -185,7 +188,7 @@ class HikeDetailsModal extends BaseModal {
       contentLabel="Example Modal"
     >
       <h2 ref={subtitle => this.subtitle = subtitle}>{this.state.load}</h2>
-      <button onClick={this.closeModal}>close</button>
+      <Button onClick={this.closeModal}>close</Button>
     </Modal>
   </div>
 ); // return
