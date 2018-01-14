@@ -1,5 +1,8 @@
 import * as React from 'react';
-// import $ from 'jquery';
+// import $ from 'jquery';''
+import '../foundation.css';
+import {Button, Colors} from 'react-foundation';
+import '../App.css';
 
 // using valueLink library to connect form fields with the components state. Also used to provide inline error handing for invalid fields in the form
 import Link, { LinkedComponent } from 'valuelink';
@@ -196,7 +199,7 @@ render() {
       { latBox }
       { lngBox }
 
-      <button type='submit'>Set pin</button>
+      <Button className='setPinButton' type='submit'>Set hike location</Button>
 
     </form>
   ) // return

@@ -6,7 +6,7 @@ import { MapAddHike } from '../components/MapAddHike';
 import SetPinForm from '../components/SetPinForm';
 import LatLngSetPinForm from '../components/LatLngSetPinForm';
 import '../foundation.css';
-import {Button, Row, Column, Callout, Colors} from 'react-foundation';
+import {Button, Row, Column, Callout, Colors, Link, Sizes} from 'react-foundation';
 import '../App.css';
 
 
@@ -146,7 +146,7 @@ class FormContainer extends Component {
           console.log('in error of geocode');
           this.setState({
             error: true,
-            errorMessage: 'No hike was found for that name. Try adding more details, like a state or county, or click the button below to manually enter the starting lat and lng for your hike.',
+            errorMessage: 'No hike was found for that name. Try adding more details, like a state or county, or click the button below to manually enter the starting latitude and longitude for your hike.',
             nameEntered: false,
           })
         } // if/else
@@ -183,16 +183,18 @@ class FormContainer extends Component {
     // if this.manualEnter is false render the LatLngSetPinForm so that the user can manually enter a lat and lng to set the pin for the hike
     let button;
     let pinForm;
+    let message;
     if (this.state.manualEnter) {
       console.log('in IF for setting detailsToSetPin and is it: ');
       console.log(detailsToSetPin);
-      button= <Button className='toggleManual' onClick={this.setManualEnter}>Use name to set pin</Button>
+      button= <Link size={Sizes.SMALL} className='toggleManual' onClick={this.setManualEnter}>Use hike name to set pin</Link>
       pinForm = <LatLngSetPinForm
       setLatLng={this.setLatLng}
       detailsToSetPin={detailsToSetPin}
       />
     } else {
-      button= <Button className='toggleManual' onClick={this.setManualEnter}>Set lat and lng manually</Button>
+      message = <p>Having trouble finding your hike? Click below to manually enter your hikes location</p>
+      button= <Link size={Sizes.SMALL} className='toggleManual' onClick={this.setManualEnter}>Set latitude and longitude manually</Link>
       pinForm= <SetPinForm
       setName={this.setName}
       detailsToSetPin={detailsToSetPin}
@@ -244,13 +246,15 @@ class FormContainer extends Component {
 
     return (
       <div>
+      <h2> Add a hike </h2>
       <Row className='setPinDiv row'>
-      <Column small={12} medium={4} large={6}  >
+      <Column small={12} medium={4} large={3}  >
       {displayErrorMessage}
       {pinForm}
+      {message}
       {button}
       </Column>
-      <Column small={12} medium={8} large={6}>
+      <Column small={12} medium={8} large={9}>
         <MapAddHike
         lat={this.state.lat}
         lng={this.state.lng}
