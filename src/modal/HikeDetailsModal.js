@@ -7,7 +7,7 @@ import { HikeAttributes } from '../components/HikeAttributes';
 import MapHikeDetails from '../components/MapHikeDetails';
 import FormContainer from '../containers/FormContainer';
 import '../foundation.css';
-import {Button, Colors, Row, Column} from 'react-foundation';
+import {Button, Colors, Row, Colum, Alignments} from 'react-foundation';
 import '../App.css';
 
 // sets the portion of the app that should be hidden
@@ -105,14 +105,10 @@ class HikeDetailsModal extends BaseModal {
 
   render() {
 
-
       // IF THE API HAS RETURNED THE DATA FOR THE HIKES DETAILS
       if (Object.keys(this.state.hike).length !== 0) {
         // set hikeDetails to the data object with the hike details that was returned from the API
         const hikeDetails = this.state.hike;
-
-        console.log('in HikeDetailsModal render and hikeDetials is: ');
-        console.log(hikeDetails);
 
 
         let whatToRender;
@@ -122,6 +118,8 @@ class HikeDetailsModal extends BaseModal {
 
           // pass hikeState to FormContainer so that it can be passed to EditForm, hikeState will be added to EditForms state via the ComponentWillMount function in BaseForm so that the current details of the hike can be shown in the EditForm
           // passing hikeState to FormContainer will trigger FormContainer to pass detailsToSetPin to SetPinForm and LatLngSetPinForm so that the name and pin for the hike will be shown in them and on the SetPinMap
+          console.log('in HikeDetailsModal render and hikeDetials is: ');
+          console.log(hikeDetails);
 
           whatToRender =
             <div>
@@ -147,6 +145,7 @@ class HikeDetailsModal extends BaseModal {
                 lat={hikeDetails.start_lat}
                 lng={hikeDetails.start_lng}/>
               <TextHikeDetailsContainer hikeData={hikeDetails}/>
+              <Button className='yellowButton hoverGrey alignLeft' onClick={this.toggleEditForm}>Edit hike details</Button>
               <Button onClick={this.closeModal}>close</Button>
           </div>
         }
@@ -187,8 +186,8 @@ class HikeDetailsModal extends BaseModal {
       style={customStyles}
       contentLabel="Example Modal"
     >
-      <h2 ref={subtitle => this.subtitle = subtitle}>{this.state.load}</h2>
-      <Button onClick={this.closeModal}>close</Button>
+      <h2>loading ...</h2>
+      <button onClick={this.closeModal}>close</button>
     </Modal>
   </div>
 ); // return
