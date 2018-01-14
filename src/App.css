@@ -15,6 +15,10 @@ medium blue: #9bbff4
 /******************************/
 /****** General *********/
 /******************************/
+.alignLeft {
+  text-align: left;
+}
+
 .greenUnderline {
   border-bottom: solid #bbdaa4;
 }
@@ -36,6 +40,11 @@ medium blue: #9bbff4
 
 .blueButton {
   background-color: #a7cdf2;
+  color: black;
+}
+
+.yellowButton {
+  background-color: #F9E581;
   color: black;
 }
 
