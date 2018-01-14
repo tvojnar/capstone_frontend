@@ -199,7 +199,7 @@ render() {
       { latBox }
       { lngBox }
 
-      <Button className='setPinButton' type='submit'>Set hike location</Button>
+      <Button className='setPinButton hoverGrey' type='submit'>Set hike location</Button>
 
     </form>
   ) // return

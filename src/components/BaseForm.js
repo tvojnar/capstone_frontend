@@ -356,7 +356,7 @@ render() {
       </Column>
     </Row>
     {errorOnSubmitMessage}
-    <Button className='greenButton' type='submit'>Submit</Button>
+    <Button className='greenButton hoverGrey' type='submit'>Submit</Button>
     </form>
     </div>
   ) // return

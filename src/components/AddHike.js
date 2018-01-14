@@ -47,7 +47,7 @@ export class AddHike extends Component {
     return (
       <div>
         { modal }
-        <Button className='greenButton' onClick={this.handleClick}>AddHike</Button>
+        <Button className='greenButton hoverGrey' onClick={this.handleClick}>AddHike</Button>
       </div>
     )
   }

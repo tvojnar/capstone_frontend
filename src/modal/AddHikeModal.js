@@ -67,7 +67,7 @@ class AddHikeModal extends BaseModal {
             whichForm={'add'}/>
           <Row>
             <Column large={12}>
-              <Button color={Colors.ALERT} onClick={this.props.hideModalFromAddHike}>Cancle</Button>
+              <Button className='redButton hoverGrey'onClick={this.props.hideModalFromAddHike}>Cancle</Button>
             </Column>
           </Row>
         </Modal>

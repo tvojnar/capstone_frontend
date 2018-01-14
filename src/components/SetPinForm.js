@@ -131,7 +131,7 @@ render() {
 
       { nameBox }
 
-      <Button className='setPinButton' type='submit'>Find hike</Button>
+      <Button className='setPinButton hoverGrey' type='submit'>Find hike</Button>
 
     </form>
   ) // return

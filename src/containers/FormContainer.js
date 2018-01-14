@@ -187,14 +187,14 @@ class FormContainer extends Component {
     if (this.state.manualEnter) {
       console.log('in IF for setting detailsToSetPin and is it: ');
       console.log(detailsToSetPin);
-      button= <Link size={Sizes.SMALL} className='toggleManual' onClick={this.setManualEnter}>Use hike name to set pin</Link>
+      button= <Link size={Sizes.TINY} className='toggleManual hoverGrey' onClick={this.setManualEnter}>Use hike name to set pin</Link>
       pinForm = <LatLngSetPinForm
       setLatLng={this.setLatLng}
       detailsToSetPin={detailsToSetPin}
       />
     } else {
       message = <p>Having trouble finding your hike? Click below to manually enter your hikes location</p>
-      button= <Link size={Sizes.SMALL} className='toggleManual' onClick={this.setManualEnter}>Set latitude and longitude manually</Link>
+      button= <Link size={Sizes.SMALL} className='toggleManual hoverGrey' onClick={this.setManualEnter}>Set latitude and longitude manually</Link>
       pinForm= <SetPinForm
       setName={this.setName}
       detailsToSetPin={detailsToSetPin}

@@ -7,7 +7,7 @@ import { HikeAttributes } from '../components/HikeAttributes';
 import MapHikeDetails from '../components/MapHikeDetails';
 import FormContainer from '../containers/FormContainer';
 import '../foundation.css';
-import {Button, Colors, Row, Colum, Alignments} from 'react-foundation';
+import {Button, Colors, Row, Column, Alignments} from 'react-foundation';
 import '../App.css';
 
 // sets the portion of the app that should be hidden
@@ -131,7 +131,7 @@ class HikeDetailsModal extends BaseModal {
                 fetchHikeDetails={this.fetchHikeDetailsFromApi}
                 hideEditForm={this.toggleEditForm}
                 whichForm={'edit'}/>
-              <button onClick={this.toggleEditForm}>Cancle</button>
+              <button className='hoverGrey redBUtton' onClick={this.toggleEditForm}>Cancle</button>
           </div>
         }
         else {
@@ -139,14 +139,18 @@ class HikeDetailsModal extends BaseModal {
             whatToRender =
             <div>
               <h2 className='greenUnderline'>{hikeDetails.name}</h2>
-              <HikeAttributes hikeData={hikeDetails}/>
+              <div className='topMargin'>
+                <HikeAttributes hikeData={hikeDetails}/>
+              </div>
               <MapHikeDetails
                 onRef={ref => (this.child = ref)}
                 lat={hikeDetails.start_lat}
                 lng={hikeDetails.start_lng}/>
+              <div>
               <TextHikeDetailsContainer hikeData={hikeDetails}/>
-              <Button className='yellowButton hoverGrey alignLeft' onClick={this.toggleEditForm}>Edit hike details</Button>
-              <Button onClick={this.closeModal}>close</Button>
+              </div>
+              <Button className='yellowButton hoverGrey alignLeft rightMargin' onClick={this.toggleEditForm}>Edit hike details</Button>
+              <Button className='hoverGrey redButton' onClick={this.closeModal}>close</Button>
           </div>
         }
 

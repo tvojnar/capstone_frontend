@@ -15,6 +15,17 @@ medium blue: #9bbff4
 /******************************/
 /****** General *********/
 /******************************/
+
+.blueOutline {
+  border: solid #a7cdf2;
+}
+
+.rightMargin {
+  margin-right: 1%;
+}
+.topMargin {
+  margin-top: 3%;
+}
 .alignLeft {
   text-align: left;
 }
