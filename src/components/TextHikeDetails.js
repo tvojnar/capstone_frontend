@@ -7,9 +7,8 @@ export const TextHikeDetails = (props) => {
 
   return(
     <div>
-      <h3>{data.title}</h3>
+      <h3 className='blueText'>{data.title}</h3>
       <p>{data.text}</p>
-      <button>Edit {data.title}</button>
     </div>
   )
 } //

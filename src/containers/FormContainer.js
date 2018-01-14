@@ -6,7 +6,7 @@ import { MapAddHike } from '../components/MapAddHike';
 import SetPinForm from '../components/SetPinForm';
 import LatLngSetPinForm from '../components/LatLngSetPinForm';
 import '../foundation.css';
-import {Button, Colors, Row, Column} from 'react-foundation';
+import {Button, Row, Column, Callout, Colors} from 'react-foundation';
 import '../App.css';
 
 
@@ -202,7 +202,10 @@ class FormContainer extends Component {
     // if there was an error in the api call to geocode (either the api call failed or no results were returned) then render a <p> with an error message for the user
     let displayErrorMessage;
     if (this.state.error) {
-      displayErrorMessage = <h5>{this.state.errorMessage}</h5>
+      displayErrorMessage = <Callout color={Colors.ALERT}>
+      <h5>Error:</h5>
+      <p>{this.state.errorMessage}</p>
+      </Callout>
     }
 
     // use this.props.whichForm to decide if Form or EditForm should be rendered
