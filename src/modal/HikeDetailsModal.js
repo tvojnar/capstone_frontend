@@ -47,7 +47,6 @@ class HikeDetailsModal extends BaseModal {
     this.state = {
       modalIsOpen: true,
       hike: {},
-      load: 'loading...'
     }
 
     this.toggleEditForm = this.toggleEditForm.bind(this);
@@ -56,7 +55,7 @@ class HikeDetailsModal extends BaseModal {
 
   afterOpenModal() {
     // references are now sync'd and can be accessed.
-    this.subtitle.style.color = 'green';
+    // this.subtitle.style.color = 'green';
   }
 
 
@@ -106,10 +105,14 @@ class HikeDetailsModal extends BaseModal {
 
   render() {
 
+
       // IF THE API HAS RETURNED THE DATA FOR THE HIKES DETAILS
       if (Object.keys(this.state.hike).length !== 0) {
         // set hikeDetails to the data object with the hike details that was returned from the API
         const hikeDetails = this.state.hike;
+
+        console.log('in HikeDetailsModal render and hikeDetials is: ');
+        console.log(hikeDetails);
 
 
         let whatToRender;
@@ -119,12 +122,10 @@ class HikeDetailsModal extends BaseModal {
 
           // pass hikeState to FormContainer so that it can be passed to EditForm, hikeState will be added to EditForms state via the ComponentWillMount function in BaseForm so that the current details of the hike can be shown in the EditForm
           // passing hikeState to FormContainer will trigger FormContainer to pass detailsToSetPin to SetPinForm and LatLngSetPinForm so that the name and pin for the hike will be shown in them and on the SetPinMap
-          console.log('in HikeDetailsModal render and hikeDetials is: ');
-          console.log(hikeDetails);
 
           whatToRender =
             <div>
-              <h2 ref={subtitle => this.subtitle = subtitle}>{hikeDetails.name}</h2>
+              <h2 className='greenUnderline'>{hikeDetails.name}</h2>
               <h4>Edit hike details: </h4>
               <FormContainer
                 hikeState={hikeDetails}
@@ -139,8 +140,7 @@ class HikeDetailsModal extends BaseModal {
           // else the modal will show all of the hike's details
             whatToRender =
             <div>
-              <h2 ref={subtitle => this.subtitle = subtitle}>{hikeDetails.name}</h2>
-              <button onClick={this.toggleEditForm}>Edit hike details</button>
+              <h2 className='greenUnderline'>{hikeDetails.name}</h2>
               <HikeAttributes hikeData={hikeDetails}/>
               <MapHikeDetails
                 onRef={ref => (this.child = ref)}
