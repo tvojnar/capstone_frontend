@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
 import AddHikeModal from '../modal/AddHikeModal';
+import {Button, Colors} from 'react-foundation';
+import '../App.css';
+import '../foundation.css';
+
+
 
 // To start off AddHike only renders the 'Add hike' button
 // when the 'add hike button is clicked it changes the showModal state to true, which triggers {modal} to be rendered
@@ -42,7 +47,7 @@ export class AddHike extends Component {
     return (
       <div>
         { modal }
-        <button className='button' onClick={this.handleClick}>AddHike</button>
+        <Button className='greenButton hoverGrey' onClick={this.handleClick}>AddHike</Button>
       </div>
     )
   }

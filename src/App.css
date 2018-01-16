@@ -1,3 +1,72 @@
+/************************/
+/****** colors **********/
+/************************/
+/*
+bright blue #20C5EF
+red #E85252
+light green #B0EDA0
+yellow: #F9F581
+light orange yellow: F9E581
+water blue: #a7cdf2
+medium blue: #9bbff4
+*/
+
+
+/******************************/
+/****** General *********/
+/******************************/
+
+.blueOutline {
+  border: solid #a7cdf2;
+}
+
+.rightMargin {
+  margin-right: 1%;
+}
+.topMargin {
+  margin-top: 3%;
+}
+.alignLeft {
+  text-align: left;
+}
+
+.greenUnderline {
+  border-bottom: solid #bbdaa4;
+}
+
+.blueText {
+  color: #a7cdf2;
+}
+
+.greenText {
+  color: #bbdaa4;
+}
+
+#b:hover {
+  background-color: red;
+}
+.redButton {
+  background-color: #E85252;
+}
+
+.blueButton {
+  background-color: #a7cdf2;
+  color: black;
+}
+
+.yellowButton {
+  background-color: #F9E581;
+  color: black;
+}
+
+.hoverGrey:hover {
+  background-color: gray;
+}
+.greenButton {
+  background-color: #bbdaa4;
+  color: black;
+}
+
 .App {
   text-align: center;
 }
@@ -34,3 +103,72 @@
 .error-placeholder {
   color: blue;
 }
+
+/******************************/
+/****** Home page *********/
+/******************************/
+header {
+  height: 30%;
+  width: 100%;
+  /* background-color: #bbdaa4; */
+  border-bottom:  solid #bbdaa4;
+  color: #9bbff4;
+
+  /* background-color: blue; */
+}
+
+body {
+  /* background-color: #FEFAF1; */
+}
+
+/******************************/
+/****** FormContainer *********/
+/******************************/
+
+.toggleManual {
+  background-color: #F9E581;
+  color: black;
+}
+
+
+/******************************/
+/****** BaseForm *********/
+/******************************/
+.hikeAttributes {
+  margin-top: 5%;
+}
+/*
+.attributeLabel input {
+  float: left;
+}
+
+.attributeLabel {
+  margin-left: 30px;
+  display: block;
+} */
+
+/******************************/
+/**** Set pin forms   *********/
+/******************************/
+
+.setPinButton {
+  background-color: #20C5EF;
+  color: black;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/******************************/
+/**** Form/EditForm   *********/
+/******************************/

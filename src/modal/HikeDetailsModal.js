@@ -6,6 +6,9 @@ import { TextHikeDetailsContainer } from '../containers/TextHikeDetailsContainer
 import { HikeAttributes } from '../components/HikeAttributes';
 import MapHikeDetails from '../components/MapHikeDetails';
 import FormContainer from '../containers/FormContainer';
+import '../foundation.css';
+import {Button, Colors, Row, Column, Alignments} from 'react-foundation';
+import '../App.css';
 
 // sets the portion of the app that should be hidden
 Modal.setAppElement('#root');
@@ -44,7 +47,6 @@ class HikeDetailsModal extends BaseModal {
     this.state = {
       modalIsOpen: true,
       hike: {},
-      load: 'loading...'
     }
 
     this.toggleEditForm = this.toggleEditForm.bind(this);
@@ -53,7 +55,7 @@ class HikeDetailsModal extends BaseModal {
 
   afterOpenModal() {
     // references are now sync'd and can be accessed.
-    this.subtitle.style.color = 'green';
+    // this.subtitle.style.color = 'green';
   }
 
 
@@ -121,7 +123,7 @@ class HikeDetailsModal extends BaseModal {
 
           whatToRender =
             <div>
-              <h2 ref={subtitle => this.subtitle = subtitle}>{hikeDetails.name}</h2>
+              <h2 className='greenUnderline'>{hikeDetails.name}</h2>
               <h4>Edit hike details: </h4>
               <FormContainer
                 hikeState={hikeDetails}
@@ -129,22 +131,26 @@ class HikeDetailsModal extends BaseModal {
                 fetchHikeDetails={this.fetchHikeDetailsFromApi}
                 hideEditForm={this.toggleEditForm}
                 whichForm={'edit'}/>
-              <button onClick={this.toggleEditForm}>Cancle</button>
+              <button className='hoverGrey redBUtton' onClick={this.toggleEditForm}>Cancle</button>
           </div>
         }
         else {
           // else the modal will show all of the hike's details
             whatToRender =
             <div>
-              <h2 ref={subtitle => this.subtitle = subtitle}>{hikeDetails.name}</h2>
-              <button onClick={this.toggleEditForm}>Edit hike details</button>
-              <HikeAttributes hikeData={hikeDetails}/>
+              <h2 className='greenUnderline'>{hikeDetails.name}</h2>
+              <div className='topMargin'>
+                <HikeAttributes hikeData={hikeDetails}/>
+              </div>
               <MapHikeDetails
                 onRef={ref => (this.child = ref)}
                 lat={hikeDetails.start_lat}
                 lng={hikeDetails.start_lng}/>
+              <div>
               <TextHikeDetailsContainer hikeData={hikeDetails}/>
-              <button onClick={this.closeModal}>close</button>
+              </div>
+              <Button className='yellowButton hoverGrey alignLeft rightMargin' onClick={this.toggleEditForm}>Edit hike details</Button>
+              <Button className='hoverGrey redButton' onClick={this.closeModal}>close</Button>
           </div>
         }
 
@@ -184,7 +190,7 @@ class HikeDetailsModal extends BaseModal {
       style={customStyles}
       contentLabel="Example Modal"
     >
-      <h2 ref={subtitle => this.subtitle = subtitle}>{this.state.load}</h2>
+      <h2>loading ...</h2>
       <button onClick={this.closeModal}>close</button>
     </Modal>
   </div>

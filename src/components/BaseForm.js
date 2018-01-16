@@ -1,5 +1,9 @@
 import * as React from 'react';
+import '../foundation.css';
+import {Button, Colors, Row, Column, Callout} from 'react-foundation';
+import '../App.css';
 // import $ from 'jquery';
+
 
 // import modals to show sucess or error message after post request to add a new hike
 
@@ -196,7 +200,9 @@ render() {
 
   let errorOnSubmitMessage;
   if (this.state.submitError) {
-    errorOnSubmitMessage = <p>{this.state.submitErrorMessage}</p>
+    errorOnSubmitMessage = <Callout color={Colors.ALERT}>
+    <p>{this.state.submitErrorMessage}</p>
+    </Callout>
 
   }
   // render the form
@@ -204,95 +210,153 @@ render() {
   return(
     <div>
     {modal}
-    <form onSubmit={this.onSubmit}>
 
+    <form onSubmit={this.onSubmit}>
+    <div class='hikeAttributes'>
+    <Row upOnSmall={1} upOnMedium={2} upOnLarge={6}>
+    <Column isColumn>
     <label>
     Region: <Select valueLink={ linked.region }>{regionOptions}</Select>
     </label>
+    </Column>
 
-    <label>
+    <Column isColumn>
+    <label className='attributeLabel'>
     Start date: <Input type="date" valueLink={ linked.start_date } />
     </label>
+    </Column>
 
-    <label>
+    <Column isColumn>
+    <label className='attributeLabel'>
     End date: <Input type="date" valueLink={ linked.end_date } />
     </label>
+    </Column>
 
-    <label>
+    <Column isColumn>
+    <label className='attributeLabel'>
     Miles: <Input type="number" valueLink={ linked.miles } />
     </label>
+    </Column>
 
-    <label>
+    <Column isColumn>
+    <label className='attributeLabel'>
     Elevation gain: <Input type="number" valueLink={ linked.elevation_gain } />
     </label>
+    </Column>
 
-    <label>
+    <Column isColumn>
+    <label className='attributeLabel'>
     Max elevation: <Input type="number" valueLink={ linked.max_elevation } />
     </label>
+    </Column>
+    </Row>
+    </div>
 
-    <label>
-    Description: <Input valueLink={ linked.description } />
+    <label className='attributeLabel'>
+    Description: <Input style={{ minHeight: 40, minWidth: '100%' }} valueLink={ linked.description } />
     </label>
 
-    <label>
-    Notes: <Input valueLink={ linked.notes } />
-    </label>
 
     <label>
-    Lakes: <Input type="checkbox" valueLink={ linked.lakes } />
+    Notes: <Input style={{ minHeight: 40, minWidth: '100%' }} valueLink={ linked.notes } />
     </label>
 
-    <label>
-    Coast: <Input type="checkbox" valueLink={ linked.coast } />
-    </label>
 
-    <label>
-    Rivers: <Input type="checkbox" valueLink={ linked.rivers } />
-    </label>
+    <Row upOnSmall={2} upOnMedium={4} upOnLarge={6}>
+      <Column isColumn>
 
-    <label>
-    Waterfalls: <Input type="checkbox" valueLink={ linked.waterfalls } />
-    </label>
+        <label>
+        <Input type="checkbox" valueLink={ linked.lakes } /> Lakes
+        </label>
 
-    <label>
-    Fall foliage: <Input type="checkbox" valueLink={ linked.fall_foliage } />
-    </label>
+      </Column>
+      <Column isColumn>
 
-    <label>
-    Wildflowers: <Input type="checkbox" valueLink={ linked.wildflowers } />
-    </label>
+        <label>
+        <Input type="checkbox" valueLink={ linked.coast } /> Coast
+        </label>
 
-    <label>
-    Meadows: <Input type="checkbox" valueLink={ linked.meadows} />
-    </label>
+      </Column>
+      <Column isColumn>
 
-    <label>
-    Old-growth: <Input type="checkbox" valueLink={ linked.old_growth } />
-    </label>
+        <label>
+        <Input type="checkbox" valueLink={ linked.rivers } /> Rivers
+        </label>
 
-    <label>
-    Mountain views: <Input type="checkbox" valueLink={ linked.mountain_views } />
-    </label>
+      </Column>
+      <Column isColumn>
 
-    <label>
-    Summits: <Input type="checkbox" valueLink={ linked.summits } />
-    </label>
+        <label>
+        <Input type="checkbox" valueLink={ linked.waterfalls } /> Waterfalls
+        </label>
 
-    <label>
-    Established campsites: <Input type="checkbox" valueLink={ linked.established_campsites } />
-    </label>
+      </Column>
+      <Column isColumn>
 
-    <label>
-    Day hike: <Input type="checkbox" valueLink={ linked.day_hike } />
-    </label>
+        <label>
+        <Input type="checkbox" valueLink={ linked.fall_foliage } />Fall foliage
+        </label>
 
-    <label>
-    Overnight: <Input type="checkbox" valueLink={ linked.overnight } />
-    </label>
+      </Column>
+      <Column isColumn>
 
+        <label>
+        <Input type="checkbox" valueLink={ linked.wildflowers } /> Wildflowers
+        </label>
+
+      </Column>
+      <Column isColumn>
+
+        <label>
+        <Input type="checkbox" valueLink={ linked.meadows} />Meadows
+        </label>
+
+      </Column>
+      <Column isColumn>
+
+        <label>
+        <Input type="checkbox" valueLink={ linked.old_growth } />Old-growth
+        </label>
+
+      </Column>
+      <Column isColumn>
+
+        <label>
+        <Input type="checkbox" valueLink={ linked.mountain_views } /> Mountain views
+        </label>
+
+      </Column>
+      <Column isColumn>
+
+        <label>
+        <Input type="checkbox" valueLink={ linked.summits } /> Summits
+        </label>
+
+      </Column>
+      <Column isColumn>
+
+        <label>
+        <Input type="checkbox" valueLink={ linked.established_campsites } /> Campsites
+        </label>
+
+      </Column>
+      <Column isColumn>
+
+        <label>
+        <Input type="checkbox" valueLink={ linked.day_hike } /> Day hike
+        </label>
+
+      </Column>
+      <Column isColumn>
+
+        <label>
+        <Input type="checkbox" valueLink={ linked.overnight } />  Overnight
+        </label>
+
+      </Column>
+    </Row>
     {errorOnSubmitMessage}
-    <button type='submit'>Submit</button>
-
+    <Button className='greenButton hoverGrey' type='submit'>Submit</Button>
     </form>
     </div>
   ) // return

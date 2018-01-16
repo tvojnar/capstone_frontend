@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Map from './components/Map';
 import { AddHike } from './components/AddHike';
 import './App.css';
+// import Foundation from 'react-foundation';
 
 
 class App extends Component {

@@ -5,6 +5,9 @@ import EditForm from '../components/EditForm';
 import { MapAddHike } from '../components/MapAddHike';
 import SetPinForm from '../components/SetPinForm';
 import LatLngSetPinForm from '../components/LatLngSetPinForm';
+import '../foundation.css';
+import {Button, Row, Column, Callout, Colors, Link, Sizes} from 'react-foundation';
+import '../App.css';
 
 
 // FormContainer is rendered by AddHikeModal and HikeDetailsModal
@@ -36,16 +39,16 @@ class FormContainer extends Component {
   // if we are editing the hike then we want to change nameEntered to true so that the pin for the hike will be shown in the edit form
   componentWillMount() {
     if (this.props.whichForm === 'edit') {
-          console.log('in IF of CWM in FormContainer:');
-          console.log(this.props.hikeState.start_lat);
-          console.log(this.props.hikeState.start_lng);
+      console.log('in IF of CWM in FormContainer:');
+      console.log(this.props.hikeState.start_lat);
+      console.log(this.props.hikeState.start_lng);
 
-          this.setState({
-            nameEntered: true,
-            hikeName: this.props.hikeState.name,
-            lat: this.props.hikeState.start_lat,
-            lng: this.props.hikeState.start_lng,
-          })
+      this.setState({
+        nameEntered: true,
+        hikeName: this.props.hikeState.name,
+        lat: this.props.hikeState.start_lat,
+        lng: this.props.hikeState.start_lng,
+      })
     }
   } // conponentWillMount
 
@@ -143,7 +146,7 @@ class FormContainer extends Component {
           console.log('in error of geocode');
           this.setState({
             error: true,
-            errorMessage: 'No hike was found for that name. Try adding more details, like a state or county, or click the button below to manually enter the starting lat and lng for your hike.',
+            errorMessage: 'No hike was found for that name. Try adding more details, like a state or county, or click the button below to manually enter the starting latitude and longitude for your hike.',
             nameEntered: false,
           })
         } // if/else
@@ -180,26 +183,31 @@ class FormContainer extends Component {
     // if this.manualEnter is false render the LatLngSetPinForm so that the user can manually enter a lat and lng to set the pin for the hike
     let button;
     let pinForm;
+    let message;
     if (this.state.manualEnter) {
       console.log('in IF for setting detailsToSetPin and is it: ');
       console.log(detailsToSetPin);
-      button= <button onClick={this.setManualEnter}>Use name to set pin</button>
+      button= <Link size={Sizes.TINY} className='toggleManual hoverGrey' onClick={this.setManualEnter}>Use hike name to set pin</Link>
       pinForm = <LatLngSetPinForm
-                      setLatLng={this.setLatLng}
-                      detailsToSetPin={detailsToSetPin}
-                      />
+      setLatLng={this.setLatLng}
+      detailsToSetPin={detailsToSetPin}
+      />
     } else {
-      button= <button onClick={this.setManualEnter}>Set lat and lng manually</button>
+      message = <p>Having trouble finding your hike? Click below to manually enter your hikes location</p>
+      button= <Link size={Sizes.SMALL} className='toggleManual hoverGrey' onClick={this.setManualEnter}>Set latitude and longitude manually</Link>
       pinForm= <SetPinForm
-                      setName={this.setName}
-                      detailsToSetPin={detailsToSetPin}
-                      />
+      setName={this.setName}
+      detailsToSetPin={detailsToSetPin}
+      />
     }
 
     // if there was an error in the api call to geocode (either the api call failed or no results were returned) then render a <p> with an error message for the user
     let displayErrorMessage;
     if (this.state.error) {
-      displayErrorMessage = <h5>{this.state.errorMessage}</h5>
+      displayErrorMessage = <Callout color={Colors.ALERT}>
+      <h5>Error:</h5>
+      <p>{this.state.errorMessage}</p>
+      </Callout>
     }
 
     // use this.props.whichForm to decide if Form or EditForm should be rendered
@@ -238,14 +246,26 @@ class FormContainer extends Component {
 
     return (
       <div>
+      <h2> Add a hike </h2>
+      <Row className='setPinDiv row'>
+      <Column small={12} medium={4} large={3}  >
       {displayErrorMessage}
       {pinForm}
+      {message}
       {button}
-      <MapAddHike
+      </Column>
+      <Column small={12} medium={8} large={9}>
+        <MapAddHike
         lat={this.state.lat}
         lng={this.state.lng}
         nameEntered={this.state.nameEntered}/>
-      { formToShow }
+      </Column>
+      </Row>
+      <Row>
+        <Column small={12}>
+          { formToShow }
+        </Column>
+      </Row>
       </div>
     );
   }

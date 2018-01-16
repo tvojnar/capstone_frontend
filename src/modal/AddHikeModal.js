@@ -2,17 +2,34 @@ import React from 'react';
 import Modal from 'react-modal';
 import BaseModal from './BaseModal';
 import FormContainer from '../containers/FormContainer'
+import '../foundation.css';
+import {Button, Colors, Row, Column} from 'react-foundation';
 
 // sets the portion of the app that should be hidden
 Modal.setAppElement('#root');
 const customStyles = {
+  overlay : {
+    position          : 'fixed',
+    top               : 0,
+    left              : 0,
+    right             : 0,
+    bottom            : 0,
+    backgroundColor   : 'rgba(255, 255, 255, 0.75)'
+  },
   content : {
-    top                   : '50%',
-    left                  : '50%',
-    right                 : 'auto',
-    bottom                : 'auto',
-    marginRight           : '-50%',
-    transform             : 'translate(-50%, -50%)'
+    position                   : 'absolute',
+    top                        : '40px',
+    left                       : '40px',
+    right                      : '40px',
+    bottom                     : '40px',
+    border                     : '1px solid #ccc',
+    background                 : '#fff',
+    overflow                   : 'auto',
+    WebkitOverflowScrolling    : 'touch',
+    borderRadius               : '4px',
+    outline                    : 'none',
+    padding                    : '20px'
+
   }
 };
 
@@ -48,7 +65,11 @@ class AddHikeModal extends BaseModal {
             fetchHikes={this.props.fetchHikes}
             hideModalFromAddHike={this.props.hideModalFromAddHike}
             whichForm={'add'}/>
-          <button onClick={this.props.hideModalFromAddHike}>Cancle</button>
+          <Row>
+            <Column large={12}>
+              <Button className='redButton hoverGrey'onClick={this.props.hideModalFromAddHike}>Cancle</Button>
+            </Column>
+          </Row>
         </Modal>
       </div>
     );
