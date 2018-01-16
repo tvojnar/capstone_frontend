@@ -11,6 +11,22 @@ water blue: #a7cdf2
 medium blue: #9bbff4
 */
 
+/******************************/
+/****** Map *********/
+/******************************/
+.map-responsive{
+    overflow:hidden;
+    padding-bottom:56.25%;
+    position:relative;
+    height:0;
+}
+.map-responsive-element iframe{
+    left:0;
+    top:0;
+    height:100%;
+    width:100%;
+    position:absolute;
+}
 
 /******************************/
 /****** General *********/
