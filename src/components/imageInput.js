@@ -22,6 +22,19 @@ export class ImageInput extends Component {
     e.preventDefault();
     console.log('in handle submit');
     console.log(this.state.file);
+    console.log(this.state.file.name);
+
+    let file = this.state.file
+
+    const url = '/api/images'
+
+    $.getJSON(url, {filename: file.name},
+      function(data) {
+        console.log('we got the url!');
+        console.log(data['url']);
+      }
+    ); // getJSON
+
   //   let form = this;
   //   let field = $(this).find('input[name=image]');
   //   let file = field[0].files[0];
