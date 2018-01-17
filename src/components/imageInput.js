@@ -1,3 +1,5 @@
+
+
 import $ from 'jquery'
 import React, { Component } from 'react'
 
@@ -16,18 +18,21 @@ export class ImageInput extends Component {
 // on change set the file selected by the user to this.state.file
   handleChange(e) {
     console.log('in handleChange');
+    // const cleanFilename = filename.toLowerCase().replace(/[^a-z0-9/g,""]/);
     this.setState({file:e.target.files[0]})
   }
 
 
   handleSubmit(e) {
+    // resources: https://stuff-things.net/2016/03/16/uploading-from-rails-to-aws-s3-with-presigned-urls/
     e.preventDefault();
     console.log('in handle submit');
     console.log(this.state.file);
     console.log(this.state.file.name);
 
     let file = this.state.file
-    const url = '/api/images'
+    // clean the filename to remove any characters that S3 doesn't like
+    let cleanFileName = file.name.toLowerCase().replace(/[^a-z0-9/g,""]/);
 
     const upload_image = function(url) {
 
@@ -36,6 +41,9 @@ export class ImageInput extends Component {
         console.log(file.type);
         console.log(url);
 
+        // const proxyurl = "https://cors-anywhere.herokuapp.com/";
+        // const finalUrl = proxyurl + url
+
 
   // THIRD: upload the image file to S3 using the presigned url
         $.ajax({
@@ -43,7 +51,8 @@ export class ImageInput extends Component {
             url : url,
             data : file,
             processData: false,  // tell jQuery not to convert to form data
-            contentType: file.type,
+            // headers: { 'Content-Type': file.type, 'x-amz-acl': 'public-read' },
+              headers: { 'Content-Type': file.type},
             success: function(json) { console.log('Upload complete!') },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
                 console.log('Upload error: ' + XMLHttpRequest);
@@ -54,7 +63,9 @@ export class ImageInput extends Component {
     }
 
     // FIRST:  make a call to the rails API (Images#index) to get a presignedUrl from S3
-    $.getJSON(url, {filename: file.name},
+    const apiUrl = '/api/images'
+
+    $.getJSON(apiUrl, {filename: file.name, content_type: file.type},
       function(data) {
         console.log('we got the url!');
         console.log(data['url']);
