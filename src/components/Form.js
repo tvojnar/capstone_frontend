@@ -36,7 +36,7 @@ class Form extends BaseForm {
     this.setState(this.props.initialState);
 
     // construct the url to submit the post request to
-    const url = `/api/hikes`
+    const url = 'http://capstone-env.ejfznpwqha.us-west-2.elasticbeanstalk.com/api/hikes'
 
     // make the API post request to the API
     $.ajax({
