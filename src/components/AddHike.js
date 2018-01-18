@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import AddHikeModal from '../modal/AddHikeModal';
-import {Button, Colors} from 'react-foundation';
+import {Button} from 'react-foundation';
 import '../App.css';
 import '../foundation.css';
 

@@ -3,7 +3,7 @@ import Modal from 'react-modal';
 import BaseModal from './BaseModal';
 import FormContainer from '../containers/FormContainer'
 import '../foundation.css';
-import {Button, Colors, Row, Column} from 'react-foundation';
+import {Button, Row, Column} from 'react-foundation';
 
 // sets the portion of the app that should be hidden
 Modal.setAppElement('#root');

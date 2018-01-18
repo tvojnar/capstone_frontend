@@ -175,14 +175,14 @@ render() {
   const linked = this.linkAll(); // wrap all state members in links
 
   // link the name, lat, and lng input feilds in this way so that I can show the user error messages in the form when they try to submit the form without filling out a name, lat, or lng.
-  const nameLink = Link.state(this, 'name'),
-  nameIsValid = nameLink.value
+  const nameLink = Link.state(this, 'name')
 
-  const latLink = Link.state(this, 'start_lat'),
-  latIsValid = latLink.value
 
-  const lngLink = Link.state(this, 'start_lng'),
-  lngIsValid = lngLink.value
+  const latLink = Link.state(this, 'start_lat')
+
+
+  const lngLink = Link.state(this, 'start_lng')
+
 
 
   // define these so that I can use them in the if/else statements below for the name, lat, and lng input fields

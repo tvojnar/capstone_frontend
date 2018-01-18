@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { InfoWindow } from 'react-google-maps';
 import HikeDetailsModal from '../modal/HikeDetailsModal';
 import '../foundation.css';
-import {Button, Colors, Row, Column} from 'react-foundation';
+import {Button} from 'react-foundation';
 import '../App.css';
 
 // component to display an info window when a hike pin is clicked on

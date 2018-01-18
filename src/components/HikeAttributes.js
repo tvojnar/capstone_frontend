@@ -4,7 +4,7 @@ import { HikeLength } from './HikeLength';
 import { HikeElevation } from './HikeElevation';
 import { HikeFeatures } from './HikeFeatures';
 import '../foundation.css';
-import {Button, Colors, Row, Column, Alignments, Menu} from 'react-foundation';
+import {Row, Column, Alignments} from 'react-foundation';
 import '../App.css';
 
 

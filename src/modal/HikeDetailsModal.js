@@ -7,7 +7,7 @@ import { HikeAttributes } from '../components/HikeAttributes';
 import MapHikeDetails from '../components/MapHikeDetails';
 import FormContainer from '../containers/FormContainer';
 import '../foundation.css';
-import {Button, Colors, Row, Column, Alignments} from 'react-foundation';
+import {Button} from 'react-foundation';
 import '../App.css';
 
 // sets the portion of the app that should be hidden

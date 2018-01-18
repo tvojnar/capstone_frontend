@@ -6,7 +6,7 @@ import { MapAddHike } from '../components/MapAddHike';
 import SetPinForm from '../components/SetPinForm';
 import LatLngSetPinForm from '../components/LatLngSetPinForm';
 import '../foundation.css';
-import {Button, Row, Column, Callout, Colors, Link, Sizes} from 'react-foundation';
+import {Row, Column, Callout, Colors, Link, Sizes} from 'react-foundation';
 import '../App.css';
 
 
