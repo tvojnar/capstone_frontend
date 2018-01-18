@@ -17,9 +17,7 @@ class EditForm extends BaseForm {
 
   submitForm() {
     console.log('in submit editForm');
-    console.log(this.state.id);
-    // construct the url to submit the patch request to
-    const url = `/api/hikes/${this.state.id}`
+
 
     // construct the data to send to the API
     const hikeParams = {
@@ -31,6 +29,10 @@ class EditForm extends BaseForm {
       this.props.hideEditForm();
     }
 
+    console.log(this.state.id);
+    // construct the url to submit the patch request to
+    const baseUrl = 'http://capstone-env.ejfznpwqha.us-west-2.elasticbeanstalk.com/api/hikes/'
+    const url = baseUrl + `${this.state.id}`
 
     // make the API patch request to the API
     $.ajax({
