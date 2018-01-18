@@ -52,7 +52,7 @@ export class ImageInput extends Component {
             data : file,
             processData: false,  // tell jQuery not to convert to form data
             // headers: { 'Content-Type': file.type, 'x-amz-acl': 'public-read' },
-              headers: { 'Content-Type': file.type},
+            headers: { 'Content-Type': file.type},
             success: function(json) { console.log('Upload complete!') },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
                 console.log('Upload error: ' + XMLHttpRequest);
