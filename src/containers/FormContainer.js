@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import $ from 'jquery';
 import Form from '../components/Form';
 import EditForm from '../components/EditForm';
+import {ImageInput} from '../components/imageInput';
 import { MapAddHike } from '../components/MapAddHike';
 import SetPinForm from '../components/SetPinForm';
 import LatLngSetPinForm from '../components/LatLngSetPinForm';
@@ -247,6 +248,7 @@ class FormContainer extends Component {
     return (
       <div>
       <h2> Add a hike </h2>
+      <ImageInput />
       <Row className='setPinDiv row'>
       <Column small={12} medium={4} large={3}  >
       {displayErrorMessage}
