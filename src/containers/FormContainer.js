@@ -267,6 +267,7 @@ class FormContainer extends Component {
           { formToShow }
         </Column>
       </Row>
+      <p> <strong>Upload images for the hike:</strong></p>
       <ImageInput />
       </div>
     );
