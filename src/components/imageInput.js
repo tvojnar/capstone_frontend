@@ -10,6 +10,7 @@ export class ImageInput extends Component {
     this.state = {
       file:null,
       urlsAndFiles: [],
+      imageNames: [],
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -19,8 +20,12 @@ export class ImageInput extends Component {
 // on change set the file selected by the user to this.state.file
   handleChange(e) {
     console.log('in handleChange');
+    console.log(e.target.files[0].name);
     // const cleanFilename = filename.toLowerCase().replace(/[^a-z0-9/g,""]/);
     this.setState({file:e.target.files[0]})
+    this.setState({ imageNames: [...this.state.imageNames, ...e.target.files[0].name ] })
+
+
   }
 
 
@@ -71,6 +76,7 @@ export class ImageInput extends Component {
       console.log(this.state.urlsAndFiles);
     } // add_file_and_url_to_state
 
+
     // FIRST:  make a call to the rails API (Images#index) to get a presignedUrl from S3
     const apiUrl = '/api/images'
 
@@ -88,7 +94,7 @@ render() {
   return (
   <form className="upload-form">
   <input onChange={this.handleChange} id="image" type="file" name="image" accept="image/x-png, image/gif, image/jpeg" />
-
+  <ImageNameContainer imageInfo={this.state.imageNames} />
   <button onClick={this.handleSubmit} type="submit">Go!</button>
   </form>
 )

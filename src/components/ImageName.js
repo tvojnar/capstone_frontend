@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
 export const ImageName = (props) => {
-    return
+    return(
+      <p>props.name</p>
+    )
 } // ImageName
