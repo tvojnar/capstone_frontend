@@ -1,14 +1,15 @@
 
-
 import $ from 'jquery'
 import React, { Component } from 'react'
+import {ImageNameContainer} from '../containers/ImageNameContainer';
 
 export class ImageInput extends Component {
   constructor(props) {
     super(props) ;
 
     this.state = {
-      file:null
+      file:null,
+      urlsAndFiles: [],
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -35,7 +36,6 @@ export class ImageInput extends Component {
     let cleanFileName = file.name.toLowerCase().replace(/[^a-z0-9/g,""]/);
 
     const upload_image = function(url) {
-
         console.log('in upload_image');
         console.log(file);
         console.log(file.type);
@@ -60,7 +60,16 @@ export class ImageInput extends Component {
                 console.log(XMLHttpRequest);
             }
         });
-    }
+    } // upload_image
+
+    const add_file_and_url_to_state = (presignedUrl) => {
+      console.log('in add_file_and_url_to_state');
+      // make an array with the presignedUrl passed from the $.getJSON below and the current file that is selected
+      const urlFileArray = [presignedUrl, this.state.file]
+      // append this array onto this.state.urlsAndFiles
+      this.setState({ urlsAndFiles: [...this.state.urlsAndFiles, ...urlFileArray ] })
+      console.log(this.state.urlsAndFiles);
+    } // add_file_and_url_to_state
 
     // FIRST:  make a call to the rails API (Images#index) to get a presignedUrl from S3
     const apiUrl = '/api/images'
@@ -70,7 +79,8 @@ export class ImageInput extends Component {
         console.log('we got the url!');
         console.log(data['url']);
         // SECOND: call upload_image, passing it the presigned url from the rails API
-        upload_image(data['url'] )
+        // upload_image(data['url'] )
+        add_file_and_url_to_state(data['url']);
       }
     ); // getJSON
 }
@@ -78,6 +88,7 @@ render() {
   return (
   <form className="upload-form">
   <input onChange={this.handleChange} id="image" type="file" name="image" accept="image/x-png, image/gif, image/jpeg" />
+
   <button onClick={this.handleSubmit} type="submit">Go!</button>
   </form>
 )
