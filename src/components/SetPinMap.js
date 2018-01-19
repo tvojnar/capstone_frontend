@@ -1,4 +1,4 @@
-import {HikeMarkerContainer} from '../containers/HikeMarkerContainer';
+// import {HikeMarkerContainer} from '../containers/HikeMarkerContainer';
 import React from 'react';
 
 import { compose, withProps } from "recompose"

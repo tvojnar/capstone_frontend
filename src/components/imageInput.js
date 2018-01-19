@@ -18,6 +18,14 @@ export class ImageInput extends Component {
     this.generatePresignedUrl = this.generatePresignedUrl.bind(this);
   }
 
+
+componentWillReceiveProps(nextProps) {
+  console.log('in component will receive props of ImageInput');
+  if (nextProps.submitted) {
+    this.upload_image;
+  }
+}
+
 // on change set the file selected by the user to this.state.file
   handleChange(e) {
     console.log('in handleChange');

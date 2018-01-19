@@ -1,5 +1,5 @@
 import React from 'react';
-import {HikeMarkerContainer} from '../containers/HikeMarkerContainer';
+// import {HikeMarkerContainer} from '../containers/HikeMarkerContainer';
 
 import { compose, withProps } from "recompose"
 import { withScriptjs, withGoogleMap, GoogleMap} from "react-google-maps"

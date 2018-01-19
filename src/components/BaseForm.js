@@ -97,7 +97,6 @@ class BaseForm extends LinkedComponent {
   }
 
 
-
   // function runs when the submit button is clicked on the form
   onSubmit = e => {
     // NOTE: rails will automatically convert string numbers into floats or intergers depending on the data type for the column that data is being added to. It will also reformat dates if they are in year-month-date format ("2018-01-09")
@@ -175,13 +174,9 @@ render() {
   const linked = this.linkAll(); // wrap all state members in links
 
   // link the name, lat, and lng input feilds in this way so that I can show the user error messages in the form when they try to submit the form without filling out a name, lat, or lng.
-  const nameLink = Link.state(this, 'name')
-
-
-  const latLink = Link.state(this, 'start_lat')
-
-
-  const lngLink = Link.state(this, 'start_lng')
+  // const nameLink = Link.state(this, 'name')
+  // const latLink = Link.state(this, 'start_lat')
+  // const lngLink = Link.state(this, 'start_lng')
 
 
 
@@ -212,7 +207,7 @@ render() {
     {modal}
 
     <form onSubmit={this.onSubmit}>
-    <div class='hikeAttributes'>
+    <div className='hikeAttributes'>
     <Row upOnSmall={1} upOnMedium={2} upOnLarge={6}>
     <Column isColumn>
     <label>
@@ -355,6 +350,8 @@ render() {
 
       </Column>
     </Row>
+    <p><strong>Upload images for the hike:</strong></p>
+    <input onChange={this.handleChange} id="image" type="file" name="image" accept="image/x-png, image/gif, image/jpeg" />
     {errorOnSubmitMessage}
     <Button className='greenButton hoverGrey' type='submit'>Submit</Button>
     </form>

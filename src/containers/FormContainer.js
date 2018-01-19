@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import $ from 'jquery';
 import Form from '../components/Form';
 import EditForm from '../components/EditForm';
-import {ImageInput} from '../components/imageInput';
+// import {ImageInput} from '../components/imageInput';
 import { MapAddHike } from '../components/MapAddHike';
 import SetPinForm from '../components/SetPinForm';
 import LatLngSetPinForm from '../components/LatLngSetPinForm';
@@ -262,8 +262,6 @@ class FormContainer extends Component {
         nameEntered={this.state.nameEntered}/>
       </Column>
       </Row>
-      <p><strong>Upload images for the hike:</strong></p>
-      <ImageInput />
       <Row>
         <Column small={12}>
           { formToShow }
