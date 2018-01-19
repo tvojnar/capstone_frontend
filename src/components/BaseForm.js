@@ -79,11 +79,11 @@ class BaseForm extends LinkedComponent {
     // pull the file out of the form
     let file = e.target.files[0]
     // clean the filename to remove any characters that S3 doesn't like
-    let cleanFileName = file.name.toLowerCase().replace(/[^a-z0-9/g,""]/);
+    // let cleanFileName = file.name.toLowerCase().replace(/[^a-z0-9/g,""]/);
 
     const setUrlToState = (fileName) => {
       console.log('in setUrlToState');
-      this.setState({imageUrl: fileName})
+      this.setState({image_url: fileName})
     }
 
     const upload_image = function(presignedUrl, fileName) {
@@ -101,7 +101,8 @@ class BaseForm extends LinkedComponent {
             success: function(data) {
               console.log('Upload complete!')
               const baseImageUrl = 'https://s3-us-west-2.amazonaws.com/tv-capstone/';
-              const imageUrl = baseImageUrl + fileName
+              let imageUrl = baseImageUrl + fileName;
+              // imageUrl = imageUrl.replace(/[\s+,"+"]/);
               console.log(imageUrl);
               setUrlToState(imageUrl);
             }.bind(this),
