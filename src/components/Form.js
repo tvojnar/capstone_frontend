@@ -39,6 +39,8 @@ class Form extends BaseForm {
     // const url = 'http://capstone-env.ejfznpwqha.us-west-2.elasticbeanstalk.com/api/hikes'
     const url = '/api/hikes'
 
+    // TODO: need to make the post request a call back function here so that the image is uploaded so that the url of the image can be passed with the state to the post. I will have the image url be an attribute of Hike as a cover image to keep it simple right now. 
+
     // make the API post request to the API
     $.ajax({
       type: "POST",
