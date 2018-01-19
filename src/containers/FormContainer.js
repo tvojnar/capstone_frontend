@@ -262,13 +262,13 @@ class FormContainer extends Component {
         nameEntered={this.state.nameEntered}/>
       </Column>
       </Row>
+      <p><strong>Upload images for the hike:</strong></p>
+      <ImageInput />
       <Row>
         <Column small={12}>
           { formToShow }
         </Column>
       </Row>
-      <p> <strong>Upload images for the hike:</strong></p>
-      <ImageInput />
       </div>
     );
   }
