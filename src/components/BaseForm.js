@@ -66,6 +66,7 @@ class BaseForm extends LinkedComponent {
       showSuccessModal: false,
       submitError: false,
       submitErrorMessage: 'Submit failed: Please set a pin for the hike',
+      file:null,
     }
   }
 
@@ -77,7 +78,7 @@ class BaseForm extends LinkedComponent {
     }
   }
 
-  // on change set the file selected by the user to this.state.file so that the file can be uploaded when the form is submitted 
+  // on change set the file selected by the user to this.state.file so that the file can be uploaded when the form is submitted
     handleChange(e) {
       console.log('in handleChange');
       console.log(e.target.files[0].name);
