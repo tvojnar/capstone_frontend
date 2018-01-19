@@ -355,6 +355,8 @@ render() {
 
       </Column>
     </Row>
+    <p><strong>Add cover image for your hike:</strong></p>
+    <input onChange={this.handleChange} id="image" type="file" name="image" accept="image/x-png, image/gif, image/jpeg" />
     {errorOnSubmitMessage}
     <Button className='greenButton hoverGrey' type='submit'>Submit</Button>
     </form>
