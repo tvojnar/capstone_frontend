@@ -77,7 +77,8 @@ class HikeDetailsModal extends BaseModal {
   fetchHikeDetailsFromApi() {
     // make the api call to get hike details
     const hikeId = this.props.id
-    const baseUrl = 'http://capstone-env.ejfznpwqha.us-west-2.elasticbeanstalk.com/api/hikes/'
+    // const baseUrl = 'http://capstone-env.ejfznpwqha.us-west-2.elasticbeanstalk.com/api/hikes/'
+    const baseUrl = '/api/hikes/';
     const url = baseUrl + `${hikeId}`
 
     $.ajax({

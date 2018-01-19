@@ -2,6 +2,7 @@
   "name": "capstone_frontend",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:4000",
   "dependencies": {
     "classnames": "^2.2.5",
     "google-maps": "^3.2.1",

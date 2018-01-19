@@ -74,7 +74,8 @@ export class Map extends Component {
   fetchHikesFromApi() {
     // clear the hikes array before making the api call
     this.setState({ hikes: [] })
-    const baseUrl = 'http://capstone-env.ejfznpwqha.us-west-2.elasticbeanstalk.com/api/hikes'
+    // const baseUrl = 'http://capstone-env.ejfznpwqha.us-west-2.elasticbeanstalk.com/api/hikes'
+    const baseUrl = 'api/hikes'
     const url = baseUrl + `?min_lng=${this.xMapBounds.min}&max_lng=${this.xMapBounds.max}&min_lat=${this.yMapBounds.max}&max_lat=${this.yMapBounds.min}`
 
     // make the api call

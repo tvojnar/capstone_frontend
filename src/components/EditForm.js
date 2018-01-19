@@ -31,7 +31,8 @@ class EditForm extends BaseForm {
 
     console.log(this.state.id);
     // construct the url to submit the patch request to
-    const baseUrl = 'http://capstone-env.ejfznpwqha.us-west-2.elasticbeanstalk.com/api/hikes/'
+    // const baseUrl = 'http://capstone-env.ejfznpwqha.us-west-2.elasticbeanstalk.com/api/hikes/'
+    const baseUrl = '/api/hikes/';
     const url = baseUrl + `${this.state.id}`
 
     // make the API patch request to the API

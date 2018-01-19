@@ -248,7 +248,6 @@ class FormContainer extends Component {
     return (
       <div>
       <h2> Add a hike </h2>
-      <ImageInput />
       <Row className='setPinDiv row'>
       <Column small={12} medium={4} large={3}  >
       {displayErrorMessage}
@@ -268,6 +267,7 @@ class FormContainer extends Component {
           { formToShow }
         </Column>
       </Row>
+      <ImageInput />
       </div>
     );
   }
