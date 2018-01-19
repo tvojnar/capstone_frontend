@@ -86,7 +86,7 @@ class BaseForm extends LinkedComponent {
       this.setState({imageUrl: fileName})
     }
 
-    const upload_image = function(presignedUrl) {
+    const upload_image = function(presignedUrl, fileName) {
         console.log('in upload_image');
         console.log(presignedUrl);
 
@@ -98,9 +98,12 @@ class BaseForm extends LinkedComponent {
             processData: false,  // tell jQuery not to convert to form data
             // headers: { 'Content-Type': file.type, 'x-amz-acl': 'public-read' },
             headers: { 'Content-Type': file.type},
-            success: function(json) {
+            success: function(data) {
               console.log('Upload complete!')
-              setUrlToState(file.name);
+              const baseImageUrl = 'https://s3-us-west-2.amazonaws.com/tv-capstone/';
+              const imageUrl = baseImageUrl + fileName
+              console.log(imageUrl);
+              setUrlToState(imageUrl);
             }.bind(this),
             error: function (XMLHttpRequest, textStatus, errorThrown) {
                 console.log('Upload error: ' + XMLHttpRequest);
@@ -116,9 +119,10 @@ class BaseForm extends LinkedComponent {
     $.getJSON(apiUrl, {filename: file.name, content_type: file.type},
       function(data) {
         console.log('we got the url!');
+        console.log(data['fileName']);
         console.log(data['url']);
         // SECOND: call upload_image, passing it the presigned url from the rails API
-        upload_image(data['url'] )
+        upload_image(data['url'], data['fileName'])
       }
     ); // getJSON
   } // handleImageUpload
