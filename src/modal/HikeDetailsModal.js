@@ -6,6 +6,7 @@ import { TextHikeDetailsContainer } from '../containers/TextHikeDetailsContainer
 import { HikeAttributes } from '../components/HikeAttributes';
 import MapHikeDetails from '../components/MapHikeDetails';
 import FormContainer from '../containers/FormContainer';
+import {TrackForm} from '../components/TrackForm';
 import '../foundation.css';
 import {Button} from 'react-foundation';
 import '../App.css';
@@ -162,6 +163,7 @@ class HikeDetailsModal extends BaseModal {
                 lat={hikeDetails.start_lat}
                 lng={hikeDetails.start_lng}/>
               <Button className='yellowButton hoverGrey alignLeft rightMargin' onClick={this.toggleEditForm}>Edit hike details</Button>
+              <TrackForm />
               <Button className='hoverGrey redButton' onClick={this.closeModal}>close</Button>
           </div>
         }
