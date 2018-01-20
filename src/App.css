@@ -187,3 +187,22 @@ body {
 	overflow: hidden;
   border: solid #bbdaa4 1rem;
 }
+
+.singelHikeMap {
+  height: 100%;
+  width: 100%;
+  margin: 2% 0;
+  padding: 0;
+}
+
+.hikeDetails h4 {
+    font-weight: bold;
+}
+
+.hikeDetails {
+  text-align: center;
+}
+
+.hikeDetails ul {
+list-style-type: none !important;
+}

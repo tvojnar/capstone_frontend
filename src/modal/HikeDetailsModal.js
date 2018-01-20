@@ -143,20 +143,20 @@ class HikeDetailsModal extends BaseModal {
           // else the modal will show all of the hike's details
             whatToRender =
             <div>
+              <h2 className='greenUnderline'>{hikeDetails.name}</h2>
               <div >
                 <img src={hikeDetails.image_url} className='coverImage'/>
               </div>
-              <h2 className='greenUnderline'>{hikeDetails.name}</h2>
               <div className='topMargin'>
                 <HikeAttributes hikeData={hikeDetails}/>
+              </div>
+              <div>
+              <TextHikeDetailsContainer hikeData={hikeDetails}/>
               </div>
               <MapHikeDetails
                 onRef={ref => (this.child = ref)}
                 lat={hikeDetails.start_lat}
-                lng={hikeDetails.start_lng}/>
-              <div>
-              <TextHikeDetailsContainer hikeData={hikeDetails}/>
-              </div>
+                lng={hikeDetails.start_lng}/>  
               <Button className='yellowButton hoverGrey alignLeft rightMargin' onClick={this.toggleEditForm}>Edit hike details</Button>
               <Button className='hoverGrey redButton' onClick={this.closeModal}>close</Button>
           </div>

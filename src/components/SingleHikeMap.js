@@ -16,7 +16,7 @@ export const SingleHikeMap = compose(
   withScriptjs,
   withGoogleMap
 )((props) =>
-  <GoogleMap
+  <GoogleMap className='SingleHikeMap'
     defaultCenter={props.center}
     defaultZoom={props.zoom}>
   {props.hike}

@@ -69,7 +69,7 @@ export class HikeFeatures extends Component {
     }
 
     return (
-      <div>
+      <div className='hikeDetails'>
         <h4>Features</h4>
         <ul>
           {lakes}
