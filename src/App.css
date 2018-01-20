@@ -185,4 +185,5 @@ body {
 
 	object-fit: cover;
 	overflow: hidden;
+  border: solid #bbdaa4 1rem;
 }
