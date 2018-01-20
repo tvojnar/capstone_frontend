@@ -124,6 +124,7 @@ class HikeDetailsModal extends BaseModal {
           // passing hikeState to FormContainer will trigger FormContainer to pass detailsToSetPin to SetPinForm and LatLngSetPinForm so that the name and pin for the hike will be shown in them and on the SetPinMap
           console.log('in HikeDetailsModal render and hikeDetials is: ');
           console.log(hikeDetails);
+          console.log(hikeDetails.image_url);
 
           whatToRender =
             <div>
@@ -142,6 +143,7 @@ class HikeDetailsModal extends BaseModal {
           // else the modal will show all of the hike's details
             whatToRender =
             <div>
+            <img src={hikeDetails.image_url} />
               <h2 className='greenUnderline'>{hikeDetails.name}</h2>
               <div className='topMargin'>
                 <HikeAttributes hikeData={hikeDetails}/>
