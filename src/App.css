@@ -127,21 +127,43 @@ header {
   height: 30%;
   width: 100%;
   /* background-color: #bbdaa4; */
-  border-bottom:  solid #bbdaa4;
   color: #9bbff4;
-
   /* background-color: blue; */
 }
 
 body {
-  /* background-color: #FEFAF1; */
+  /* background-color: #bbdaa4; */
 }
 
 .mainMap {
   height: 100%;
   width: 100%;
-  margin: 2% 0;
+  margin: 0;
   padding: 0;
+}
+
+
+.addHikeButton {
+  margin-bottom: 0%;
+  display: inline-block !important;
+}
+
+.appName {
+  margin-bottom: 0;
+  margin-top: 1%;
+  margin-left: 2%;
+}
+
+.appDescription {
+  margin-top: 0;
+  margin-bottom: 3%;
+  margin-left: 2%;
+  display: inline-block !important;
+}
+
+.addHikeDiv {
+  display: inline-block !important;
+  margin-left: 60%;
 }
 
 /******************************/

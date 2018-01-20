@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import Map from './components/Map';
 import { AddHike } from './components/AddHike';
 import './App.css';
-// import Foundation from 'react-foundation';
+import './foundation.css';
+import {Row, Column} from 'react-foundation';
+
 
 
 class App extends Component {
@@ -29,7 +31,9 @@ class App extends Component {
     // we are connecting Map via the 'Refs to components' approach so that we can call Maps methods from App (see handleFetchHikes method above for example of this)
     return (
       <div>
-        <AddHike fetchHikes={this.handleFetchHikes}/>
+        <h1 className='appName'>ScrappyHiker</h1>
+        <p className='appDescription'>A digital scrapbook for your hiking history</p>
+        <AddHike fetchHikes={this.handleFetchHikes} className='addHikeButton'/>
         <Map onRef={ref => (this.child = ref)}/>
       </div>
     );
