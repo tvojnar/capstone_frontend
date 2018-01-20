@@ -32,6 +32,8 @@ medium blue: #9bbff4
 /****** General *********/
 /******************************/
 
+
+
 .blueOutline {
   border: solid #a7cdf2;
 }
@@ -186,6 +188,18 @@ body {
 .hikeAttributes {
   margin-top: 5%;
 }
+
+[type='file'] {
+   display: block;
+   padding: 10px;
+   width: 30%;
+   -webkit-border-radius: 5px;
+   -moz-border-radius: 5px;
+   border: 1px solid #BBB;
+   text-align: center;
+   background-color: #DDD;
+   cursor:pointer;
+}
 /*
 .attributeLabel input {
   float: left;
@@ -238,4 +252,12 @@ body {
 
 .hikeDetails ul {
 list-style-type: none !important;
+}
+
+/******************************/
+/**** success and error modals   *********/
+/******************************/
+
+.modalBorder {
+  border: solid #bbdaa4 1px;
 }
