@@ -175,16 +175,14 @@ body {
 
 
 
-
-
-
-
-
-
-
-
-
-
 /******************************/
-/**** Form/EditForm   *********/
+/**** HikeDetailsModal   *********/
 /******************************/
+
+.coverImage {
+  width: 100%;
+	height: 25em;
+
+	object-fit: cover;
+	overflow: hidden;
+}

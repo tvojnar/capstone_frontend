@@ -143,7 +143,9 @@ class HikeDetailsModal extends BaseModal {
           // else the modal will show all of the hike's details
             whatToRender =
             <div>
-            <img src={hikeDetails.image_url} />
+              <div >
+                <img src={hikeDetails.image_url} className='coverImage'/>
+              </div>
               <h2 className='greenUnderline'>{hikeDetails.name}</h2>
               <div className='topMargin'>
                 <HikeAttributes hikeData={hikeDetails}/>
