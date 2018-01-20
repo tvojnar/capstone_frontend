@@ -121,7 +121,7 @@ export class Map extends Component {
     // the center point is defined the state
     // By defining a GoogleMap component (from the react-google-maps library) outside of the Map component, wrapped in the withGoogleMaps method it makes it so that each time we update a components state we will only re render the components on the map and not the entire map :)
     return(
-      <div style={{width: `750px`, height: `750px`}}>
+      <div className='mainMap'>
 
       <HikingMap
       onMapMounted={this.handleMapMounted.bind(this)}

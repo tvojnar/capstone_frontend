@@ -137,6 +137,13 @@ body {
   /* background-color: #FEFAF1; */
 }
 
+.mainMap {
+  height: 100%;
+  width: 100%;
+  margin: 2% 0;
+  padding: 0;
+}
+
 /******************************/
 /****** FormContainer *********/
 /******************************/
