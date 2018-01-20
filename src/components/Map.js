@@ -21,7 +21,7 @@ export class Map extends Component {
     // hikes will be all the hikes visable in a map area
     // TODO: maybe be able to dynamically set the starting center point of the map?
     this.state = {
-      lat: 46.6062,
+      lat: 47.6062,
       lng: -122.3321,
       hikes: [],
     };
