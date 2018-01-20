@@ -140,13 +140,17 @@ class HikeDetailsModal extends BaseModal {
           </div>
         }
         else {
+            let image;
+             if (hikeDetails.image_url) {
+               image = <div >
+                 <img src={hikeDetails.image_url} className='coverImage'/>
+               </div>
+             }
           // else the modal will show all of the hike's details
             whatToRender =
             <div>
               <h2 className='greenUnderline'>{hikeDetails.name}</h2>
-              <div >
-                <img src={hikeDetails.image_url} className='coverImage'/>
-              </div>
+              {image}
               <div className='topMargin'>
                 <HikeAttributes hikeData={hikeDetails}/>
               </div>
@@ -156,7 +160,7 @@ class HikeDetailsModal extends BaseModal {
               <MapHikeDetails
                 onRef={ref => (this.child = ref)}
                 lat={hikeDetails.start_lat}
-                lng={hikeDetails.start_lng}/>  
+                lng={hikeDetails.start_lng}/>
               <Button className='yellowButton hoverGrey alignLeft rightMargin' onClick={this.toggleEditForm}>Edit hike details</Button>
               <Button className='hoverGrey redButton' onClick={this.closeModal}>close</Button>
           </div>

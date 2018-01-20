@@ -1,6 +1,9 @@
 import React from 'react';
 import Modal from 'react-modal';
 import BaseModal from './BaseModal'
+import '../foundation.css';
+import {Button} from 'react-foundation';
+import '../App.css';
 
 // sets the portion of the app that should be hidden
 Modal.setAppElement('#root');
@@ -23,14 +26,14 @@ class SuccessModal extends BaseModal {
 
   afterOpenModal() {
     // references are now sync'd and can be accessed.
-    this.subtitle.style.color = 'green';
+    // this.subtitle.style.color = 'green';
   }
 
 
   closeModal() {
     // make the success modal dissapear
     this.setState({modalIsOpen: false});
-    // make the form modal close 
+    // make the form modal close
     this.props.hideFormModal();
   }
 
@@ -46,9 +49,8 @@ class SuccessModal extends BaseModal {
           style={customStyles}
           contentLabel="Example Modal"
         >
-
-          <h2 ref={subtitle => this.subtitle = subtitle}>Your hike was successfully saved!</h2>
-          <button onClick={this.closeModal}>close</button>
+          <h2 >Your hike was successfully saved!</h2>
+          <Button className='blueButton' onClick={this.closeModal}>Close</Button>
         </Modal>
       </div>
     );

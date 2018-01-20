@@ -1,6 +1,9 @@
 import React from 'react';
 import Modal from 'react-modal';
-import BaseModal from './BaseModal'
+import BaseModal from './BaseModal';
+import '../foundation.css';
+import {Button} from 'react-foundation';
+import '../App.css';
 
 // sets the portion of the app that should be hidden
 Modal.setAppElement('#root');
@@ -40,7 +43,7 @@ class ErrorModal extends BaseModal {
 
           <h2 ref={subtitle => this.subtitle = subtitle}>Sorry, your hike failed to save</h2>
           <p>Please try again</p>
-          <button onClick={this.closeModal}>close</button>
+          <Button className='blueButton' onClick={this.closeModal}>Close</Button>
         </Modal>
       </div>
     );

@@ -1,4 +1,4 @@
-import * as React from 'react';
+ import * as React from 'react';
 import $ from 'jquery'
 import '../foundation.css';
 import {Button, Colors, Row, Column, Callout} from 'react-foundation';
@@ -414,7 +414,7 @@ render() {
       </Column>
     </Row>
     <p><strong>Add cover image for your hike:</strong></p>
-    <input onChange={this.handleImageUpload} id="image" type="file" name="image" accept="image/x-png, image/gif, image/jpeg" />
+    <input classname='imageButton' onChange={this.handleImageUpload} id="image" type="file" name="image" accept="image/x-png, image/gif, image/jpeg" />
     {errorOnSubmitMessage}
     <Button className='greenButton hoverGrey' type='submit'>Submit</Button>
     </form>
