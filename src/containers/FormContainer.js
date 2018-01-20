@@ -267,7 +267,6 @@ class FormContainer extends Component {
           { formToShow }
         </Column>
       </Row>
-      <ImageInput />
       </div>
     );
   }

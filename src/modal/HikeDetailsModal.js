@@ -124,6 +124,7 @@ class HikeDetailsModal extends BaseModal {
           // passing hikeState to FormContainer will trigger FormContainer to pass detailsToSetPin to SetPinForm and LatLngSetPinForm so that the name and pin for the hike will be shown in them and on the SetPinMap
           console.log('in HikeDetailsModal render and hikeDetials is: ');
           console.log(hikeDetails);
+          console.log(hikeDetails.image_url);
 
           whatToRender =
             <div>
@@ -143,16 +144,19 @@ class HikeDetailsModal extends BaseModal {
             whatToRender =
             <div>
               <h2 className='greenUnderline'>{hikeDetails.name}</h2>
+              <div >
+                <img src={hikeDetails.image_url} className='coverImage'/>
+              </div>
               <div className='topMargin'>
                 <HikeAttributes hikeData={hikeDetails}/>
+              </div>
+              <div>
+              <TextHikeDetailsContainer hikeData={hikeDetails}/>
               </div>
               <MapHikeDetails
                 onRef={ref => (this.child = ref)}
                 lat={hikeDetails.start_lat}
-                lng={hikeDetails.start_lng}/>
-              <div>
-              <TextHikeDetailsContainer hikeData={hikeDetails}/>
-              </div>
+                lng={hikeDetails.start_lng}/>  
               <Button className='yellowButton hoverGrey alignLeft rightMargin' onClick={this.toggleEditForm}>Edit hike details</Button>
               <Button className='hoverGrey redButton' onClick={this.closeModal}>close</Button>
           </div>

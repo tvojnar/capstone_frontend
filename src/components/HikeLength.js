@@ -4,7 +4,7 @@ export class HikeLength extends Component {
   render() {
     if (this.props.miles) {
       return(
-        <div>
+        <div className='hikeDetails'>
           <h4>Length</h4>
           <p>{this.props.miles} miles</p>
         </div>
@@ -12,7 +12,7 @@ export class HikeLength extends Component {
     }
     else {
       return(
-        <div>
+        <div className='hikeDetails'>
           <h4>Length</h4>
         </div>
       )

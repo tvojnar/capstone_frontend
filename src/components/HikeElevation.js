@@ -16,7 +16,7 @@ export class HikeElevation extends Component {
       elevationGain = <p>Elevation gain: {this.props.elevationGain}</p>
     }
     return(
-      <div>
+      <div className='hikeDetails'>
         <h4>Elevation</h4>
         { maxElevation }
         { elevationGain }

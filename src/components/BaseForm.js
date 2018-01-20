@@ -1,4 +1,5 @@
 import * as React from 'react';
+import $ from 'jquery'
 import '../foundation.css';
 import {Button, Colors, Row, Column, Callout} from 'react-foundation';
 import '../App.css';
@@ -27,6 +28,7 @@ class BaseForm extends LinkedComponent {
     this.state = this.props.initialState;
 
     this.trimState = this.trimState.bind(this);
+    this.handleImageUpload = this.handleImageUpload.bind(this);
   }
 
   // default props are used to generate the options for the select input for regions in the form and to set the state in the constructor, as well as to reset the state to clear the form
@@ -68,6 +70,64 @@ class BaseForm extends LinkedComponent {
     }
   }
 
+  // upload
+  handleImageUpload(e) {
+    // resources: https://stuff-things.net/2016/03/16/uploading-from-rails-to-aws-s3-with-presigned-urls/
+    console.log('in handleImageUpload');
+    console.log(e.target.files[0]);
+
+    // pull the file out of the form
+    let file = e.target.files[0]
+    // clean the filename to remove any characters that S3 doesn't like
+    // let cleanFileName = file.name.toLowerCase().replace(/[^a-z0-9/g,""]/);
+
+    const setUrlToState = (fileName) => {
+      console.log('in setUrlToState');
+      this.setState({image_url: fileName})
+    }
+
+    const upload_image = function(presignedUrl, fileName) {
+        console.log('in upload_image');
+        console.log(presignedUrl);
+
+  // THIRD: upload the image file to S3 using the presigned url
+        $.ajax({
+            type : 'PUT',
+            url : presignedUrl,
+            data : file,
+            processData: false,  // tell jQuery not to convert to form data
+            // headers: { 'Content-Type': file.type, 'x-amz-acl': 'public-read' },
+            headers: { 'Content-Type': file.type},
+            success: function(data) {
+              console.log('Upload complete!')
+              const baseImageUrl = 'https://s3-us-west-2.amazonaws.com/tv-capstone/';
+              let imageUrl = baseImageUrl + fileName;
+              // imageUrl = imageUrl.replace(/[\s+,"+"]/);
+              console.log(imageUrl);
+              setUrlToState(imageUrl);
+            }.bind(this),
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                console.log('Upload error: ' + XMLHttpRequest);
+                console.log(errorThrown);
+                console.log(XMLHttpRequest);
+            }
+        });
+    }
+
+    // FIRST:  make a call to the rails API (Images#index) to get a presignedUrl from S3
+    const apiUrl = '/api/images'
+
+    $.getJSON(apiUrl, {filename: file.name, content_type: file.type},
+      function(data) {
+        console.log('we got the url!');
+        console.log(data['fileName']);
+        console.log(data['url']);
+        // SECOND: call upload_image, passing it the presigned url from the rails API
+        upload_image(data['url'], data['fileName'])
+      }
+    ); // getJSON
+  } // handleImageUpload
+
   // use this function to prepopulate form input fields with the hike's data in EditForm via props passed in from the parent component of EditForm
   componentDidMount() {
     console.log('in CDM of BaseForm');
@@ -75,8 +135,6 @@ class BaseForm extends LinkedComponent {
       this.setState(this.props.hikeState)
     }
   }
-
-
 
   componentWillReceiveProps(nextProps) {
     // once the user has entered name in SetPinForm or name/lat/lng in LatLngSetPinForm and enteredName === true then the name, start_latm and start_lng will be set in Form via props passed from FormContainer
@@ -355,6 +413,8 @@ render() {
 
       </Column>
     </Row>
+    <p><strong>Add cover image for your hike:</strong></p>
+    <input onChange={this.handleImageUpload} id="image" type="file" name="image" accept="image/x-png, image/gif, image/jpeg" />
     {errorOnSubmitMessage}
     <Button className='greenButton hoverGrey' type='submit'>Submit</Button>
     </form>
