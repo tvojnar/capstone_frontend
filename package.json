@@ -14,7 +14,8 @@
     "react-geocode": "0.0.1",
     "react-google-maps": "^9.4.3",
     "react-modal": "^3.1.10",
-    "react-scripts": "1.0.17"
+    "react-scripts": "1.0.17",
+    "react-xml-parser": "^1.0.2"
   },
   "scripts": {
     "start": "react-scripts start",
