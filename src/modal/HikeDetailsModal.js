@@ -94,6 +94,8 @@ class HikeDetailsModal extends BaseModal {
         // set this.state.hikes to be equal to the data for all of the hikes within the maps bounds
         this.setState({ hike: data["hike_data"] })
 
+        // if the hike has trackpoints (meaning a gpx track was uploaded by the user) the API will send back trackpoints in the response which is formatted like: [{lat: 45, lng: 55}, {lat: 47, lng: 59} ...]
+        // if trackpoints are returned then add them to this.state.trackpoints so that they can be passed to MapHikeDetails -> SingleHikeMap
         if (data["trackpoints"]) {
           this.setState({trackpoints: data["trackpoints"]})
           console.log(' in if for trackpoints');
@@ -157,6 +159,7 @@ class HikeDetailsModal extends BaseModal {
                </div>
              }
           // else the modal will show all of the hike's details
+          // passing trackpoints to MapHikeDetails will allow SingleHikeMap to display the gpx track if there is one for the hike 
             whatToRender =
             <div>
               <h2 className='greenUnderline'>{hikeDetails.name}</h2>

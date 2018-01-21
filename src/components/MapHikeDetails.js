@@ -25,6 +25,8 @@ export class MapHikeDetails extends Component {
     const hike = <SingleHikeMarker lat={lat} lng={lng}/>
 
     // return an instance of SingleHikeMap, which is the map that will be rendered on the HikeDetailsModal
+    // pass SingleHikeMap hike so that it can render this marker (created above)
+    // pass SingleHikeMap trackpoints so that it if a gpx track has been uploaded for the hike it can render a Polyline for it using the trackpoints data
     return(
       <div className='singelHikeMap'>
         <SingleHikeMap
