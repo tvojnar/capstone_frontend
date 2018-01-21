@@ -78,25 +78,29 @@ export class TrackForm extends Component {
 
 
       $.ajax({
-          type : "POST",
-          url : url,
-          // data: {gpx_file: xml, hikeId: hikeId},
-          data : xml,
-          // dataType: "xml",
-          // contentType: "text/xml",
-          processData: false,  // tell jQuery not to convert to form data
-          // headers: { 'Content-Type': file.type},
-          success: function(data) {
-            console.log('trackpoints uploaded!');
-            console.log(data);
+        type : "POST",
+        url : url,
+        // data: {gpx_file: xml, hikeId: hikeId},
+        data : xml,
+        // dataType: "xml",
+        // contentType: "text/xml",
+        processData: false,  // tell jQuery not to convert to form data
+        // headers: { 'Content-Type': file.type},
+        success: function(data) {
+          console.log('trackpoints uploaded!');
+          console.log(data);
+          if (data.status == 'all') {
             this.props.fetchHikeDetails();
-          }.bind(this),
-          error: function (XMLHttpRequest, textStatus, errorThrown) {
-              console.log('Error uploading trackpoints:' + XMLHttpRequest);
-              console.log(errorThrown);
-              console.log(XMLHttpRequest);
-              this.setState({trkpt_failed: true})
-          }.bind(this)
+          } else {
+            this.setState({trkpt_failed: true})
+          }
+        }.bind(this),
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+          console.log('Error uploading trackpoints:' + XMLHttpRequest);
+          console.log(errorThrown);
+          console.log(XMLHttpRequest);
+          this.setState({trkpt_failed: true})
+        }.bind(this)
       });
     }
 
