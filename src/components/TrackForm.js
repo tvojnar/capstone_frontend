@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
 import XMLParser from 'react-xml-parser'
+import '../foundation.css';
+import {Callout, Colors} from 'react-foundation';
+import '../App.css';
 
 export class TrackForm extends Component {
   constructor(props) {
@@ -8,10 +11,12 @@ export class TrackForm extends Component {
 
     this.state = {
       gpx_file:null,
+      trkpt_failed:false,
     }
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+
   }
 
   handleChange(e) {
@@ -90,7 +95,8 @@ export class TrackForm extends Component {
               console.log('Error uploading trackpoints:' + XMLHttpRequest);
               console.log(errorThrown);
               console.log(XMLHttpRequest);
-          }
+              this.setState({trkpt_failed: true})
+          }.bind(this)
       });
     }
 
@@ -131,9 +137,16 @@ export class TrackForm extends Component {
   } // handleSubmit
 
   render() {
+    let errorMessage;
+    if (this.state.trkpt_failed) {
+      errorMessage = <Callout color={Colors.ALERT}>
+      <p>Your gps track failed to save</p>
+      </Callout>
+    }
     return (
       <form>
       <p>Upload a gpx track for this hike:</p>
+      {errorMessage}
       <input onChange={this.handleChange} id="gpx" type="file" name="gpx"/>
       <button onClick={this.handleSubmit} type="submit">Go!</button>
       </form>

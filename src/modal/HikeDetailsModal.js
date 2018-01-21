@@ -97,6 +97,7 @@ class HikeDetailsModal extends BaseModal {
       error: function(xhr, status, err) {
         console.log('in error');
         console.log(err);
+
         // TODO: Display error message that the api call did not work.
       } // error
     }); // get request
