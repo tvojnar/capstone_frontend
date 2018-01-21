@@ -86,6 +86,12 @@ export class TrackForm extends Component {
         // contentType: "text/xml",
         processData: false,  // tell jQuery not to convert to form data
         // headers: { 'Content-Type': file.type},
+        beforeSend: function() {
+          this.setState({showLoading: true})
+        }.bind(this),
+        complete: function() {
+          this.setState({showLoading: false})
+        }.bind(this),
         success: function(data) {
           console.log('trackpoints uploaded!');
           console.log(data);
@@ -146,12 +152,18 @@ export class TrackForm extends Component {
       errorMessage = <Callout color={Colors.ALERT}>
       <p>Your gps track failed to save</p>
       </Callout>
-    }
+    } // if
+
+    let loadingMessage;
+    if (this.state.showLoading) {
+      loadingMessage = <p>loading gps track ...</p>
+    } // if
     return (
       <form>
       <p>Upload a gpx track for this hike:</p>
       {errorMessage}
       <input onChange={this.handleChange} id="gpx" type="file" name="gpx"/>
+      {loadingMessage}
       <button onClick={this.handleSubmit} type="submit">Go!</button>
       </form>
     )
