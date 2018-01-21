@@ -76,6 +76,7 @@ class HikeDetailsModal extends BaseModal {
   }
 
   fetchHikeDetailsFromApi() {
+    console.log('in fetchHikeDetailsFromApi');
     // make the api call to get hike details
     const hikeId = this.props.id
     // const baseUrl = 'http://capstone-env.ejfznpwqha.us-west-2.elasticbeanstalk.com/api/hikes/'
@@ -163,7 +164,7 @@ class HikeDetailsModal extends BaseModal {
                 lat={hikeDetails.start_lat}
                 lng={hikeDetails.start_lng}/>
               <Button className='yellowButton hoverGrey alignLeft rightMargin' onClick={this.toggleEditForm}>Edit hike details</Button>
-              <TrackForm id={hikeDetails.id}/>
+              <TrackForm id={hikeDetails.id} fetchHikeDetails={this.fetchHikeDetailsFromApi}/>
               <Button className='hoverGrey redButton' onClick={this.closeModal}>close</Button>
           </div>
         }

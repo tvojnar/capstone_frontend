@@ -71,7 +71,7 @@ export class TrackForm extends Component {
       const baseUrl = '/api/hikes/'
       const url = baseUrl + `${hikeId}` + '/trackpoints'
 
-      debugger
+
       $.ajax({
           type : "POST",
           url : url,
@@ -84,7 +84,8 @@ export class TrackForm extends Component {
           success: function(data) {
             console.log('trackpoints uploaded!');
             console.log(data);
-          },
+            this.props.fetchHikeDetails();
+          }.bind(this),
           error: function (XMLHttpRequest, textStatus, errorThrown) {
               console.log('Error uploading trackpoints:' + XMLHttpRequest);
               console.log(errorThrown);
