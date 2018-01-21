@@ -91,7 +91,7 @@ class HikeDetailsModal extends BaseModal {
         console.log('successful show api call!');
         console.log(data);
         // set this.state.hikes to be equal to the data for all of the hikes within the maps bounds
-        this.setState({ hike: data })
+        this.setState({ hike: data["hike_data"] })
         // QUESTION: Should I have a message to the user appear when there are no hikes in the boundaries of the map?
       }.bind(this), // success
       error: function(xhr, status, err) {
