@@ -67,11 +67,15 @@ export class TrackForm extends Component {
 
 
     const submitXml = (xml) => {
-      const url = '/api/trackpoints'
+      let hikeId = this.props.id
+      const baseUrl = '/api/hikes/'
+      const url = baseUrl + `${hikeId}` + '/trackpoints'
+
       debugger
       $.ajax({
           type : "POST",
           url : url,
+          // data: {gpx_file: xml, hikeId: hikeId},
           data : xml,
           // dataType: "xml",
           // contentType: "text/xml",

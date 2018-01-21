@@ -163,7 +163,7 @@ class HikeDetailsModal extends BaseModal {
                 lat={hikeDetails.start_lat}
                 lng={hikeDetails.start_lng}/>
               <Button className='yellowButton hoverGrey alignLeft rightMargin' onClick={this.toggleEditForm}>Edit hike details</Button>
-              <TrackForm />
+              <TrackForm id={hikeDetails.id}/>
               <Button className='hoverGrey redButton' onClick={this.closeModal}>close</Button>
           </div>
         }
