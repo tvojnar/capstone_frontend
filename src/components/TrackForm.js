@@ -87,7 +87,11 @@ export class TrackForm extends Component {
           processData: false,  // tell jQuery not to convert to form data
           // headers: { 'Content-Type': file.type},
           beforeSend: function() {
-            this.setState({showLoading: true})
+            this.setState({
+              showLoading: true,
+              uploadWarning: false,
+              trkpt_failed: false 
+              })
           }.bind(this),
           complete: function() {
             this.setState({showLoading: false})
