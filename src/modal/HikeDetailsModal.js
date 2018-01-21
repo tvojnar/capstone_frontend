@@ -92,6 +92,12 @@ class HikeDetailsModal extends BaseModal {
         console.log(data);
         // set this.state.hikes to be equal to the data for all of the hikes within the maps bounds
         this.setState({ hike: data["hike_data"] })
+
+        if (data["trackpoints"]) {
+          this.setState({trackpoints: data["trackpoints"]})
+          console.log(' in if for trackpoints');
+          console.log(this.state.trackpoints);
+        }
         // QUESTION: Should I have a message to the user appear when there are no hikes in the boundaries of the map?
       }.bind(this), // success
       error: function(xhr, status, err) {
