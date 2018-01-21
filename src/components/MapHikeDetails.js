@@ -24,7 +24,6 @@ export class MapHikeDetails extends Component {
     // pass the SingleHikeMap an instance of SingleHikeMap to render on the map
     const hike = <SingleHikeMarker lat={lat} lng={lng}/>
 
-    // style={{width: `750px`, height: `400px`}}
     // return an instance of SingleHikeMap, which is the map that will be rendered on the HikeDetailsModal
     return(
       <div className='singelHikeMap'>
@@ -35,6 +34,7 @@ export class MapHikeDetails extends Component {
           }}
           zoom={this.zoom}
           hike={hike}
+          trackpoints={this.props.trackpoints}
         />
       </div>
     );

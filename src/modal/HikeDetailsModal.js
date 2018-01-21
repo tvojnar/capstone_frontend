@@ -48,6 +48,7 @@ class HikeDetailsModal extends BaseModal {
     this.state = {
       modalIsOpen: true,
       hike: {},
+      trackpoint:[],
     }
 
     this.toggleEditForm = this.toggleEditForm.bind(this);
@@ -169,7 +170,8 @@ class HikeDetailsModal extends BaseModal {
               <MapHikeDetails
                 onRef={ref => (this.child = ref)}
                 lat={hikeDetails.start_lat}
-                lng={hikeDetails.start_lng}/>
+                lng={hikeDetails.start_lng}
+                trackpoints={this.state.trackpoints}/>
               <Button className='yellowButton hoverGrey alignLeft rightMargin' onClick={this.toggleEditForm}>Edit hike details</Button>
               <TrackForm id={hikeDetails.id} fetchHikeDetails={this.fetchHikeDetailsFromApi}/>
               <Button className='hoverGrey redButton' onClick={this.closeModal}>close</Button>

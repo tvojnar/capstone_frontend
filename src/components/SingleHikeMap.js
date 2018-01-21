@@ -2,7 +2,7 @@ import React from 'react';
 import {HikeMarkerContainer} from '../containers/HikeMarkerContainer';
 
 import { compose, withProps } from "recompose"
-import { withScriptjs, withGoogleMap, GoogleMap} from "react-google-maps"
+import { withScriptjs, withGoogleMap, GoogleMap, Polygon, Polyline} from "react-google-maps"
 
 export const SingleHikeMap = compose(
   withProps({
@@ -19,6 +19,11 @@ export const SingleHikeMap = compose(
   <GoogleMap className='SingleHikeMap'
     defaultCenter={props.center}
     defaultZoom={props.zoom}>
-  {props.hike}
+    {props.hike}
+
+
+<Polyline path={props.trackpoints}/>
+
+
   </GoogleMap>
 )
