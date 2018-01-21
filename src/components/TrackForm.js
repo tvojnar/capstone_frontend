@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import $ from 'jquery';
 import XMLParser from 'react-xml-parser'
 import '../foundation.css';
-import {Callout, Colors, Button} from 'react-foundation';
+import {Callout, Colors, Button, Link, Sizes} from 'react-foundation';
 import '../App.css';
 
 export class TrackForm extends Component {
@@ -18,6 +18,16 @@ export class TrackForm extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
 
+    this.handleCloseUploadWarning = this.handleCloseUploadWarning.bind(this);
+    this.handleCloseFailure = this.handleCloseFailure.bind(this);
+  }
+
+  handleCloseFailure() {
+    this.setState({trkpt_failed: false})
+  }
+
+  handleCloseUploadWarning() {
+    this.setState({uploadWarning: false})
   }
 
   handleChange(e) {
@@ -90,7 +100,7 @@ export class TrackForm extends Component {
             this.setState({
               showLoading: true,
               uploadWarning: false,
-              trkpt_failed: false 
+              trkpt_failed: false
               })
           }.bind(this),
           complete: function() {
@@ -155,6 +165,7 @@ export class TrackForm extends Component {
     if (this.state.trkpt_failed) {
       errorMessage = <Callout color={Colors.ALERT}>
       <p>Your gps track failed to save</p>
+      <Link size={Sizes.TINY} onClick={this.handleCloseFailure}>Close</Link>
       </Callout>
     } // if
 
@@ -170,6 +181,7 @@ export class TrackForm extends Component {
       uploadMessage =
       <Callout color={Colors.WARNING}>
       <p>Please choose a gpx track before uploading!</p>
+      <Link size={Sizes.TINY} onClick={this.handleCloseUploadWarning}>Close</Link>
       </Callout>
     }
     return (
