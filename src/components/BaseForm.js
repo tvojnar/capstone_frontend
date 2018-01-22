@@ -422,8 +422,13 @@ render() {
 
       </Column>
     </Row>
-    <p><strong>Add cover image for your hike:</strong></p>
+    <div className='importImage'>
+    <label>
+    <strong>Add cover photo for your hike:</strong>
     <input classname='imageButton' onChange={this.handleImageUpload} id="image" type="file" name="image" accept="image/x-png, image/gif, image/jpeg" />
+    </label>
+    </div>
+
     {errorOnSubmitMessage}
     <Button className='greenButton hoverGrey' type='submit'>Submit</Button>
     </form>

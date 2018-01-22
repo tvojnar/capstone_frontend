@@ -65,16 +65,22 @@ medium blue: #9bbff4
 }
 .redButton {
   background-color: #E85252;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
 }
 
 .blueButton {
   background-color: #a7cdf2;
   color: black;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
 }
 
 .yellowButton {
   background-color: #F9E581;
   color: black;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
 }
 
 .hoverGrey:hover {
@@ -83,6 +89,8 @@ medium blue: #9bbff4
 .greenButton {
   background-color: #bbdaa4;
   color: black;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
 }
 
 .App {
@@ -189,26 +197,18 @@ body {
   margin-top: 5%;
 }
 
-[type='file'] {
-   display: block;
-   padding: 10px;
-   width: 30%;
-   -webkit-border-radius: 5px;
-   -moz-border-radius: 5px;
-   border: 1px solid #BBB;
-   text-align: center;
-   background-color: #DDD;
-   cursor:pointer;
-}
-/*
-.attributeLabel input {
-  float: left;
+.importImage {
+  display: block;
+  padding: 10px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border: 1px solid #BBB;
+  /* background-color: #DDD; */
+  cursor:pointer;
+  margin:  1% auto;
 }
 
-.attributeLabel {
-  margin-left: 30px;
-  display: block;
-} */
+
 
 /******************************/
 /**** Set pin forms   *********/
@@ -217,6 +217,8 @@ body {
 .setPinButton {
   background-color: #20C5EF;
   color: black;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
 }
 
 
