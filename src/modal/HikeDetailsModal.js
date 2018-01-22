@@ -7,6 +7,7 @@ import { HikeAttributes } from '../components/HikeAttributes';
 import MapHikeDetails from '../components/MapHikeDetails';
 import FormContainer from '../containers/FormContainer';
 import {TrackForm} from '../components/TrackForm';
+import DeleteModal from '../modal/DeleteModal';
 import '../foundation.css';
 import {Button} from 'react-foundation';
 import '../App.css';
@@ -49,11 +50,46 @@ class HikeDetailsModal extends BaseModal {
       modalIsOpen: true,
       hike: {},
       trackpoint:[],
+      showDeleteModal: false,
     }
 
     this.toggleEditForm = this.toggleEditForm.bind(this);
     this.fetchHikeDetailsFromApi = this.fetchHikeDetailsFromApi.bind(this);
+    this.showDeleteModal = this.showDeleteModal.bind(this);
+    this.deleteHike = this.deleteHike.bind(this);
   }
+
+  showDeleteModal() {
+    this.setState({
+      showDeleteModal: true
+    })
+  }
+
+// called when the user clickes 'yes' in the delete hike modal (whch appears when the user clicks the delete button)
+deleteHike() {
+  console.log('in deleteHike!');
+  const hikeId = this.props.id
+  const baseUrl = '/api/hikes/';
+  const url = baseUrl + `${hikeId}`
+
+  $.ajax({
+    url: url,
+    type: 'DELETE',
+    dataType: 'json',
+    cache: false,
+    success: function(data){
+      console.log('got back from DELETE');
+      console.log(data);
+      this.setState({modalIsOpen: false});
+      this.props.fetchHikes();
+    }.bind(this), // success
+    error: function(xhr, status, err) {
+      console.log('in error');
+      console.log(err);
+    } // error
+  }); // DELETE request
+
+} // deleteHike()
 
   afterOpenModal() {
     // references are now sync'd and can be accessed.
@@ -120,6 +156,10 @@ class HikeDetailsModal extends BaseModal {
   }
 
   render() {
+      let deleteModal;
+      if (this.state.showDeleteModal) {
+        deleteModal = <DeleteModal deleteHike={this.deleteHike}/>
+      }
 
       // IF THE API HAS RETURNED THE DATA FOR THE HIKES DETAILS
       if (Object.keys(this.state.hike).length !== 0) {
@@ -129,7 +169,7 @@ class HikeDetailsModal extends BaseModal {
 
         let whatToRender;
         if (this.state.showEditForm) {
-          // the editForm will replace all of the hike details when the 'Edit hike details' buttomn is clicked
+          // the editForm will replace all of the hike details when the 'Edit hike details' button is clicked
             // only the edit form will be rendered in the modal!
 
           // pass hikeState to FormContainer so that it can be passed to EditForm, hikeState will be added to EditForms state via the ComponentWillMount function in BaseForm so that the current details of the hike can be shown in the EditForm
@@ -159,9 +199,10 @@ class HikeDetailsModal extends BaseModal {
                </div>
              }
           // else the modal will show all of the hike's details
-          // passing trackpoints to MapHikeDetails will allow SingleHikeMap to display the gpx track if there is one for the hike 
+          // passing trackpoints to MapHikeDetails will allow SingleHikeMap to display the gpx track if there is one for the hike
             whatToRender =
             <div>
+              {deleteModal}
               <h2 className='greenUnderline'>{hikeDetails.name}</h2>
               {image}
               <div className='topMargin'>
@@ -177,6 +218,7 @@ class HikeDetailsModal extends BaseModal {
                 trackpoints={this.state.trackpoints}/>
               <Button className='yellowButton hoverGrey alignLeft rightMargin' onClick={this.toggleEditForm}>Edit hike details</Button>
               <TrackForm id={hikeDetails.id} fetchHikeDetails={this.fetchHikeDetailsFromApi}/>
+              <Button onClick={this.showDeleteModal} className='hoverGrey redButton'>Delete hike</Button>
               <Button className='hoverGrey redButton' onClick={this.closeModal}>close</Button>
           </div>
         }
