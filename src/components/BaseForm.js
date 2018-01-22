@@ -35,7 +35,7 @@ class BaseForm extends LinkedComponent {
   // default props are used to generate the options for the select input for regions in the form and to set the state in the constructor, as well as to reset the state to clear the form
   // TODO: figure out how to set the state for the modals in form.js
   static defaultProps = {
-    regions: ['Central Washington', 'Eastern Washington', 'North Cascades', 'Mount Rainier Area', 'Puget Sound and Islands', 'Olympic Peninsula', 'Snoqualmie Region', 'South Cascades', 'Central Cascades', 'Issaquah Alps', 'Southwest Washington', 'Mount Adams', 'Mount Hood', 'Columbia Gorge', 'Oregon Coast', ],
+    regions: ['Central Washington', 'Eastern Washington', 'North Cascades', 'Mount Rainier Area', 'Puget Sound and Islands', 'Olympic Peninsula', 'Snoqualmie Region', 'South Cascades', 'Central Cascades', 'Issaquah Alps', 'Southwest Washington', 'Mount Adams', 'Mount Hood', 'Columbia Gorge', 'Oregon Coast', 'Other'],
     initialState: {
       name: '',
       nameError: false,
@@ -257,7 +257,7 @@ render() {
   // show the error modal if the post request failed
   // pass the successModal the function to close the AddHikeModal via props (hideFormModal)
   // TODO: figure out how to refactor this to move this logic into Form.js instead
-  // showModal() function in Form.js controls when this.state.showErrorModal and this.state.showSuccessModal is changed to true 
+  // showModal() function in Form.js controls when this.state.showErrorModal and this.state.showSuccessModal is changed to true
   if (this.state.showErrorModal) {
     modal = <ErrorModal hideFormModal={this.props.hideFormModal}/>
   } else if (this.state.showSuccessModal) {

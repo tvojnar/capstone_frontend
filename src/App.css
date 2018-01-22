@@ -93,6 +93,12 @@ medium blue: #9bbff4
   -moz-border-radius: 5px;
 }
 
+
+/* .button:active, .button:visited {
+  color: inherit;
+  background-color: inherit;
+} */
+
 .darkBlueButton {
   background-color: #4a80f5;
   color: white;
@@ -103,6 +109,8 @@ medium blue: #9bbff4
 
 :focus {
     outline: none !important;
+    color: inherit;
+    background-color: inherit;
 }
 
 .App {
@@ -169,6 +177,11 @@ body {
   margin-bottom: 0%;
   display: inline-block !important;
 }
+
+/* .addHikeButton:active, .addHikeButton:visited {
+  color: inherit;
+  background-color: inherit;
+} */
 
 .appName {
   margin-bottom: 0;
