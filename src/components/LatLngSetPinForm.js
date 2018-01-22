@@ -16,28 +16,37 @@ class LatLngSetPinForm extends LinkedComponent {
 
     // Set the state using the default props
     // later state will be reset when a user types in the input fields
-    this.state = this.props.initialState;
+    // this.state = this.props.initialState;
+    this.state = {
+      lat: '',
+      lng: '',
+      name: '',
+    }
 
     this.trimState = this.trimState.bind(this);
     this.submitForm = this.submitForm.bind(this);
   }
 
   // default props are used to reset the state to clear the form as well as to set the initialState
-  static defaultProps = {
-    initialState: {
-      lat: '',
-      lng: '',
-      name: '',
-    }
-  }
+  // static defaultProps = {
+  //   initialState: {
+  //     lat: '',
+  //     lng: '',
+  //     name: this.props.hikeName,
+  //   }
+  // }
 
+// componentWillReceiveProps(nextProps) {
+//   this.setState({
+//     name: nextProps.hikeName
+//   })
+//
+//   nextProps.setName(this.state.name);
+//
+// }
   // use this function to prepopulate form input fields with the hike's name in EditForm
-  componentWillMount(nextProps) {
-    // if (this.props.hikeName) {
-    //   this.setState({
-    //     lat: this.props.hikeLat,
-    //     lng: this.state.hikeLng})
-    // }
+  componentWillMount() {
+
       console.log('in CWM in LatLngSetPinForm');
 
     if (Object.keys(this.props.detailsToSetPin).length !== 0) {
@@ -47,6 +56,14 @@ class LatLngSetPinForm extends LinkedComponent {
         lng: this.props.detailsToSetPin.lng
       })
     }
+
+    // else if (Object.keys(this.props.detailsToSetPin).length === 0) {
+    //   this.setState({
+    //     name: this.props.hikeName
+    //   })
+    //
+    //   this.props.setName(this.state.name);
+    // }
 
   }
 

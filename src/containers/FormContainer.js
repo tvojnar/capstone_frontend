@@ -195,6 +195,7 @@ class FormContainer extends Component {
       pinForm = <LatLngSetPinForm
       setLatLng={this.setLatLng}
       detailsToSetPin={detailsToSetPin}
+      name={this.state.hikeName}
       />
     } else {
       message = <p>Having trouble finding your hike? Click below to manually enter your hikes location</p>
@@ -202,6 +203,7 @@ class FormContainer extends Component {
       pinForm= <SetPinForm
       setName={this.setName}
       detailsToSetPin={detailsToSetPin}
+      name={this.state.hikeName}
       />
     }
 

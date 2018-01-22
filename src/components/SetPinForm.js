@@ -15,17 +15,19 @@ class SetPinForm extends LinkedComponent {
 
     // Set the state using the default props
     // later state will be reset when a user types in the input fields
-    this.state = this.props.initialState;
-
+    // this.state = this.props.initialState;
+    this.state = {
+      name: '',
+    }
     this.trimState = this.trimState.bind(this);
   }
 
   // default props are used to reset the state to clear the form as well as to set the initialState
-  static defaultProps = {
-    initialState: {
-      name: '',
-    }
-  }
+  // static defaultProps = {
+  //   initialState: {
+  //     name: this.props.hikeName,
+  //   }
+  // }
 
   // use this function to prepopulate form input fields with the hike's name in EditForm
   // componentWillMount(nextProps) {
@@ -34,8 +36,18 @@ class SetPinForm extends LinkedComponent {
   //   }
   // }
 
+  // componentWillReceiveProps(nextProps) {
+  //   console.log('in CWRP in SetPinForm:');
+  //
+  //   this.setState({
+  //     name: nextProps.hikeName
+  //   })
+  //
+  //   nextProps.setName(this.state.name);
+  // }
+
   componentWillMount() {
-    console.log('in CWRP in SetPinForm and detailsToSetPin is:');
+
     console.log(this.props.detailsToSetPin);
     if (Object.keys(this.props.detailsToSetPin).length !== 0) {
       this.setState({
@@ -44,7 +56,14 @@ class SetPinForm extends LinkedComponent {
         lng: this.props.detailsToSetPin
       })
     }
-  }
+    // else if (Object.keys(this.props.detailsToSetPin).length === 0) {
+    //   this.setState({
+    //     name: this.props.hikeName
+    //   })
+    //
+    //   this.props.setName(this.state.name);
+    // }
+  } // componentWillMount
 
 
   // function runs when the submit button is clicked on the form
