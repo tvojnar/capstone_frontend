@@ -35,6 +35,7 @@ class FormContainer extends Component {
     this.setName = this.setName.bind(this);
     this.setLatLng = this.setLatLng.bind(this);
     this.setManualEnter = this.setManualEnter.bind(this);
+    this.handleClose = this.handleClose.bind(this);
   }
 
   // if we are editing the hike then we want to change nameEntered to true so that the pin for the hike will be shown in the edit form
@@ -53,7 +54,9 @@ class FormContainer extends Component {
     }
   } // conponentWillMount
 
-
+  handleClose() {
+    this.setState({error: false})
+  }
 
   // this function is passed as props to SetPinForm so it can call it when the form is submitted
   // it sets this.name as the name passed from SetPinForm
@@ -147,7 +150,7 @@ class FormContainer extends Component {
           console.log('in error of geocode');
           this.setState({
             error: true,
-            errorMessage: 'No hike was found for that name. Try adding more details, like a state or county, or click the button below to manually enter the starting latitude and longitude for your hike.',
+            errorMessage: 'No hike was found for that name. Try adding more details, like a state or county, or click the yellow button below to manually enter the starting latitude and longitude for your hike.',
             nameEntered: false,
           })
         } // if/else
@@ -208,6 +211,7 @@ class FormContainer extends Component {
       displayErrorMessage = <Callout color={Colors.ALERT}>
       <h5>Error:</h5>
       <p>{this.state.errorMessage}</p>
+      <Link size={Sizes.TINY} onClick={this.handleClose}>Close</Link>
       </Callout>
     }
 

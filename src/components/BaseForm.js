@@ -29,6 +29,7 @@ class BaseForm extends LinkedComponent {
 
     this.trimState = this.trimState.bind(this);
     this.handleImageUpload = this.handleImageUpload.bind(this);
+    this.handleClose = this.handleClose.bind(this);
   }
 
   // default props are used to generate the options for the select input for regions in the form and to set the state in the constructor, as well as to reset the state to clear the form
@@ -66,8 +67,14 @@ class BaseForm extends LinkedComponent {
       showErrorModal: false,
       showSuccessModal: false,
       submitError: false,
-      submitErrorMessage: 'Submit failed: Please set a pin for the hike',
+      submitErrorMessage: 'Submit failed: Please set the location of the hike.',
     }
+  }
+
+// hide the error message when the user hits the close button on the Callout for when the form is submitted without setting a location for the hike
+  handleClose() {
+    console.log('in handleClose');
+    this.setState({submitError: false})
   }
 
   // upload
@@ -258,8 +265,10 @@ render() {
 
   let errorOnSubmitMessage;
   if (this.state.submitError) {
-    errorOnSubmitMessage = <Callout color={Colors.ALERT}>
-    <p>{this.state.submitErrorMessage}</p>
+    errorOnSubmitMessage =
+    <Callout color={Colors.ALERT}>
+      <p>{this.state.submitErrorMessage}</p>
+      <Button className='closeButton blueButton' onClick={this.handleClose}>Close</Button>
     </Callout>
 
   }
