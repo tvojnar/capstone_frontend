@@ -6,6 +6,7 @@ import { TextHikeDetailsContainer } from '../containers/TextHikeDetailsContainer
 import { HikeAttributes } from '../components/HikeAttributes';
 import MapHikeDetails from '../components/MapHikeDetails';
 import FormContainer from '../containers/FormContainer';
+import {TrackForm} from '../components/TrackForm';
 import '../foundation.css';
 import {Button} from 'react-foundation';
 import '../App.css';
@@ -47,6 +48,7 @@ class HikeDetailsModal extends BaseModal {
     this.state = {
       modalIsOpen: true,
       hike: {},
+      trackpoint:[],
     }
 
     this.toggleEditForm = this.toggleEditForm.bind(this);
@@ -75,6 +77,7 @@ class HikeDetailsModal extends BaseModal {
   }
 
   fetchHikeDetailsFromApi() {
+    console.log('in fetchHikeDetailsFromApi');
     // make the api call to get hike details
     const hikeId = this.props.id
     // const baseUrl = 'http://capstone-env.ejfznpwqha.us-west-2.elasticbeanstalk.com/api/hikes/'
@@ -89,12 +92,21 @@ class HikeDetailsModal extends BaseModal {
         console.log('successful show api call!');
         console.log(data);
         // set this.state.hikes to be equal to the data for all of the hikes within the maps bounds
-        this.setState({ hike: data })
+        this.setState({ hike: data["hike_data"] })
+
+        // if the hike has trackpoints (meaning a gpx track was uploaded by the user) the API will send back trackpoints in the response which is formatted like: [{lat: 45, lng: 55}, {lat: 47, lng: 59} ...]
+        // if trackpoints are returned then add them to this.state.trackpoints so that they can be passed to MapHikeDetails -> SingleHikeMap
+        if (data["trackpoints"]) {
+          this.setState({trackpoints: data["trackpoints"]})
+          console.log(' in if for trackpoints');
+          console.log(this.state.trackpoints);
+        }
         // QUESTION: Should I have a message to the user appear when there are no hikes in the boundaries of the map?
       }.bind(this), // success
       error: function(xhr, status, err) {
         console.log('in error');
         console.log(err);
+
         // TODO: Display error message that the api call did not work.
       } // error
     }); // get request
@@ -147,6 +159,7 @@ class HikeDetailsModal extends BaseModal {
                </div>
              }
           // else the modal will show all of the hike's details
+          // passing trackpoints to MapHikeDetails will allow SingleHikeMap to display the gpx track if there is one for the hike 
             whatToRender =
             <div>
               <h2 className='greenUnderline'>{hikeDetails.name}</h2>
@@ -160,8 +173,10 @@ class HikeDetailsModal extends BaseModal {
               <MapHikeDetails
                 onRef={ref => (this.child = ref)}
                 lat={hikeDetails.start_lat}
-                lng={hikeDetails.start_lng}/>
+                lng={hikeDetails.start_lng}
+                trackpoints={this.state.trackpoints}/>
               <Button className='yellowButton hoverGrey alignLeft rightMargin' onClick={this.toggleEditForm}>Edit hike details</Button>
+              <TrackForm id={hikeDetails.id} fetchHikeDetails={this.fetchHikeDetailsFromApi}/>
               <Button className='hoverGrey redButton' onClick={this.closeModal}>close</Button>
           </div>
         }

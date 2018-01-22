@@ -2,8 +2,10 @@ import React from 'react';
 import {HikeMarkerContainer} from '../containers/HikeMarkerContainer';
 
 import { compose, withProps } from "recompose"
-import { withScriptjs, withGoogleMap, GoogleMap} from "react-google-maps"
+import { withScriptjs, withGoogleMap, GoogleMap, Polygon, Polyline} from "react-google-maps"
 
+// props.hike is the Marker for the hike
+// the polyline will be the gps track of the hike if it has one
 export const SingleHikeMap = compose(
   withProps({
     // googleMapURL: "https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyDz5xfxr2GdFNz--4JKd5zfkPSmJFt6jas&libraries=geometry,drawing,places",
@@ -19,6 +21,7 @@ export const SingleHikeMap = compose(
   <GoogleMap className='SingleHikeMap'
     defaultCenter={props.center}
     defaultZoom={props.zoom}>
-  {props.hike}
+    {props.hike}
+    <Polyline path={props.trackpoints}/>
   </GoogleMap>
 )
