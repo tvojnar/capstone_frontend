@@ -425,7 +425,7 @@ render() {
     <div className='importFile'>
     <label>
     <strong>Add cover photo for your hike:</strong>
-    <input classname='imageButton' onChange={this.handleImageUpload} id="image" type="file" name="image" accept="image/x-png, image/gif, image/jpeg" />
+    <input className='imageButton' onChange={this.handleImageUpload} id="image" type="file" name="image" accept="image/x-png, image/gif, image/jpeg" />
     </label>
     </div>
 

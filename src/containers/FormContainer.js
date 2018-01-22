@@ -29,6 +29,7 @@ class FormContainer extends Component {
       lng: -122,
       nameEntered: false,
       hikeName: '',
+      nameForPin: '',
     };
 
 
@@ -36,6 +37,7 @@ class FormContainer extends Component {
     this.setLatLng = this.setLatLng.bind(this);
     this.setManualEnter = this.setManualEnter.bind(this);
     this.handleClose = this.handleClose.bind(this);
+    this.setNameForPinForms = this.setNameForPinForms.bind(this);
   }
 
   // if we are editing the hike then we want to change nameEntered to true so that the pin for the hike will be shown in the edit form
@@ -56,6 +58,12 @@ class FormContainer extends Component {
 
   handleClose() {
     this.setState({error: false})
+  }
+
+  setNameForPinForms(nameFromForm) {
+    console.log('in setNameForPinForms and name is:');
+    console.log(nameFromForm);
+    this.setState({nameForPin: nameFromForm})
   }
 
   // this function is passed as props to SetPinForm so it can call it when the form is submitted
@@ -195,7 +203,8 @@ class FormContainer extends Component {
       pinForm = <LatLngSetPinForm
       setLatLng={this.setLatLng}
       detailsToSetPin={detailsToSetPin}
-      name={this.state.hikeName}
+      name={this.state.nameForPin}
+      setNameBeforeFormSwitch={this.setNameForPinForms}
       />
     } else {
       message = <p>Having trouble finding your hike? Click below to manually enter your hikes location</p>
@@ -204,6 +213,7 @@ class FormContainer extends Component {
       setName={this.setName}
       detailsToSetPin={detailsToSetPin}
       name={this.state.hikeName}
+      setNameBeforeFormSwitch={this.setNameForPinForms}
       />
     }
 

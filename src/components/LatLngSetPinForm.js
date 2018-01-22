@@ -25,8 +25,16 @@ class LatLngSetPinForm extends LinkedComponent {
 
     this.trimState = this.trimState.bind(this);
     this.submitForm = this.submitForm.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+
   }
 
+
+  handleChange() {
+    console.log('in handleChange for lat lng ');
+        console.log(this.state.name);
+    this.props.setNameBeforeFormSwitch(this.state.name);
+  }
   // default props are used to reset the state to clear the form as well as to set the initialState
   // static defaultProps = {
   //   initialState: {
@@ -36,14 +44,17 @@ class LatLngSetPinForm extends LinkedComponent {
   //   }
   // }
 
-// componentWillReceiveProps(nextProps) {
+//  componentWillReceiveProps(nextProps) {
+//   console.log('COMPONENT WILL RECEIVE PROPS latlng');
 //   this.setState({
-//     name: nextProps.hikeName
+//     name: nextProps.nameForPin
 //   })
 //
-//   nextProps.setName(this.state.name);
+// nextProps.setNameBeforeFormSwitch(this.state.name);
 //
 // }
+
+
   // use this function to prepopulate form input fields with the hike's name in EditForm
   componentWillMount() {
 
@@ -55,18 +66,17 @@ class LatLngSetPinForm extends LinkedComponent {
         lat: this.props.detailsToSetPin.lat,
         lng: this.props.detailsToSetPin.lng
       })
+    } else if (Object.keys(this.props.detailsToSetPin).length === 0) {
+      if (this.props.nameForPin) {
+      this.setState({
+        name: this.props.nameForPin
+      })
+  this.props.setNameBeforeFormSwitch(this.state.name);
+
+    }
     }
 
-    // else if (Object.keys(this.props.detailsToSetPin).length === 0) {
-    //   this.setState({
-    //     name: this.props.hikeName
-    //   })
-    //
-    //   this.props.setName(this.state.name);
-    // }
-
   }
-
 
   // function runs when the submit button is clicked on the form
   onSubmit = e => {
@@ -159,7 +169,7 @@ render() {
   // only show the form validation message and styling if the user hit submit without entering a name
   if (this.state.nameError) {
     nameBox = <label>
-    Name: <Input type="text"
+    Name: <Input onChange={this.handleChange} type="text"
     className={ nameIsValid ? '' : 'invalid'}
     valueLink={ nameLink }
     />

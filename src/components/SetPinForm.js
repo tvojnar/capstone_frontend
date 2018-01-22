@@ -20,7 +20,16 @@ class SetPinForm extends LinkedComponent {
       name: '',
     }
     this.trimState = this.trimState.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  } // constructor
+
+
+  handleChange() {
+    console.log('in handleChange for lat lng ');
+    console.log(this.state.name);
+    this.props.setNameBeforeFormSwitch(this.state.name);
   }
+
 
   // default props are used to reset the state to clear the form as well as to set the initialState
   // static defaultProps = {
@@ -35,15 +44,15 @@ class SetPinForm extends LinkedComponent {
   //     this.setState({name: this.nextProps.hikeName})
   //   }
   // }
-
-  // componentWillReceiveProps(nextProps) {
-  //   console.log('in CWRP in SetPinForm:');
+  //
+  //  componentWillReceiveProps(nextProps) {
+  //   console.log('COMPONENT WILL RECEIVE PROPS setPin');
   //
   //   this.setState({
-  //     name: nextProps.hikeName
+  //     name: nextProps.nameForPin
   //   })
   //
-  //   nextProps.setName(this.state.name);
+  //   nextProps.setNameBeforeFormSwitch(this.state.name);
   // }
 
   componentWillMount() {
@@ -55,15 +64,18 @@ class SetPinForm extends LinkedComponent {
         lat: this.props.detailsToSetPin.lat,
         lng: this.props.detailsToSetPin
       })
+    } else if (Object.keys(this.props.detailsToSetPin).length === 0) {
+      if (this.props.nameForPin) {
+      this.setState({
+        name: this.props.nameForPin
+
+      })
+      this.props.setNameBeforeFormSwitch(this.state.name);
     }
-    // else if (Object.keys(this.props.detailsToSetPin).length === 0) {
-    //   this.setState({
-    //     name: this.props.hikeName
-    //   })
-    //
-    //   this.props.setName(this.state.name);
-    // }
+    }
   } // componentWillMount
+
+
 
 
   // function runs when the submit button is clicked on the form
@@ -138,7 +150,7 @@ render() {
     </label>
   } else {
     nameBox = <label>
-    Name: <Input type="text" valueLink={ nameLink }
+    Name: <Input onChange={this.handleChange} type="text" valueLink={ nameLink }
     />
     </label>
   }
