@@ -60,9 +60,11 @@ medium blue: #9bbff4
   color: #bbdaa4;
 }
 
-#b:hover {
-  background-color: red;
+.button:hover {
+  background-color: gray;
+
 }
+
 .redButton {
   background-color: #E85252;
   -webkit-border-radius: 5px;
@@ -83,14 +85,24 @@ medium blue: #9bbff4
   -moz-border-radius: 5px;
 }
 
-.hoverGrey:hover {
-  background-color: gray;
-}
+
 .greenButton {
   background-color: #bbdaa4;
   color: black;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
+}
+
+.darkBlueButton {
+  background-color: #4a80f5;
+  color: white;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  margin-left: 1%;
+}
+
+:focus {
+    outline: none !important;
 }
 
 .App {
@@ -256,6 +268,9 @@ body {
 list-style-type: none !important;
 }
 
+.addLeftMargin {
+  margin-left: 1%;
+}
 /******************************/
 /**** success and error modals   *********/
 /******************************/
