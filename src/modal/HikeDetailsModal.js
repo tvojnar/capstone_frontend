@@ -9,7 +9,7 @@ import FormContainer from '../containers/FormContainer';
 import {TrackForm} from '../components/TrackForm';
 import DeleteModal from '../modal/DeleteModal';
 import '../foundation.css';
-import {Button} from 'react-foundation';
+import {Button, Callout, Colors, Link, Sizes} from 'react-foundation';
 import '../App.css';
 
 // sets the portion of the app that should be hidden
@@ -51,19 +51,25 @@ class HikeDetailsModal extends BaseModal {
       hike: {},
       trackpoint:[],
       showDeleteModal: false,
+      deleteError: false,
     }
 
     this.toggleEditForm = this.toggleEditForm.bind(this);
     this.fetchHikeDetailsFromApi = this.fetchHikeDetailsFromApi.bind(this);
     this.showDeleteModal = this.showDeleteModal.bind(this);
     this.deleteHike = this.deleteHike.bind(this);
-  }
+    this.handleClose = this.handleClose.bind(this);
+  } // constructor
 
   showDeleteModal() {
     this.setState({
       showDeleteModal: true
     })
-  }
+  } // showDeleteModal
+
+  handleClose() {
+    this.setState({deleteError: false})
+  } // handleClose
 
 // called when the user clickes 'yes' in the delete hike modal (whch appears when the user clicks the delete button)
 deleteHike() {
@@ -86,7 +92,8 @@ deleteHike() {
     error: function(xhr, status, err) {
       console.log('in error');
       console.log(err);
-    } // error
+      this.setState({deleteError: true})
+    }.bind(this)// error
   }); // DELETE request
 
 } // deleteHike()
@@ -156,10 +163,23 @@ deleteHike() {
   }
 
   render() {
+
+      // if the user clicks the delete button then this.state.showErrorModal will be true and the modal will show up
       let deleteModal;
       if (this.state.showDeleteModal) {
         deleteModal = <DeleteModal deleteHike={this.deleteHike}/>
       }
+
+      // if the delete fails then show a callout with an error message
+      let deleteErrorMessage;
+      if (this.state.deleteError) {
+        deleteErrorMessage = <Callout color={Colors.ALERT}>
+        <p>We were unable to delete your hike. Please try again.</p>
+        <Link size={Sizes.TINY} onClick={this.handleClose}>Close</Link>
+        </Callout>
+      }
+
+
 
       // IF THE API HAS RETURNED THE DATA FOR THE HIKES DETAILS
       if (Object.keys(this.state.hike).length !== 0) {
@@ -218,6 +238,7 @@ deleteHike() {
                 trackpoints={this.state.trackpoints}/>
               <Button className='yellowButton hoverGrey alignLeft rightMargin' onClick={this.toggleEditForm}>Edit hike details</Button>
               <TrackForm id={hikeDetails.id} fetchHikeDetails={this.fetchHikeDetailsFromApi}/>
+              {deleteErrorMessage}
               <Button onClick={this.showDeleteModal} className='hoverGrey redButton'>Delete hike</Button>
               <Button className='hoverGrey redButton' onClick={this.closeModal}>close</Button>
           </div>
