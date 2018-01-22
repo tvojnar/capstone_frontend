@@ -179,14 +179,17 @@ handleCloseSuccess() {
       }
 
     return (
-      <form>
-      <p>Upload a gpx track for this hike:</p>
-      {errorMessage}
-      <input onChange={this.handleChange} id="gpx" type="file" name="gpx" accept=".gpx"/>
-      {loadingMessage}
-      {uploadMessage}
-      <Button onClick={this.handleSubmit} type="submit">Upload track</Button>
-      </form>
+      <div className='importFile'>
+        <form>
+          <label><strong>Upload a gpx track for this hike:</strong>
+          {errorMessage}
+          <input onChange={this.handleChange} id="gpx" type="file" name="gpx" accept=".gpx"/>
+          </label>
+          {loadingMessage}
+          {uploadMessage}
+          <Button className='blueButton' onClick={this.handleSubmit} type="submit">Upload track</Button>
+        </form>
+      </div>
     )
   }
 }
