@@ -13,6 +13,7 @@ export class TrackForm extends Component {
       gpx_file:null,
       trkpt_failed: false,
       uploadWarning: false,
+      successfulPost: false,
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -20,8 +21,14 @@ export class TrackForm extends Component {
 
     this.handleCloseUploadWarning = this.handleCloseUploadWarning.bind(this);
     this.handleCloseFailure = this.handleCloseFailure.bind(this);
+    this.handleCloseSuccess = this.handleCloseSuccess.bind(this);
   }
 
+
+// removes the success message when a track saved to the api
+handleCloseSuccess() {
+  this.setState({successfulPost: false})
+}
 // removes the error message for when a track fails to save to the api
   handleCloseFailure() {
     this.setState({trkpt_failed: false})
@@ -108,6 +115,7 @@ export class TrackForm extends Component {
             console.log(data);
             if (data.status == 'all') {
                   // if the api call was a success and the api was able to create all of the trackpoints in the xml file then call a function so that the HikeDetailsModal will fetch the hikes details from the API again so that it will now have all of the trackpoints of the hike so that they can be displayed on the map
+              this.setState({successfulPost: true})
               this.props.fetchHikeDetails();
             } else {
               // if the trackpoints did not all save then tell the user that the upload failed
@@ -159,6 +167,17 @@ export class TrackForm extends Component {
       <Link size={Sizes.TINY} onClick={this.handleCloseUploadWarning}>Close</Link>
       </Callout>
     }
+
+    // if the upload of the gpx track was successful then show the user a success message
+      let successMessage;
+      if (this.state.successfulPost) {
+        successMessage =
+        <Callout color={Colors.SUCCESS}>
+        <p>Your gpx track was successfully saved!</p>
+        <Link size={Sizes.TINY} onClick={this.handleCloseSuccess}>Close</Link>
+        </Callout>
+      }
+
     return (
       <form>
       <p>Upload a gpx track for this hike:</p>
