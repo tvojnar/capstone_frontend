@@ -33,14 +33,13 @@ class DeleteModal extends BaseModal {
 
 
   closeModal() {
-    // make the success modal dissapear
+    // make the delete modal dissapear
     this.setState({modalIsOpen: false});
-    // make the form modal close
-    // this.props.hideFormModal();
+
   }
 
   handleDelete() {
-    // call the deleteHike() function in HikeDetailsModal
+    // call the deleteHike() function in HikeDetailsModal to delete the hike in the API
     this.props.deleteHike();
     // close the modal
     this.setState({modalIsOpen: false});

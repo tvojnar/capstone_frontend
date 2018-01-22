@@ -61,12 +61,14 @@ class HikeDetailsModal extends BaseModal {
     this.handleClose = this.handleClose.bind(this);
   } // constructor
 
+  // is called when the user clicks the 'Delte' button so that the modal that asks the user if they really want to delete the hike is shown
   showDeleteModal() {
     this.setState({
       showDeleteModal: true
     })
   } // showDeleteModal
 
+  // closes the warning that the hike was not deleted when the user clicks the 'close' button
   handleClose() {
     this.setState({deleteError: false})
   } // handleClose
@@ -74,10 +76,12 @@ class HikeDetailsModal extends BaseModal {
   // called when the user clickes 'yes' in the delete hike modal (whch appears when the user clicks the delete button)
   deleteHike() {
     console.log('in deleteHike!');
-    const hikeId = this.props.id 
+    // genereate the url for the DELETE request
+    const hikeId = this.props.id
     const baseUrl = '/api/hikes/';
     const url = baseUrl + `${hikeId}`
 
+    // make the DELETE request to the API
     $.ajax({
       url: url,
       type: 'DELETE',
@@ -86,10 +90,12 @@ class HikeDetailsModal extends BaseModal {
       success: function(data){
         console.log('got back from DELETE');
         console.log(data);
+        // if the DELETE request was a success and the API has deleted the hike then close the modal and refresh the map so that the pin for the hike is removed
         if (data['id']) {
           this.setState({modalIsOpen: false});
           this.props.fetchHikes();
         } else {
+          // if the api was unable to delete the hike then tell the user that the hike was not deleted
           this.setState({deleteError: true})
         }
       }.bind(this), // success
@@ -99,13 +105,7 @@ class HikeDetailsModal extends BaseModal {
         this.setState({deleteError: true})
       }.bind(this)// error
     }); // DELETE request
-
   } // deleteHike()
-
-  afterOpenModal() {
-    // references are now sync'd and can be accessed.
-    // this.subtitle.style.color = 'green';
-  }
 
 
   closeModal() {
