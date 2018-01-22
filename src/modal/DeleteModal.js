@@ -17,7 +17,7 @@ const customStyles = {
     transform             : 'translate(-50%, -50%)'
   },
   overlay : {
-    backgroundColor   : 'transparent'
+    backgroundColor   : 'rgba(255, 255, 255, 0.75)'
   }
 };
 
@@ -34,8 +34,8 @@ class DeleteModal extends BaseModal {
 
   closeModal() {
     // make the delete modal dissapear
-    this.setState({modalIsOpen: false});
-
+    // showDeleteModal will toggle HikeDetailsModal's this.state.showDeleteModal to false
+    this.props.showDeleteModal();
   }
 
   handleDelete() {
@@ -57,7 +57,7 @@ class DeleteModal extends BaseModal {
         >
           <h2 >Are you sure you want to delete this hike?</h2>
           <Button className='greenButton' onClick={this.handleDelete}>Yes</Button>
-          <Button className='redButton' onClick={this.closeModal}>Cancel</Button>
+          <Button className='redButton addLeftMargin' onClick={this.closeModal}>Cancel</Button>
         </Modal>
       </div>
     );

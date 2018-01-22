@@ -62,9 +62,10 @@ class HikeDetailsModal extends BaseModal {
   } // constructor
 
   // is called when the user clicks the 'Delte' button so that the modal that asks the user if they really want to delete the hike is shown
+  // when the user clicks 'yes' or 'close' in the DeleteModal this function will be called to toggle this.state.showDeleteModal back to false so that the DeleteModal dissapears
   showDeleteModal() {
     this.setState({
-      showDeleteModal: true
+      showDeleteModal: !this.state.showDeleteModal
     })
   } // showDeleteModal
 
@@ -171,7 +172,9 @@ class HikeDetailsModal extends BaseModal {
     // if the user clicks the delete button then this.state.showErrorModal will be true and the modal will show up
     let deleteModal;
     if (this.state.showDeleteModal) {
-      deleteModal = <DeleteModal deleteHike={this.deleteHike}/>
+      deleteModal = <DeleteModal
+        deleteHike={this.deleteHike}
+        showDeleteModal={this.showDeleteModal}/>
     }
 
     // if the delete fails then show a callout with an error message
@@ -240,11 +243,11 @@ class HikeDetailsModal extends BaseModal {
         lat={hikeDetails.start_lat}
         lng={hikeDetails.start_lng}
         trackpoints={this.state.trackpoints}/>
-        <Button className='yellowButton hoverGrey alignLeft rightMargin' onClick={this.toggleEditForm}>Edit hike details</Button>
         <TrackForm id={hikeDetails.id} fetchHikeDetails={this.fetchHikeDetailsFromApi}/>
-        {deleteErrorMessage}
+          {deleteErrorMessage}
+        <Button className='yellowButton hoverGrey alignLeft rightMargin' onClick={this.toggleEditForm}>Edit hike details</Button>
         <Button onClick={this.showDeleteModal} className='hoverGrey redButton'>Delete hike</Button>
-        <Button className='hoverGrey redButton' onClick={this.closeModal}>close</Button>
+        <Button className='hoverGrey darkBlueButton' onClick={this.closeModal}>Close</Button>
         </div>
       }
 
