@@ -25,8 +25,8 @@ export class AddHike extends Component {
   handleClick() {
     console.log('in handleClick');
     this.setState({showModal: true})
-
   }
+
 
   handleHideModal() {
     console.log('in handleHideModal');

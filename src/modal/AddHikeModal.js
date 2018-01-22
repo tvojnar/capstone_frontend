@@ -45,6 +45,11 @@ class AddHikeModal extends BaseModal {
 
   }
 
+// override the BaseModals behavior so that the user can click on 'Add Hike' again if they close the AddHikeModal by clicking outside of the modal. This way 'modalIsOpen' for AddHikeModal will always be true so it can be shown whenever the 'Add hike' button is clicked 
+  closeModal() {
+    this.props.hideModalFromAddHike();
+  }
+
 
 
 // pass FormContainer fetchHikes so that it can pass it to Form to call the Map components fetchHikesFromApi function when the form is submitted
