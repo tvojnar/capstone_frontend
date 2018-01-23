@@ -8,7 +8,7 @@ export const TextHikeDetails = (props) => {
   return(
     <div>
       <h3 className='blueText'>{data.title}</h3>
-      <p>{data.text}</p>
+      <p className='textForDetails' >{data.text}</p>
     </div>
   )
 } //

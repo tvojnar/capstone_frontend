@@ -323,7 +323,7 @@ render() {
     </div>
 
     <label className='attributeLabel'>
-    Description: <TextArea style={{ minHeight: 150, minWidth: '100%' }} valueLink={ linked.description } />
+    Description: <TextArea style={{ minHeight: 150, minWidth: '100%'}} valueLink={ linked.description } />
     </label>
 
 

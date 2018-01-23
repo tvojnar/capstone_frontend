@@ -297,6 +297,10 @@ list-style-type: none !important;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
 }
+
+.textForDetails {
+  white-space: pre-wrap;
+}
 /******************************/
 /**** success and error modals   *********/
 /******************************/
