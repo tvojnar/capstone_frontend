@@ -89,7 +89,7 @@ handleCloseSuccess() {
         let hikeId = this.props.id
         // since I am using a nested rout on the backend the url is '/api/hikes/:hike_id/trackpoints'
         // I am making the url in this way because I can only get my post to work when i send 'data: xml' and if I do 'data: {gpx_file: xml, id: hikeId}' it doesn't work, so I am using a nested route in my api for trackpoints#create so that I can send the hikeId in the url to the API instead
-        const baseUrl = 'http://scrappyhikerapi.com/api/hikes';
+        const baseUrl = 'http://scrappyhikerapi.com/api/hikes/';
         // const baseUrl = '/api/hikes/'
         const url = baseUrl + `${hikeId}` + '/trackpoints'
 
