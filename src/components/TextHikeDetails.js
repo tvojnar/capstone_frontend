@@ -6,9 +6,9 @@ export const TextHikeDetails = (props) => {
 
 
   return(
-    <div>
-      <h3 className='blueText'>{data.title}</h3>
-      <p>{data.text}</p>
+    <div className='details'>
+      <h3 className='greenUnderline'>{data.title}</h3>
+      <p >{data.text}</p>
     </div>
   )
 } //

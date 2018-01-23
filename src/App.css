@@ -53,7 +53,11 @@ medium blue: #9bbff4
 }
 
 .blueText {
-  color: #a7cdf2;
+  color: #a7cdf9;
+}
+
+.blueUnderline {
+  border-bottom: solid 3px #a7cdf9;
 }
 
 .greenText {
@@ -293,6 +297,16 @@ list-style-type: none !important;
   margin-bottom: 4%;
   background-color: #a7cdf2;
   padding: 1%;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+}
+
+.details {
+  /* border: solid 1px blue; */
+  /* background-color: #F2F9F2; */
+  background-color: #F2F9F2;
+  margin-bottom: 1%;
+  padding: 2%;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
 }
