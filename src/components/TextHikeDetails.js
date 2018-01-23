@@ -7,7 +7,7 @@ export const TextHikeDetails = (props) => {
 
   return(
     <div className='details'>
-    <h3 className='greenUnderline'>{data.title}</h3>
+    <h4 className='greenUnderline'>{data.title}</h4>
     <p >{data.text}</p>
     </div>
   )
