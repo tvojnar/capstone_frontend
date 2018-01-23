@@ -1,4 +1,4 @@
-
+// NOTE: I am not using this component in my app 
 
 import $ from 'jquery'
 import React, { Component } from 'react'
