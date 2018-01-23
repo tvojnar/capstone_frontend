@@ -251,7 +251,6 @@ class FormContainer extends Component {
 
     return (
       <div>
-      <h1 className="addh2"> Add a hike </h1>
       <Row className='setPinDiv row'>
       <Column small={12} medium={4} large={3}  >
       {displayErrorMessage}

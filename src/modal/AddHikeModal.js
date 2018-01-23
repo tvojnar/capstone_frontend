@@ -45,7 +45,7 @@ class AddHikeModal extends BaseModal {
 
   }
 
-// override the BaseModals behavior so that the user can click on 'Add Hike' again if they close the AddHikeModal by clicking outside of the modal. This way 'modalIsOpen' for AddHikeModal will always be true so it can be shown whenever the 'Add hike' button is clicked 
+// override the BaseModals behavior so that the user can click on 'Add Hike' again if they close the AddHikeModal by clicking outside of the modal. This way 'modalIsOpen' for AddHikeModal will always be true so it can be shown whenever the 'Add hike' button is clicked
   closeModal() {
     this.props.hideModalFromAddHike();
   }
@@ -66,6 +66,7 @@ class AddHikeModal extends BaseModal {
           style={customStyles}
           contentLabel="Example Modal"
         >
+         <h1 className="addh2"> Add a hike </h1>
           <FormContainer
             fetchHikes={this.props.fetchHikes}
             hideModalFromAddHike={this.props.hideModalFromAddHike}
