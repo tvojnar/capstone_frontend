@@ -207,8 +207,8 @@ class HikeDetailsModal extends BaseModal {
 
         whatToRender =
         <div>
-        <h2 className='greenUnderline'>{hikeDetails.name}</h2>
-        <h4>Edit hike details: </h4>
+        <h1 className='greenUnderline'>{hikeDetails.name}</h1>
+        <h3 className='edith3'>Edit hike details: </h3>
         <FormContainer
         hikeState={hikeDetails}
         fetchHikes={this.props.fetchHikes}
