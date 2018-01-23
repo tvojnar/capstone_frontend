@@ -37,7 +37,7 @@ class Form extends BaseForm {
 
 
     // construct the url to submit the post request to
-    const url = 'scrappyhikerapi.com/api/hikes'
+    const url = 'http://scrappyhikerapi.com/api/hikes'
     // NOTE: below is url not using my domain name
     // const url = 'http://capstone-env.ejfznpwqha.us-west-2.elasticbeanstalk.com/api/hikes'
 
