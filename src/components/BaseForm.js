@@ -83,34 +83,35 @@ class BaseForm extends LinkedComponent {
     console.log('in handleImageUpload');
     console.log(e.target.files[0]);
 
-    // pull the file out of the form
+    // ONE: pull the file out of the form
     let file = e.target.files[0]
-    // clean the filename to remove any characters that S3 doesn't like
-    // let cleanFileName = file.name.toLowerCase().replace(/[^a-z0-9/g,""]/);
 
+    // takes the public url of the image that was uploaded to s3 (generated in the success callback below) and sets it to state so that it can be accessible in the POST request to create a new hike. This url will be set to the new Hikes image_url in the db so that I can access this image on the show page 
     const setUrlToState = (fileName) => {
       console.log('in setUrlToState');
       this.setState({image_url: fileName})
     }
 
+    // FOURTH: upload the image file to S3 using the presigned url
+    // upoadImage() is the function that using the presignedUrl received from the API uploads the image to s3
     const upload_image = function(presignedUrl, fileName) {
         console.log('in upload_image');
         console.log(presignedUrl);
 
-  // THIRD: upload the image file to S3 using the presigned url
+        // make an ajax call to upload the image to s3 using the presigned url
         $.ajax({
             type : 'PUT',
             url : presignedUrl,
             data : file,
             processData: false,  // tell jQuery not to convert to form data
-            // headers: { 'Content-Type': file.type, 'x-amz-acl': 'public-read' },
             headers: { 'Content-Type': file.type},
             success: function(data) {
               console.log('Upload complete!')
+              // construct the public url of the image that was just uploaded to s3 by ading to gether the base url that all images in my bucket (tv-capstone) will have to the fileName passed back from the API along with the presigned url. This filename is a compiliation of a bunch of random numbers (to insure that each fileName is unique) with the actual name of the file
               const baseImageUrl = 'https://s3-us-west-2.amazonaws.com/tv-capstone/';
               let imageUrl = baseImageUrl + fileName;
-              // imageUrl = imageUrl.replace(/[\s+,"+"]/);
               console.log(imageUrl);
+              // call setUrlToState since I don't have access to the right 'this' in here
               setUrlToState(imageUrl);
             }.bind(this),
             error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -121,7 +122,7 @@ class BaseForm extends LinkedComponent {
         });
     }
 
-    // FIRST:  make a call to the rails API (Images#index) to get a presignedUrl from S3
+    // SECOND:  make a call to the rails API (Images#index) to get a presignedUrl from S3
     const apiUrl = '/api/images'
 
     $.getJSON(apiUrl, {filename: file.name, content_type: file.type},
@@ -129,7 +130,7 @@ class BaseForm extends LinkedComponent {
         console.log('we got the url!');
         console.log(data['fileName']);
         console.log(data['url']);
-        // SECOND: call upload_image, passing it the presigned url from the rails API
+        // THIRD: call upload_image, passing it the presigned url from the rails API
         upload_image(data['url'], data['fileName'])
       }
     ); // getJSON
