@@ -1,4 +1,4 @@
- import * as React from 'react';
+import * as React from 'react';
 import $ from 'jquery'
 import '../foundation.css';
 import {Button, Colors, Row, Column, Callout} from 'react-foundation';
@@ -86,7 +86,7 @@ class BaseForm extends LinkedComponent {
     // ONE: pull the file out of the form
     let file = e.target.files[0]
 
-    // takes the public url of the image that was uploaded to s3 (generated in the success callback below) and sets it to state so that it can be accessible in the POST request to create a new hike. This url will be set to the new Hikes image_url in the db so that I can access this image on the show page 
+    // takes the public url of the image that was uploaded to s3 (generated in the success callback below) and sets it to state so that it can be accessible in the POST request to create a new hike. This url will be set to the new Hikes image_url in the db so that I can access this image on the show page
     const setUrlToState = (fileName) => {
       console.log('in setUrlToState');
       this.setState({image_url: fileName})
