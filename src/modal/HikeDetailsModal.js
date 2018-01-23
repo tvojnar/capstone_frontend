@@ -218,7 +218,7 @@ class HikeDetailsModal extends BaseModal {
         fetchHikeDetails={this.fetchHikeDetailsFromApi}
         hideEditForm={this.toggleEditForm}
         whichForm={'edit'}/>
-        <button className='hoverGrey redBUtton' onClick={this.toggleEditForm}>Cancle</button>
+        <Button className='hoverGrey redButton' onClick={this.toggleEditForm}>Cancel</Button>
         </div>
       }
       else {
