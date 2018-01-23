@@ -17,6 +17,7 @@ import SuccessModal from '../modal/SuccessModal'
 import Link, { LinkedComponent } from 'valuelink';
 import { Input } from 'valuelink/tags';
 import { Select } from 'valuelink/tags';
+import { TextArea } from 'valuelink/tags';
 
 // this is the base class for Form and EditForm
 class BaseForm extends LinkedComponent {
@@ -322,12 +323,12 @@ render() {
     </div>
 
     <label className='attributeLabel'>
-    Description: <Input style={{ minHeight: 40, minWidth: '100%' }} valueLink={ linked.description } />
+    Description: <TextArea style={{ minHeight: 150, minWidth: '100%' }} valueLink={ linked.description } />
     </label>
 
 
     <label>
-    Notes: <Input style={{ minHeight: 40, minWidth: '100%' }} valueLink={ linked.notes } />
+    Notes: <TextArea style={{ minHeight: 150, minWidth: '100%' }} valueLink={ linked.notes } />
     </label>
 
 
