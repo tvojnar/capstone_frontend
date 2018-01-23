@@ -31,7 +31,7 @@ class EditForm extends BaseForm {
 
     console.log(this.state.id);
     // construct the url to submit the patch request to
-    const baseUrl = 'http://scrappyhikerapi.com/api/hikes';
+    const baseUrl = 'http://scrappyhikerapi.com/api/hikes/';
     // NOTE: below is the url I used before getting my domain name
     // const baseUrl = 'http://capstone-env.ejfznpwqha.us-west-2.elasticbeanstalk.com/api/hikes/'
     const url = baseUrl + `${this.state.id}`
