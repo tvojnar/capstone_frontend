@@ -108,7 +108,7 @@ class BaseForm extends LinkedComponent {
             success: function(data) {
               console.log('Upload complete!')
               // construct the public url of the image that was just uploaded to s3 by ading to gether the base url that all images in my bucket (tv-capstone) will have to the fileName passed back from the API along with the presigned url. This filename is a compiliation of a bunch of random numbers (to insure that each fileName is unique) with the actual name of the file
-              const baseImageUrl = 'http://scrappyhikerapi.com/api/images';
+              const baseImageUrl = 'https://s3-us-west-2.amazonaws.com/tv-capstone/';
               let imageUrl = baseImageUrl + fileName;
               console.log(imageUrl);
               // call setUrlToState since I don't have access to the right 'this' in here
@@ -123,7 +123,7 @@ class BaseForm extends LinkedComponent {
     }
 
     // SECOND:  make a call to the rails API (Images#index) to get a presignedUrl from S3
-    const apiUrl = '/api/images'
+    const apiUrl = 'http://scrappyhikerapi.com/api/images'
 
     $.getJSON(apiUrl, {filename: file.name, content_type: file.type},
       function(data) {
