@@ -35,8 +35,11 @@ class Form extends BaseForm {
     // clear the form by resetting the state to the initialState defined in the default props
     this.setState(this.props.initialState);
 
+
     // construct the url to submit the post request to
-    const url = 'http://capstone-env.ejfznpwqha.us-west-2.elasticbeanstalk.com/api/hikes'
+    const url = 'scrappyhikerapi.com/api/hikes'
+    // NOTE: below is url not using my domain name
+    // const url = 'http://capstone-env.ejfznpwqha.us-west-2.elasticbeanstalk.com/api/hikes'
 
 
     // make the API post request to the API
