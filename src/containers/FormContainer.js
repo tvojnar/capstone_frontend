@@ -191,7 +191,7 @@ class FormContainer extends Component {
     if (this.state.manualEnter) {
       console.log('in IF for setting detailsToSetPin and is it: ');
       console.log(detailsToSetPin);
-      button= <Link size={Sizes.TINY} className='toggleManual hoverGrey' onClick={this.setManualEnter}>Use hike name to set pin</Link>
+      button= <Link size={Sizes.SMALL} className='toggleManual hoverGrey' onClick={this.setManualEnter}>Use hike name to set pin</Link>
       pinForm = <LatLngSetPinForm
       setLatLng={this.setLatLng}
       detailsToSetPin={detailsToSetPin}

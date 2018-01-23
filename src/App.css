@@ -29,10 +29,20 @@ medium blue: #9bbff4
 }
 
 /******************************/
+/****** footer *********/
+footer {
+  text-align: center;
+}
+/******************************/
+/******************************/
 /****** General *********/
 /******************************/
+ /* @import url('https://fonts.googleapis.com/css?family=Titillium Web'); */
 
 
+ /* body {
+   font-family: 'Titillium Web';
+ } */
 
 .blueOutline {
   border: solid #a7cdf2;
@@ -94,10 +104,6 @@ medium blue: #9bbff4
 }
 
 
-/* .button:active, .button:visited {
-  color: inherit;
-  background-color: inherit;
-} */
 
 .darkBlueButton {
   background-color: #4a80f5;
@@ -161,9 +167,6 @@ header {
   /* background-color: blue; */
 }
 
-body {
-  /* background-color: #bbdaa4; */
-}
 
 .mainMap {
   height: 100%;
@@ -212,6 +215,8 @@ body {
 
 .addh2 {
   margin-bottom: 4%;
+  background-color: #bbdaa4;
+  padding: 1%;
 }
 
 
