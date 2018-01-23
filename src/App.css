@@ -302,6 +302,15 @@ list-style-type: none !important;
   white-space: pre-wrap;
 }
 
+.details {
+  /* border: solid 1px blue; */
+  /* background-color: #F2F9F2; */
+  background-color: #F2F9F2;
+  margin-bottom: 1%;
+  padding: 2%;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+}
 
 /******************************/
 /**** success and error modals   *********/
