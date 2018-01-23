@@ -79,7 +79,7 @@ class HikeDetailsModal extends BaseModal {
     console.log('in deleteHike!');
     // genereate the url for the DELETE request
     const hikeId = this.props.id
-    const baseUrl = '/api/hikes/';
+    const baseUrl = 'http://capstone-env.ejfznpwqha.us-west-2.elasticbeanstalk.com/api/hikes'
     const url = baseUrl + `${hikeId}`
 
     // make the DELETE request to the API
@@ -128,8 +128,7 @@ class HikeDetailsModal extends BaseModal {
     console.log('in fetchHikeDetailsFromApi');
     // make the api call to get hike details
     const hikeId = this.props.id
-    // const baseUrl = 'http://capstone-env.ejfznpwqha.us-west-2.elasticbeanstalk.com/api/hikes/'
-    const baseUrl = '/api/hikes/';
+    const baseUrl = 'http://capstone-env.ejfznpwqha.us-west-2.elasticbeanstalk.com/api/hikes/'
     const url = baseUrl + `${hikeId}`
 
     $.ajax({

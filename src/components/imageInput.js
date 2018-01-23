@@ -63,7 +63,7 @@ export class ImageInput extends Component {
     }
 
     // FIRST:  make a call to the rails API (Images#index) to get a presignedUrl from S3
-    const apiUrl = '/api/images'
+    const apiUrl = ''http://capstone-env.ejfznpwqha.us-west-2.elasticbeanstalk.com/api/images'
 
     $.getJSON(apiUrl, {filename: file.name, content_type: file.type},
       function(data) {
