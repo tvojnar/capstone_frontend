@@ -1,4 +1,4 @@
-// NOTE: I am not using this component in my app 
+// NOTE: I am not using this component in my app
 
 import $ from 'jquery'
 import React, { Component } from 'react'
@@ -63,8 +63,8 @@ export class ImageInput extends Component {
     }
 
     // FIRST:  make a call to the rails API (Images#index) to get a presignedUrl from S3
-    const apiUrl = 'http://capstone-env.ejfznpwqha.us-west-2.elasticbeanstalk.com/api/images'
-
+    // const apiUrl = 'http://capstone-env.ejfznpwqha.us-west-2.elasticbeanstalk.com/api/images'
+    const apiUrl = 'scrappyhikerapi.com/api/images';
     $.getJSON(apiUrl, {filename: file.name, content_type: file.type},
       function(data) {
         console.log('we got the url!');
