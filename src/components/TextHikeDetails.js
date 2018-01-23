@@ -6,7 +6,7 @@ export const TextHikeDetails = (props) => {
 
 
   return(
-    <div>
+    <div className='textArea'>
       <h3 className='blueText'>{data.title}</h3>
       <p className='textForDetails' >{data.text}</p>
     </div>
