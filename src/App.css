@@ -59,7 +59,7 @@ footer {
 }
 
 .greenUnderline {
-  border-bottom: solid #bbdaa4;
+  border-bottom: 10px solid #bbdaa4;
 }
 
 .blueText {
@@ -302,14 +302,30 @@ list-style-type: none !important;
   white-space: pre-wrap;
 }
 
+.details h3 {
+  background-color: #EEF7FD;
+  margin-bottom: 1%;
+  padding: 0.5%;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-bottom: 2px solid #bbdaa4;
+}
+
+.details p {
+  padding: 1%;
+}
+
+
 .details {
   /* border: solid 1px blue; */
   /* background-color: #F2F9F2; */
-  background-color: #EEF7FD;
-  margin-bottom: 1%;
-  padding: 2%;
+  /* background-color: #EEF7FD; */
+  /* margin-bottom: 1%;
+  padding: 2%; */
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
+    border: solid 3px #EEF7FD;
+    margin-bottom: 2%;
 }
 
 /******************************/
