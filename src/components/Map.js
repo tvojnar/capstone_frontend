@@ -76,7 +76,7 @@ export class Map extends Component {
     this.setState({ hikes: [] })
     // NOTE: below is url for elasticbeanstalk without my domain name
     // const baseUrl = 'http://capstone-env.ejfznpwqha.us-west-2.elasticbeanstalk.com/api/hikes'
-    const baseUrl = 'http://scrappyhikerapi.com/api/hikes'
+    const baseUrl = 'https://scrappyhikerapi.com/api/hikes'
     const url = baseUrl + `?min_lng=${this.xMapBounds.min}&max_lng=${this.xMapBounds.max}&min_lat=${this.yMapBounds.max}&max_lat=${this.yMapBounds.min}`
 
     // make the api call

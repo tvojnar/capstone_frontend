@@ -124,7 +124,7 @@ class BaseForm extends LinkedComponent {
     }
 
     // SECOND:  make a call to the rails API (Images#index) to get a presignedUrl from S3
-    const apiUrl = 'http://scrappyhikerapi.com/api/images'
+    const apiUrl = 'https://scrappyhikerapi.com/api/images'
 
     $.getJSON(apiUrl, {filename: file.name, content_type: file.type},
       function(data) {
