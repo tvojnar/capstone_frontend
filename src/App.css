@@ -302,7 +302,7 @@ list-style-type: none !important;
   white-space: pre-wrap;
 }
 
-.details h3 {
+.details h4 {
   background-color: #EEF7FD;
   margin-bottom: 1%;
   padding: 0.5%;
@@ -324,8 +324,8 @@ list-style-type: none !important;
   padding: 2%; */
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
-    border: solid 3px #EEF7FD;
-    margin-bottom: 2%;
+  border: solid 3px #EEF7FD;
+  margin-bottom: 2%;
 }
 
 /******************************/
