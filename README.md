@@ -9,7 +9,7 @@ So, for my capstone project at Ada Developers Academy I built a web app called S
 1. Visual representation of your hiking history on a map
 2. Add a pin for a hike 
 3. Upload a cover photo for a hike 
-4. Upload a cover photo for a hike 
+4. Upload a GPX track for a hike 
 
 ## Demo 
 Checkout the [live site](http://scrappyhiker.com/) or [video demo](https://drive.google.com/file/d/1-zdlxIL19-GJ7iM7DcEHGD2HEgXDasv9/view) of ScrappyHiker! 
