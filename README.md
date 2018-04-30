@@ -30,7 +30,7 @@ Checkout the [live site](http://scrappyhiker.com/) or [video demo](https://drive
 **It’s incredibly rewarding tp build something that solves a pain point in your own life.** I really enjoyed having the opportunity to have the time to build something that solves an issue that I have in my day to day life. I know that this will be the first of many such projects that I build in my spare time. 
 
 ## Improvements 
-It turns out a month wasn’t a lot of time to learn React and implement all the features I wanted in Scrappy hiker. As a result, there are a lot of features I envisioned in ScrappyHiker that I didn’t have time to implement. A few of them are: 
+It turns out a month wasn’t a lot of time to learn React and implement all the features I wanted in ScrappyHiker. As a result, there are a lot of features I envisioned in ScrappyHiker that I didn’t have time to implement. A few of them are: 
 
 **Photo gallery:** Each hike would have a photo gallery on it’s details page (as opposed to the ability to upload a single cover photo for each hike) 
 
