@@ -36,4 +36,4 @@ It turns out a month wasn’t a lot of time to learn React and implement all the
 
 **Search functionality:** Ability to narrow down what hikes are shown on the map by region, length, elevation gain, ect. 
 
-**Location based pins:** Ability for a user to click on the map to add a location based pin. These pins could have additional location based notes about the hike (like the location of a great campsite) or a picture that was taken at that location on the hike. 
+**Location based pins:** Ability for a user to click on the map to add a pin at that exact location on the map. These pins could have additional location based notes about the hike (like the location of a great campsite) or a picture that was taken at that location on the hike. 
